@@ -1,0 +1,49 @@
+@import '../../styles/functions.scss';
+
+.card {
+  width: 288px;
+  background-image: url('https://files.tecnoblog.net/wp-content/uploads/2022/03/belair1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0px 30px 24px;
+  margin-bottom: 16px;
+
+  .title {
+    margin-bottom: 12px;
+    font-size: rem(20);
+    font-weight: 900;
+    text-shadow: 2px 2px 4px #000
+  }
+
+  time {
+    font-size: rem(12);
+    color: #fff;
+  }
+
+  .categories {
+    display: flex;
+    margin-top: 12px;
+
+    .category {
+      padding: 6px 0;
+      font-size: rem(10);
+      background-color: #37384A;
+      border-radius: 8px;
+      width: 80px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s;
+      
+      &:hover {
+        color: #00FFC2;
+      }
+    }
+  }
+
+}

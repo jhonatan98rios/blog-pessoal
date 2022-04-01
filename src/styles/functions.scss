@@ -1,0 +1,3 @@
+@function rem($font_size) {
+  @return calc($font_size / 16) + rem
+}

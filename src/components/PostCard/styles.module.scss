@@ -1,0 +1,44 @@
+@import '../../styles/functions.scss';
+
+.card {
+  width: 576px;
+  background-color: #37384A;
+  margin: 16px 0;
+  border-radius: 8px;
+  
+  .container {
+    padding: 20px 20px 10px;
+
+    .title {
+      font-size: rem(18);
+      margin-bottom: 12px;
+    }
+  
+    time {
+      font-size: rem(12);
+      color: #BCBDC4;
+    }
+  
+    .excerpt {
+      font-size: rem(14);
+      color: #BCBDC4;
+      margin-bottom: 12px;
+    }
+  }
+
+  .categories {
+    display: flex;
+    background-color: #272730;
+    padding: 10px 20px;
+    border-radius: 0px 0px 8px 8px;
+
+    .category {
+      padding: 6px 0;
+      font-size: rem(12);
+      background-color: #37384A;
+      border-radius: 8px;
+      width: 90px;
+      text-align: center;
+    }
+  }
+}
