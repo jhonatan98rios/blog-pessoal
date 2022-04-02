@@ -51,7 +51,7 @@
 
 .slider {
   margin: 28px auto;
-  width: 100%;
+  width: calc(100% - 64px);
   max-width: 1212px;
   height: 330px;
   overflow: hidden;

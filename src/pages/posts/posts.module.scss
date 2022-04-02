@@ -7,18 +7,19 @@
 
   .posts {
     max-width: 596px;
+    width: calc(100% - 64px);
     margin: 0 auto;
 
-    display: grid;                                                
-    grid-auto-rows: 10px;                                         
-    grid-gap: 20px;                                               
-    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    @media(min-width: 769px) {
+      display: grid;                                                
+      grid-auto-rows: 10px;                                         
+      grid-gap: 20px;                                               
+      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    }
   }
 
   .fake_col {
     width: 100%;
     max-width: 288px;
   }
-
-  
 }

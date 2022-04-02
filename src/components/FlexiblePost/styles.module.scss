@@ -1,8 +1,7 @@
 @import '../../styles/functions.scss';
 
 .card {
-  width: 288px;
-  height: 400px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,8 +11,16 @@
   justify-content: flex-end;
   padding: 0px 30px 24px;
   margin-bottom: 16px;
-  float: left;
-  grid-column: span 2;
+  
+  @media(min-width: 769px) {
+    width: 288px;
+    float: left;
+    grid-column: span 2;  
+  }
+
+  @media(max-width: 768px) {
+    height: 400px !important;
+  }
 
   .title {
     margin-bottom: 12px;

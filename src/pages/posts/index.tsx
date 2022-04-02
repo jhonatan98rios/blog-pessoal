@@ -35,7 +35,6 @@ export default function Posts({ posts }: PostsProps) {
       <SEO title="Posts" />
       
       <main>
-
         <Carousel />
 
         <section className={styles.container}>
