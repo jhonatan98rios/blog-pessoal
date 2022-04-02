@@ -2,7 +2,6 @@
 
 .card {
   width: 288px;
-  background-image: url('https://files.tecnoblog.net/wp-content/uploads/2022/03/belair1.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,6 +12,8 @@
   justify-content: flex-end;
   padding: 0px 30px 24px;
   margin-bottom: 16px;
+  float: left;
+  grid-column: span 2;
 
   .title {
     margin-bottom: 12px;
@@ -24,6 +25,7 @@
   time {
     font-size: rem(12);
     color: #fff;
+    text-shadow: 0px 0px 4px #000
   }
 
   .categories {

@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 
 interface PostCardProps {
   post: Post
+  customStyle: object
 }
 
 interface Post {
@@ -13,12 +14,13 @@ interface Post {
   updateAt: string;
 }
 
-export function FlexiblePost({ post }: PostCardProps) {
+
+export function FlexiblePost({ post, customStyle }: PostCardProps) {
 
   const { asPath } = useRouter();
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} style={{...customStyle}}>
 
       <span className="likes" />
 

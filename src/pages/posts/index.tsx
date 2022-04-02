@@ -5,11 +5,14 @@ import Prismic from '@prismicio/client'
 import { RichText } from "prismic-dom";
 
 import { getPrismicClient } from '../../services/prismic'
+import { sizes, customStyles } from '../../services/constants'
 
 import styles from './posts.module.scss'
 import { FlexiblePost } from "../../components/FlexiblePost";
 import { AsideMenu } from '../../components/AsideMenu'
 import { Recents } from "../../components/Recents";
+import { Carousel } from '../../components/Carousel'
+
 
 interface Post {
   slug: string;
@@ -22,17 +25,33 @@ interface PostsProps {
   posts: Post[]
 }
 
+
 export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <SEO title="Posts" />
       
-      <main className={styles.container}>
-        <AsideMenu />
-        <div className={styles.posts}>
-          { posts.map(post => <FlexiblePost post={post} key={post.slug} />) }
-        </div>
-        <Recents />
+      <main>
+
+        <Carousel />
+
+        <section className={styles.container}>
+          <AsideMenu />
+          <div className={styles.posts}>
+            { posts.map((post, index) => (
+              <FlexiblePost 
+                post={post} 
+                customStyle={{
+                  ...customStyles[index],
+                  ...sizes[customStyles[index].size]
+                }}
+                key={index} 
+              />
+            ))}
+          </div>
+          {/* <Recents /> */}
+          <span className={styles.fake_col}></span>
+        </section>
       </main>
     </>
   );
@@ -47,7 +66,7 @@ export const getStaticProps: GetStaticProps = async () => {
     fetch: ['post.title', 'post.content']
   })
 
-  const posts = response.results.map(post => {
+  const posts = response.results.map((post) => {
     return {
       slug: post.uid,
       title: RichText.asText(post.data.title),
@@ -62,7 +81,7 @@ export const getStaticProps: GetStaticProps = async () => {
   
   return {
     props: {
-      posts: [...posts, ...posts]
+      posts: [...posts, ...posts, ...posts, ...posts, ...posts, ...posts]
     },
     revalidate: 60 * 60 * 12
   }
