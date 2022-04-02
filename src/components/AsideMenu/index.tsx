@@ -5,7 +5,7 @@ const categories = [
 ]
 
 export function AsideMenu() {
-  return (
+  return  (
     <aside className={styles.container}>
       <h3 className={styles.header}>
         Categorias
@@ -19,5 +19,5 @@ export function AsideMenu() {
         )}
       </nav>
     </aside>
-  );
+  )
 }

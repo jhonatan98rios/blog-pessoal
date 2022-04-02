@@ -10,8 +10,8 @@ import { sizes, customStyles } from '../../services/constants'
 import styles from './posts.module.scss'
 import { FlexiblePost } from "../../components/FlexiblePost";
 import { AsideMenu } from '../../components/AsideMenu'
-import { Recents } from "../../components/Recents";
 import { Carousel } from '../../components/Carousel'
+import useDeviceDetect from "../../hooks/useDevice";
 
 
 interface Post {
@@ -27,6 +27,9 @@ interface PostsProps {
 
 
 export default function Posts({ posts }: PostsProps) {
+
+  const { isMobile } = useDeviceDetect()
+
   return (
     <>
       <SEO title="Posts" />
@@ -36,21 +39,17 @@ export default function Posts({ posts }: PostsProps) {
         <Carousel />
 
         <section className={styles.container}>
-          <AsideMenu />
+          { !isMobile && <AsideMenu /> }
+
           <div className={styles.posts}>
             { posts.map((post, index) => (
-              <FlexiblePost 
-                post={post} 
-                customStyle={{
-                  ...customStyles[index],
-                  ...sizes[customStyles[index].size]
-                }}
-                key={index} 
+              <FlexiblePost post={post} key={index} 
+                customStyle={{ ...customStyles[index], ...sizes[customStyles[index].size]}}
               />
             ))}
           </div>
-          {/* <Recents /> */}
-          <span className={styles.fake_col}></span>
+
+          { !isMobile && <span className={styles.fake_col}></span>  }
         </section>
       </main>
     </>
