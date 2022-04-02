@@ -6,7 +6,18 @@ import { useEffect, useRef } from 'react';
 
 function Card({ cs }){
   return (
-    <article className={styles.card} style={{...cs}} />
+    <article className={styles.card} style={{...cs}}>
+      <span className="likes" />
+
+      <h3 className={styles.title}> Getting Started </h3>
+      <time>March 25, 2022</time>
+
+      <div className={styles.categories}>
+        <span className={styles.category}>
+          Programação
+        </span>
+      </div>
+    </article>
   )
 }
 

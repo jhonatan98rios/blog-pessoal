@@ -24,7 +24,7 @@ export function PostCard({ post }: PostCardProps) {
           <h3 className={styles.title}> {post.title} </h3>
           <time>{post.updateAt} </time>
         </div>
-        <p className={styles.excerpt}> {post.excerpt} </p>
+        {/* <p className={styles.excerpt}> {post.excerpt} </p> */}
       </div>
       <div className={styles.categories}>
         <span className={styles.category}>
