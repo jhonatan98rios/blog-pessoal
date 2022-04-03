@@ -12,6 +12,7 @@ import { FlexiblePost } from "../../components/FlexiblePost";
 import { AsideMenu } from '../../components/AsideMenu'
 import { Carousel } from '../../components/Carousel'
 import useDeviceDetect from "../../hooks/useDevice";
+import { Categories } from "../../components/Categories";
 
 
 interface Post {
@@ -35,6 +36,8 @@ export default function Posts({ posts }: PostsProps) {
       <SEO title="Posts" />
       
       <main>
+      { isMobile && <Categories /> }
+
         <Carousel />
 
         <section className={styles.container}>

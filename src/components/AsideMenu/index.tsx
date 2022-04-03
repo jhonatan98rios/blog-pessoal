@@ -13,8 +13,8 @@ export function AsideMenu() {
       <nav className={styles.categories}>
         { categories.map((category, index) => 
           <li className={styles.category} key={index}> 
-            <span>{ category }</span> 
-            <span> 10 </span>   
+            <span className={styles.name}>{ category }</span> 
+            <span className={styles.amount}> 10 </span>   
           </li> 
         )}
       </nav>

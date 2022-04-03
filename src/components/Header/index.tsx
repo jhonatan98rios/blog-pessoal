@@ -9,6 +9,20 @@ export function Header() {
   return (
     <header className={styles.container}>
       <div className={styles.content}>
+
+        {
+          !isMobile && (
+            <div className={styles.menuIcon}>
+              <input type="checkbox" id="icon_menu" className={styles.icon_menu} />
+              <label htmlFor="icon_menu">
+                <div></div>
+                <div></div>
+                <div></div>
+              </label>  
+            </div> 
+          )
+        }
+
         <input className={styles.input} type="text" placeholder="Pesquisar pelo post" />
         {
           !isMobile && (

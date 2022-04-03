@@ -28,7 +28,7 @@ export function Carousel() {
 
   useEffect(() => {
     const dis = new DragInScroll(slides.current)
-    slides.current.addEventListener('mousedown', dis.mouseDownHandler.bind(dis))
+    //slides.current.addEventListener('mousedown', dis.mouseDownHandler.bind(dis))
   })
 
   return (

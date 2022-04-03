@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  //padding: 16px 32px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  background-color: #45455C;
+
+  .categories {
+    list-style: none;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 16px 32px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .category {
+      color: #CFCFE8; 
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 15px;
+    }
+  }
+}

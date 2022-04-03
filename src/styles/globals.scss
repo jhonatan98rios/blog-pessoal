@@ -32,6 +32,10 @@ body {
   background: var(--gray800);
   color: var(--white);
   overflow-x: hidden;
+
+  @media(max-width: 768px) {
+    padding-top: 70px;
+  }
 }
 
 body, input, textarea, select, button {
@@ -55,3 +59,6 @@ a {
   justify-content: space-between;   
 }
 
+.carousel-active {
+  cursor: grabbing !important;
+}

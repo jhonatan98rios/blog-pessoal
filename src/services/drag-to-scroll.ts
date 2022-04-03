@@ -1,49 +1,38 @@
 export class DragInScroll {
 
-  left: number
-  x: number
-  grabbed: boolean
-  element: HTMLElement
+  slider: any
+  isDown: boolean
+  startX: any
+  scrollLeft: any
 
-  constructor(element: HTMLElement) {
-    this.left = 0
-    this.x = 0
-    this.grabbed = false
-    this.element = element
+  constructor (element: HTMLElement) {
+    this.slider = element;
+    this.isDown = false;
 
-    this.element.style.cursor = 'grab';
-    document.addEventListener('mousemove', this.mouseMoveHandler.bind(this))
-    document.addEventListener('mouseup', this.mouseUpHandler.bind(this))
+    this.slider.addEventListener('mousedown', this.handleMouseDown.bind(this))
+    this.slider.addEventListener('mouseleave', this.handleMouseUpOrLeave.bind(this));
+    this.slider.addEventListener('mouseup', this.handleMouseUpOrLeave.bind(this));
+    this.slider.addEventListener('mousemove', this.handleMouseMove.bind(this));
   }
 
-  mouseMoveHandler(e) {
-    if (this.grabbed) {
-      const dx = e.clientX - this.x;
-      this.element.scrollLeft = this.left - dx;
-      console.log('mouseMoveHandler')
-    }
-  };
+  handleMouseDown(e: MouseEvent) {
+    this.isDown = true;
+    this.slider.classList.add('carousel-active');
+    this.startX = e.pageX - this.slider.offsetLeft;
+    this.scrollLeft = this.slider.scrollLeft;
+  }
 
-  mouseUpHandler() {
+  handleMouseUpOrLeave(e: MouseEvent) {
+    this.isDown = false;
+    this.slider.classList.remove('carousel-active');
+  }
 
-    this.grabbed = false
+  handleMouseMove(e: MouseEvent) {
+    if(!this.isDown) return;
+    e.preventDefault();
+    const x = e.pageX - this.slider.offsetLeft;
+    const walk = (x - this.startX) * 3; //scroll-fast
+    this.slider.scrollLeft = this.scrollLeft - walk;
+  }
 
-    this.element.style.cursor = 'grab';
-    this.element.style.removeProperty('user-select');
-
-    console.log('mouseUpHandler')
-  };
-
-  mouseDownHandler(e: MouseEvent) {
-
-    this.grabbed = true
-
-    this.left = this.element.scrollLeft
-    this.x = e.clientX
-
-    this.element.style.cursor = 'grabbing';
-    this.element.style.userSelect = 'none';
-
-    console.log('mouseDownHandler')
-  };
 }

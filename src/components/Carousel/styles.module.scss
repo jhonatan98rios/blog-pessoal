@@ -61,6 +61,6 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    cursor: grab;
   }
 }
