@@ -2,16 +2,22 @@ import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
 
-interface PostCardProps {
-  post: Post
-  customStyle: object
+interface IImage {
+  src: string,
+  alt: string
+  title: string
 }
 
-interface Post {
+interface IPost {
   slug: string;
   title: string;
-  excerpt: string;
+  image: IImage[]
   updateAt: string;
+}
+
+interface PostCardProps {
+  post: IPost
+  customStyle: object
 }
 
 
@@ -20,8 +26,14 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
   const { asPath } = useRouter();
 
   return (
-    <Link href={`/post/${post.slug}`}>
-      <a className={styles.card} style={{...customStyle}}>
+    <Link href={`/posts/${post.slug}`}>
+      <a 
+        className={styles.card} 
+        style={{
+          ...customStyle
+        }}
+
+      >
         <article>
           <span className="likes" />
 

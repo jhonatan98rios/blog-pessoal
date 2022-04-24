@@ -3,23 +3,23 @@ import { useRouter } from 'next/router'
 import SEO from '../../components/SEO';
 import styles from './post.module.scss'
 
-import Prismic from '@prismicio/client'
-import { RichText } from "prismic-dom";
+import { mock_posts } from '../../mockdata/posts'
 
-import { getPrismicClient } from '../../services/prismic'
+
+interface IImage {
+  src: string
+  alt: string
+  title: string
+}
 
 interface PostProps {
   post: {
-    slug: string;
-    title: string;
-    content: string;
-    updateAt: string;
+    slug: string
+    title: string
+    content: string
+    image: IImage[]
+    updateAt: string
   }
-}
-
-interface PrismicResponse {
-  content: string
-  title: string
 }
 
 
@@ -57,23 +57,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const {slug} = context.params
-
-  const prismic = getPrismicClient()
-  const response = await prismic.getByUID<PrismicResponse>('post', String(slug), {})
-
-  const post = {
-    slug,
-    title: RichText.asText(response.data.title),
-    content: RichText.asText(response.data.content),
-    updateAt: new Date(response.last_publication_date).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    })
-  }
+  const {slug} = params
+  const post = mock_posts.filter(post => post.slug == slug)[0]
   
   return {
     props: {

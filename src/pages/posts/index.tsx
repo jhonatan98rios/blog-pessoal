@@ -1,40 +1,36 @@
 import { GetStaticProps } from "next";
 /* import Link from "next/link"; */
 import SEO from "../../components/SEO";
-import Prismic from '@prismicio/client'
-import { RichText } from "prismic-dom";
 
-import { getPrismicClient } from '../../services/prismic'
-import { sizes, customStyles } from '../../services/constants'
+import { sizes } from '../../services/constants'
 
 import styles from './posts.module.scss'
 import { FlexiblePost } from "../../components/FlexiblePost";
-import { AsideMenu } from '../../components/AsideMenu'
 /* import { Carousel } from '../../components/Carousel' */
 import useDeviceDetect from "../../hooks/useDevice";
 import { Categories } from "../../components/Categories";
 
+import { mock_posts } from '../../mockdata/posts'
 
-interface Post {
+interface IImage {
+  src: string
+  alt: string
+  title: string
+}
+
+interface IPost {
   slug: string;
   title: string;
-  excerpt: string;
+  image: IImage[]
   updateAt: string;
+  style: object
 }
 
-interface PostsProps {
-  posts: Post[]
+interface IPostsProps {
+  posts: IPost[]
 }
 
-interface PrismicResponse {
-  title: string
-  content: {
-    find: Function
-  }
-}
-
-
-export default function Posts({ posts }: PostsProps) {
+export default function Posts({ posts }: IPostsProps) {
 
   const { isMobile } = useDeviceDetect()
 
@@ -48,12 +44,12 @@ export default function Posts({ posts }: PostsProps) {
         {/* <Carousel /> */}
 
         <section className={styles.container}>
-          { !isMobile && <AsideMenu /> }
+          { !isMobile && <Categories /> }
 
           <div className={styles.posts}>
             { posts.map((post, index) => (
               <FlexiblePost post={post} key={index} 
-                customStyle={{ ...customStyles[index], ...sizes[customStyles[index].size]}}
+                customStyle={{ ...post.style }}
               />
             ))}
           </div>
@@ -65,31 +61,26 @@ export default function Posts({ posts }: PostsProps) {
   );
 }
 
+
 export const getStaticProps: GetStaticProps = async () => {
 
-  const prismic = getPrismicClient()
-  const response = await prismic.query<PrismicResponse>([
-    Prismic.predicates.at('document.type', 'post')
-  ], {
-    fetch: ['post.title', 'post.content']
-  })
+  let posts = mock_posts.map(post => {
+    let random = Math.floor(Math.random() * 5)
+    let options = Object.keys(sizes)
+    let selected = options[random]
+    let style = sizes[selected]
+    style.backgroundImage = `url(${post.image[0].src})`
 
-  const posts = response.results.map((post) => {
     return {
-      slug: post.uid,
-      title: RichText.asText(post.data.title),
-      excerpt: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
-      updateAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      })
+      ...post,
+      style
     }
   })
-  
+
+
   return {
     props: {
-      posts: [...posts, ...posts, ...posts, ...posts, ...posts, ...posts]
+      posts,
     },
     revalidate: 60 * 60 * 12
   }

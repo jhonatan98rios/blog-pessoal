@@ -5,6 +5,10 @@
   display: flex;
   justify-content: center;
 
+  @media(max-width: 768px) {
+    margin-top: 1rem;
+  }
+
   .posts {
     max-width: 596px;
     width: calc(100% - 64px);

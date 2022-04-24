@@ -1,5 +1,5 @@
 import SEO from '../components/SEO';
-import styles from '../styles/home.module.scss';
+import styles from './home.module.scss';
 
 export default function Home() {
   return (
