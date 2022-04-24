@@ -17,6 +17,11 @@ interface PostProps {
   }
 }
 
+interface PrismicResponse {
+  content: string
+  title: string
+}
+
 
 export default function Post({ post }: PostProps) {
   const router = useRouter()
@@ -57,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const {slug} = context.params
 
   const prismic = getPrismicClient()
-  const response = await prismic.getByUID('post', String(slug), {})
+  const response = await prismic.getByUID<PrismicResponse>('post', String(slug), {})
 
   const post = {
     slug,

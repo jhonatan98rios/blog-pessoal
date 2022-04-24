@@ -11,7 +11,7 @@ export function Header() {
       <div className={styles.content}>
 
         {
-          !isMobile && (
+          isMobile && (
             <div className={styles.menuIcon}>
               <input type="checkbox" id="icon_menu" className={styles.icon_menu} />
               <label htmlFor="icon_menu">

@@ -10,7 +10,7 @@ export default function Home() {
         <section className={styles.section}>
           <span>Olá Dev!</span>
           <h1>
-            Bem-vindo e bem-vinda <br />
+            Bem-vindes <br />
             ao <span>Dev</span>News!
           </h1>
           <p>

@@ -20,19 +20,21 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
   const { asPath } = useRouter();
 
   return (
-    <article className={styles.card} style={{...customStyle}}>
+    <Link href={`/post/${post.slug}`}>
+      <a className={styles.card} style={{...customStyle}}>
+        <article>
+          <span className="likes" />
 
-      <span className="likes" />
+          <h3 className={styles.title}> {post.title} </h3>
+          <time>{post.updateAt} </time>
 
-      <h3 className={styles.title}> {post.title} </h3>
-      <time>{post.updateAt} </time>
-
-      <div className={styles.categories}>
-        <span className={styles.category}>
-          Programação
-        </span>
-      </div>
-
-    </article>
+          <div className={styles.categories}>
+            <span className={styles.category}>
+              Programação
+            </span>
+          </div>
+        </article>
+      </a>
+    </Link>
   );
 }

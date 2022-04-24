@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import Link from "next/link";
+/* import Link from "next/link"; */
 import SEO from "../../components/SEO";
 import Prismic from '@prismicio/client'
 import { RichText } from "prismic-dom";
@@ -10,7 +10,7 @@ import { sizes, customStyles } from '../../services/constants'
 import styles from './posts.module.scss'
 import { FlexiblePost } from "../../components/FlexiblePost";
 import { AsideMenu } from '../../components/AsideMenu'
-import { Carousel } from '../../components/Carousel'
+/* import { Carousel } from '../../components/Carousel' */
 import useDeviceDetect from "../../hooks/useDevice";
 import { Categories } from "../../components/Categories";
 
@@ -26,6 +26,13 @@ interface PostsProps {
   posts: Post[]
 }
 
+interface PrismicResponse {
+  title: string
+  content: {
+    find: Function
+  }
+}
+
 
 export default function Posts({ posts }: PostsProps) {
 
@@ -38,7 +45,7 @@ export default function Posts({ posts }: PostsProps) {
       <main>
       { isMobile && <Categories /> }
 
-        <Carousel />
+        {/* <Carousel /> */}
 
         <section className={styles.container}>
           { !isMobile && <AsideMenu /> }
@@ -61,7 +68,7 @@ export default function Posts({ posts }: PostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const prismic = getPrismicClient()
-  const response = await prismic.query([
+  const response = await prismic.query<PrismicResponse>([
     Prismic.predicates.at('document.type', 'post')
   ], {
     fetch: ['post.title', 'post.content']
