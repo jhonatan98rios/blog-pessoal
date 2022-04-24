@@ -1,16 +1,13 @@
 import { GetStaticProps } from "next";
-/* import Link from "next/link"; */
 import SEO from "../../components/SEO";
-
-import { sizes } from '../../services/constants'
-
-import styles from './posts.module.scss'
 import { FlexiblePost } from "../../components/FlexiblePost";
-/* import { Carousel } from '../../components/Carousel' */
 import useDeviceDetect from "../../hooks/useDevice";
 import { Categories } from "../../components/Categories";
+/* import { Carousel } from '../../components/Carousel' */
 
+import styles from './posts.module.scss'
 import { mock_posts } from '../../mockdata/posts'
+import { sizes } from '../../services/constants'
 
 interface IImage {
   src: string
@@ -71,12 +68,8 @@ export const getStaticProps: GetStaticProps = async () => {
     let style = sizes[selected]
     style.backgroundImage = `url(${post.image[0].src})`
 
-    return {
-      ...post,
-      style
-    }
+    return { ...post, style }
   })
-
 
   return {
     props: {
