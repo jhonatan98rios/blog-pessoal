@@ -36,12 +36,19 @@ export default function Post({ post }: PostProps) {
       
       <main className={styles.container}>
         <article className={styles.post}>
-          <h1> {post.title} </h1>
-          <time> {post.updateAt} </time>
-          <div 
-            className={styles.content}
-            dangerouslySetInnerHTML={{ __html: post.content }} 
-          /> 
+
+          <img className={styles.image} src={post.image[0].src} alt={post.image[0].alt} />
+
+          <div className={styles.text}>
+            <div className={styles.header}>
+              <h1> {post.title} </h1>
+              <time> {post.updateAt} </time>
+            </div>
+            <div 
+              className={styles.content}
+              dangerouslySetInnerHTML={{ __html: post.content }} 
+            /> 
+          </div>
 
         </article>
       </main>
