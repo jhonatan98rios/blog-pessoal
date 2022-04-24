@@ -27,7 +27,7 @@
     }
   
     nav {
-      @media (min-width: 769px) {
+      @media (min-width: 1025px) {
         margin-left: 5rem;
         height: 5rem;
       }
@@ -42,7 +42,7 @@
         transition: color 0.2s;
   
         & + a {
-          @media (min-width: 769px) {
+          @media (min-width: 1025px) {
             margin-left: 2rem;
           }
         }
@@ -129,7 +129,7 @@
 }
 
 .navbar {
-  @media(max-width: 768px) {
+  @media(max-width: 1024px) {
     background-color: #45455CFA;
     position: absolute;
     top: 5rem;
@@ -139,7 +139,6 @@
     height: calc(100vh - 5rem);
     width: 100%;
     
-
     a {
       margin: 0 auto;
     }

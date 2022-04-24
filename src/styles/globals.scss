@@ -33,7 +33,7 @@ body {
   color: var(--white);
   overflow-x: hidden;
 
-  @media(max-width: 768px) {
+  @media(max-width: 1024px) {
     padding-top: 70px;
   }
 }
