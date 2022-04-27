@@ -4,6 +4,8 @@ import SEO from '../../components/SEO';
 import styles from './post.module.scss'
 
 import { mock_posts } from '../../mockdata/posts'
+import React from 'react';
+import { Recents } from '../../components/Recents';
 
 
 interface IImage {
@@ -17,7 +19,7 @@ interface PostProps {
     slug: string
     title: string
     content: string
-    image: IImage[]
+    image: IImage
     updateAt: string
   }
 }
@@ -37,7 +39,7 @@ export default function Post({ post }: PostProps) {
       <main className={styles.container}>
         <article className={styles.post}>
 
-          <img className={styles.image} src={post.image[0].src} alt={post.image[0].alt} />
+          <img className={styles.image} src={post.image.src} alt={post.image.alt} />
 
           <div className={styles.text}>
             <div className={styles.header}>
@@ -45,12 +47,14 @@ export default function Post({ post }: PostProps) {
               <time> {post.updateAt} </time>
             </div>
             <div 
-              className={styles.content}
+              className={styles.static_content}
               dangerouslySetInnerHTML={{ __html: post.content }} 
             /> 
           </div>
 
         </article>
+
+        <Recents />
       </main>
     </>
   );

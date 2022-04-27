@@ -9,6 +9,10 @@
     margin-top: 1rem;
   }
 
+  @media (min-width: 1025px) {
+    min-height: calc(100vh - 18rem);
+  }
+
   .posts {
     max-width: 596px;
     width: calc(100% - 64px);

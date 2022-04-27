@@ -52,11 +52,11 @@ export function Header() {
               <ActiveLink href="/" activeClassName={styles.active}>
                 <a>Tecnologias</a>
               </ActiveLink>
+              <ActiveLink href="/" activeClassName={styles.active}>
+                <a>Portfólio</a>
+              </ActiveLink>
               <ActiveLink href="/posts" activeClassName={styles.active}>
                 <a>Blog</a>
-              </ActiveLink>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Social</a>
               </ActiveLink>
             </nav>
           )

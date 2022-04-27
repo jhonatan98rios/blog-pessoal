@@ -18,7 +18,7 @@ interface IImage {
 interface IPost {
   slug: string;
   title: string;
-  image: IImage[]
+  image: IImage
   updateAt: string;
   style: object
 }
@@ -61,12 +61,16 @@ export default function Posts({ posts }: IPostsProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  let posts = mock_posts.map(post => {
-    let random = Math.floor(Math.random() * 5)
-    let options = Object.keys(sizes)
-    let selected = options[random]
-    let style = sizes[selected]
-    style.backgroundImage = `url(${post.image[0].src})`
+  const posts = mock_posts.map(post => {
+
+    const text_size = post.title.length
+    const selected = text_size > 100 ? 'xbig' :
+      text_size > 75 ? 'big' :
+      text_size > 50 ? 'medium' :
+      text_size > 25 ? 'small' :
+      'xsmall'
+
+    const style = sizes[selected]
 
     return { ...post, style }
   })
@@ -75,6 +79,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    revalidate: 60 * 60 * 12
+    revalidate: 60 * 60 * 120
   }
 }

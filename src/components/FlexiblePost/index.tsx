@@ -11,7 +11,7 @@ interface IImage {
 interface IPost {
   slug: string;
   title: string;
-  image: IImage[]
+  image: IImage
   updateAt: string;
 }
 
@@ -30,7 +30,8 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
       <a 
         className={styles.card} 
         style={{
-          ...customStyle
+          ...customStyle,
+          backgroundImage: `url(${post.image.src})`
         }}
 
       >

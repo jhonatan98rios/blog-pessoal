@@ -2,11 +2,17 @@
 
 .container {
   width: 100%;
-  max-width: 288px;
   margin-right: 10px;
-  padding: 8px 28px;
+  padding: 8px 0px;
+  height: 240px;
 
-  height: 500px;
+  @media (min-width: 1025px) {
+    height: 500px;
+    margin-top: 7rem;
+    margin-left: 20px;
+    max-width: 288px;
+    padding: 8px 28px;
+  }
 
   .header {
     width: 100%;
@@ -19,10 +25,26 @@
   .recents {
     width: 100%;
     list-style: none;
+    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
 
     .post {
       color: #fff;
-      margin: 8px 0px;
+      margin: 8px 0px 2rem;
+
+      @media (max-width: 1024px) {
+        min-width: 240px;
+        margin: 0px 8px;
+      }
 
       .title {
         font-size: rem(16);
@@ -30,12 +52,13 @@
       }
 
       time {
-        font-size: rem(10);
+        font-size: rem(11);
         color: #BCBDC4;
       }
 
       .excerpt {
         font-size: rem(12);
+        line-height: rem(16);
         margin-top: 8px;
         color: #BCBDC4;
       }

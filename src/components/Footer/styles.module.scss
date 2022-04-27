@@ -1,0 +1,21 @@
+@import '../../styles/functions.scss';
+
+.footer {
+  width: 100%;
+  height: 64px;
+  background-color: #000;
+  /* position: absolute;
+  bottom: 0; */
+
+  .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .image {
+      width: 36px;
+      margin: 0px 8px;
+    }
+  }
+}
