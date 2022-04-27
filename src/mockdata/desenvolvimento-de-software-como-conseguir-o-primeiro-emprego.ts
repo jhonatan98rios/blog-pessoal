@@ -1,4 +1,4 @@
-import { baseImage, genImage } from '../services/utils'
+import { baseImage, genImage, genLink } from '../services/utils'
 
 export const post_1 = {
   slug: 'desenvolvimento-de-software-como-conseguir-o-primeiro-emprego',
@@ -78,15 +78,15 @@ export const post_1 = {
         Siga influenciadores e programadores que postem conteúdo e notícias sobre a área de tecnologia. Aqui estão alguns que vão te ajudar bastante:
         <br><br>
 
-        Filipe Deschamps: <a href="https://www.youtube.com/c/FilipeDeschamps" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/FilipeDeschamps </a> <br> 
-        Igor Oliveira: <a href="https://www.youtube.com/c/Programadorbr" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/Programadorbr </a> <br>
-        Bullas Attekita: <a href="https://www.youtube.com/c/AttekitaDev" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/AttekitaDev </a> <br>
-        Código Fonte TV: <a href="https://www.youtube.com/c/codigofontetv" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/codigofontetv </a> <br>
-        Dev Pleno: <a href="https://www.youtube.com/c/Devplenocom" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/Devplenocom </a> <br>
-        Rafaella Ballerini: <a href="https://www.youtube.com/c/rafaellaballerini" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/rafaellaballerini </a> <br>
-        Nerdologia: <a href="https://www.youtube.com/c/nerdologia" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/nerdologia </a> <br>
-        Alura: <a href="https://www.youtube.com/c/Alura" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/Alura </a> <br>
-        Rocketseat: <a href="https://www.youtube.com/c/RocketSeat" target="_blank" rel="noopener noreferrer"> https://www.youtube.com/c/RocketSeat </a> <br>
+        Filipe Deschamps: ${genLink('https://www.youtube.com/c/FilipeDeschamps')} <br> 
+        Igor Oliveira: ${genLink('https://www.youtube.com/c/Programadorbr')} <br>
+        Bullas Attekita: ${genLink('https://www.youtube.com/c/AttekitaDev')} <br>
+        Código Fonte TV: ${genLink('https://www.youtube.com/c/codigofontetv')} <br>
+        Dev Pleno: ${genLink('https://www.youtube.com/c/Devplenocom')} <br>
+        Rafaella Ballerini: ${genLink('https://www.youtube.com/c/rafaellaballerini')}" <br>
+        Nerdologia: ${genLink('https://www.youtube.com/c/nerdologia')} <br>
+        Alura: ${genLink('https://www.youtube.com/c/Alura')} <br>
+        Rocketseat: ${genLink('https://www.youtube.com/c/RocketSeat')} <br>
 
         <br>
         Crie um Linkedin e o mantenha atualizado. Adicione muitos recrutadores e outros programadores. Faça cursos, participe de eventos online e maratonas de programação e compartilhe suas experiências e certificados no LinkedIn.
