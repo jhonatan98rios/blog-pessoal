@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './styles.module.scss';
 
-import { mock_posts } from '../../mockdata/posts'
+import { mock_posts } from '../../../mockdata/posts'
 
 const categories = [
   {

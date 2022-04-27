@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next";
 import SEO from "../../components/SEO";
-import { FlexiblePost } from "../../components/FlexiblePost";
+import { FlexiblePost } from "../../components/Posts/FlexiblePost";
 import useDeviceDetect from "../../hooks/useDevice";
-import { Categories } from "../../components/Categories";
+import { Categories } from "../../components/Posts/Categories";
 /* import { Carousel } from '../../components/Carousel' */
 
 import styles from './posts.module.scss'

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 
-import { customStyles } from '../../services/constants'
-import { DragInScroll } from '../../services/drag-to-scroll'
+import { customStyles } from '../../../services/constants'
+import { DragInScroll } from '../../../services/drag-to-scroll'
 import { useEffect, useRef } from 'react';
 
 function Card({ cs }){

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useDeviceDetect from '../../hooks/useDevice';
+import useDeviceDetect from '../../../hooks/useDevice';
 import { ActiveLink } from '../ActiveLink';
 import styles from './styles.module.scss';
 

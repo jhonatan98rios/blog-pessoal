@@ -1,6 +1,6 @@
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import { baseImage } from '../../services/utils';
+import { baseImage } from '../../../services/utils';
 import styles from './styles.module.scss';
 
 

@@ -5,7 +5,7 @@ import styles from './post.module.scss'
 
 import { mock_posts } from '../../mockdata/posts'
 import React from 'react';
-import { Recents } from '../../components/Recents';
+import { Recents } from '../../components/Post/Recents';
 
 
 interface IImage {
