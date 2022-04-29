@@ -1,0 +1,6 @@
+@mixin animation-mixin($name, $from, $to) {
+  @keyframes #{$name} {
+    0% {transform: rotate($from)}
+    100% {transform: rotate($to)}
+  }
+}

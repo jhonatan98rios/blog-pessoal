@@ -6,20 +6,35 @@ export default function Home() {
     <>
       <SEO title="Dev News!" excludeTitleSuffix />
 
-      <main className={styles.content}>
+      <main className={styles.main}>
         <section className={styles.section}>
-          <span>Olá Dev!</span>
-          <h1>
-            Bem-vindes <br />
-            ao <span>Dev</span>News!
-          </h1>
-          <p>
-            Um blog com conteúdos extremamente <br />
-            <span>relevantes para o seu aprendizado.</span>
-          </p>
-        </section>
 
-        <img src="/home.svg" alt="Home image" />
+          <div className={styles.content}>
+            <span>Hello Dev!!</span>
+            <h1>
+              Tecnologia <br />
+              <span> Programação </span> <br />
+              e Design
+            </h1>
+            <p>
+              Pesquise por titulo, tema ou categoria <br />
+              e vamos começar:
+            </p>
+
+            <input 
+              className={styles.input}
+              placeholder="Ex: Desenvolvimento de software"
+              type="text" 
+            />
+          </div>
+
+          <div className={styles.presentationImage}>
+            <img src="/home/blue.png" alt="Home image" />
+            <img src="/home/gray.png" alt="Home image" />
+            <img src="/home/white.png" alt="Home image" />
+            <img src="/home/black.png" alt="Home image" />
+          </div>
+        </section>
       </main>
     </>
   );
