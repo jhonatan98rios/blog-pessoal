@@ -47,17 +47,13 @@ export function Header() {
           !isMobile && (
             <nav>
               <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Sobre</a>
-              </ActiveLink>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Tecnologias</a>
-              </ActiveLink>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Portfólio</a>
+                <a>Inicio</a>
               </ActiveLink>
               <ActiveLink href="/posts" activeClassName={styles.active}>
-                <a>Blog</a>
+                <a>Posts</a>
               </ActiveLink>
+              <a href="https://jhonatan-dev-rios.herokuapp.com/" target="_blank" rel="noopener noreferrer"> Sobre mim </a>
+              <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
             </nav>
           )
         }
@@ -66,17 +62,13 @@ export function Header() {
           isMobile && checked && (
             <nav className={styles.navbar}>
               <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Sobre</a>
-              </ActiveLink>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Tecnologias</a>
+                <a>Inicio</a>
               </ActiveLink>
               <ActiveLink href="/posts" activeClassName={styles.active}>
-                <a>Blog</a>
+                <a>Posts</a>
               </ActiveLink>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Social</a>
-              </ActiveLink>
+              <a href="https://jhonatan-dev-rios.herokuapp.com/" target="_blank" rel="noopener noreferrer"> Sobre mim </a>
+              <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
             </nav> 
           )
         }

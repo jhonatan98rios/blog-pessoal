@@ -10,20 +10,19 @@ export default function Home() {
         <section className={styles.section}>
 
           <div className={styles.content}>
-            <span>Hello Dev!!</span>
+            {/* <span>Hello Dev!!</span> */}
             <h1>
-              Tecnologia <br />
-              <span> Programação </span> <br />
-              e Design
+              Como ser um <br />
+              <span> Desenvolvedor? </span> <br />
             </h1>
             <p>
-              Pesquise por titulo, tema ou categoria <br />
-              e vamos começar:
+              Conteúdos sobre programação,  <br />
+              design e muito mais!
             </p>
 
             <input 
               className={styles.input}
-              placeholder="Ex: Desenvolvimento de software"
+              placeholder="Pesquise por titulo, tema ou categoria"
               type="text" 
             />
           </div>
