@@ -3,7 +3,18 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
 const categories = [
-  'All', 'Javascript', 'Carreira', 'Python', 'Testes', 'React', 'Next', 'Vue', 'SCSS', 'Node'
+  { label: 'All', path: '/' },
+  { label: 'Javascript', path: 'javascript' },
+  { label: 'Carreira', path: 'carreira' },
+  { label: 'Python', path: 'python' },
+  { label: 'Testes', path: 'testes' },
+  { label: 'React', path: 'react' },
+  { label: 'Next', path: 'next' },
+  { label: 'Vue', path: 'vue' },
+  { label: 'SCSS', path: 'scss' },
+  { label: 'Node', path: 'node' },
+  { label: 'Design', path: 'design' },
+  { label: 'Marketing', path: 'marketing' },
 ]
 
 export function Categories() {
@@ -18,14 +29,16 @@ export function Categories() {
       <nav className={styles.categories}>
       { categories.map((cat, index) => 
         <li  key={index}>
-          <Link href={`#${cat}`}>
+          <Link 
+            href={`/posts/${ cat.path }`}
+          >
             <a
               className={styles.category}
-              onClick={() => setCategory(cat)}
-              style={{ color: category == cat ? '#00FFC2' : '#fff' }}
+              onClick={() => setCategory(cat.label)}
+              style={{ color: category == cat.label ? '#00FFC2' : '#fff' }}
             >
-             <span className={styles.name}>{ cat }</span>
-             {/* <span className={styles.amount}> 10 </span>    */}
+             <span className={styles.name}>{ cat.label }</span>
+             {/* <span className={styles.amount}> 10 </span> */}
             </a>
           </Link>
         </li> 

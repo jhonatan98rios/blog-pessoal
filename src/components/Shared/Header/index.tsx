@@ -44,8 +44,8 @@ export function Header() {
         <input className={styles.input} type="text" placeholder="Pesquisar pelo post" />
 
         {
-          !isMobile && (
-            <nav>
+          (!isMobile || checked) && (
+            <nav className={isMobile ? styles.navbar : null}>
               <ActiveLink href="/" activeClassName={styles.active}>
                 <a>Inicio</a>
               </ActiveLink>
@@ -57,22 +57,7 @@ export function Header() {
             </nav>
           )
         }
-
-        {
-          isMobile && checked && (
-            <nav className={styles.navbar}>
-              <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Inicio</a>
-              </ActiveLink>
-              <ActiveLink href="/posts" activeClassName={styles.active}>
-                <a>Posts</a>
-              </ActiveLink>
-              <a href="https://jhonatan-dev-rios.herokuapp.com/" target="_blank" rel="noopener noreferrer"> Sobre mim </a>
-              <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
-            </nav> 
-          )
-        }
       </div>
     </header>
-  );
+  )
 }

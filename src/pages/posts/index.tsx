@@ -5,7 +5,7 @@ import useDeviceDetect from "../../hooks/useDevice";
 import { Categories } from "../../components/Posts/Categories";
 /* import { Carousel } from '../../components/Carousel' */
 
-import styles from './posts.module.scss'
+import styles from './styles.module.scss'
 import { mock_posts } from '../../mockdata/posts'
 import { sizes } from '../../services/constants'
 
@@ -16,10 +16,11 @@ interface IImage {
 }
 
 interface IPost {
-  slug: string;
-  title: string;
+  slug: string
+  title: string
   image: IImage
-  updateAt: string;
+  updateAt: string
+  categories: string[]
   style: object
 }
 
@@ -44,7 +45,7 @@ export default function Posts({ posts }: IPostsProps) {
           { !isMobile && <Categories /> }
 
           <div className={styles.posts}>
-            { posts.map((post, index) => (
+            { posts && posts.map((post, index) => (
               <FlexiblePost post={post} key={index} 
                 customStyle={{ ...post.style }}
               />

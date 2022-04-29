@@ -20,6 +20,10 @@ export const mock_posts = [
         Mé faiz elementum girarzis, nisi eros vermeio.Diuretics paradis num copo é motivis de denguis.Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Delegadis gente finis, bibendum egestas augue arcu ut est.
         Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.Quem num gosta di mé, boa gentis num é.Manduma pindureta quium dia nois paga.Suco de cevadiss deixa as pessoas mais interessantis.`,
     updateAt: '24/04/2022',
+    categories: [
+      'design',
+      'marketing',
+    ]
   },
   {
     slug: 'getting-started',
@@ -36,5 +40,9 @@ export const mock_posts = [
         Mé faiz elementum girarzis, nisi eros vermeio.Diuretics paradis num copo é motivis de denguis.Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Delegadis gente finis, bibendum egestas augue arcu ut est.
         Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.Quem num gosta di mé, boa gentis num é.Manduma pindureta quium dia nois paga.Suco de cevadiss deixa as pessoas mais interessantis.`,
     updateAt: '24/04/2022',
+    categories: [
+      'python',
+      'testes',
+    ]
   },
 ]

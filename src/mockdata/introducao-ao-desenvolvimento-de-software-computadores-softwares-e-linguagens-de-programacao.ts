@@ -76,4 +76,8 @@ export const post_2 = {
     </p>
   `,
   updateAt: '24/04/2022',
+  categories: [
+    'programação',
+    'carreira',
+  ] 
 }

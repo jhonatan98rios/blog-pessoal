@@ -1,12 +1,14 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
-import { useRouter } from 'next/router'
-import SEO from '../../components/SEO';
-import styles from './post.module.scss'
+import { GetStaticPaths, GetStaticProps } from "next";
+import SEO from "../../components/SEO";
+import { FlexiblePost } from "../../components/Posts/FlexiblePost";
+import useDeviceDetect from "../../hooks/useDevice";
+import { Categories } from "../../components/Posts/Categories";
+/* import { Carousel } from '../../components/Carousel' */
 
+import styles from './styles.module.scss'
 import { mock_posts } from '../../mockdata/posts'
-import React from 'react';
-import { Recents } from '../../components/Post/Recents';
-
+import { sizes } from '../../services/constants'
+import { useEffect } from "react";
 
 interface IImage {
   src: string
@@ -14,47 +16,45 @@ interface IImage {
   title: string
 }
 
-interface PostProps {
-  post: {
-    slug: string
-    title: string
-    content: string
-    image: IImage
-    updateAt: string
-  }
+interface IPost {
+  slug: string
+  title: string
+  image: IImage
+  updateAt: string
+  categories: string[]
+  style: object
 }
 
+interface IPostsProps {
+  posts: IPost[]
+}
 
-export default function Post({ post }: PostProps) {
-  const router = useRouter()
+export default function FilteredPosts({ posts }: IPostsProps) {
 
-  if (router.isFallback) {
-    return <p> Loading... </p>
-  }
+  const { isMobile } = useDeviceDetect()
 
   return (
     <>
-      <SEO title="Post" />
+      <SEO title="Posts" />
       
-      <main className={styles.container}>
-        <article className={styles.post}>
+      <main>
+      { isMobile && <Categories /> }
 
-          <img className={styles.image} src={post.image.src} alt={post.image.alt} />
+        {/* <Carousel /> */}
 
-          <div className={styles.text}>
-            <div className={styles.header}>
-              <h1> {post.title} </h1>
-              <time> {post.updateAt} </time>
-            </div>
-            <div 
-              className={styles.static_content}
-              dangerouslySetInnerHTML={{ __html: post.content }} 
-            /> 
+        <section className={styles.container}>
+          { !isMobile && <Categories /> }
+
+          <div className={styles.posts}>
+            { posts && posts.map((post, index) => (
+              <FlexiblePost post={post} key={index} 
+                customStyle={{ ...post.style }}
+              />
+            ))}
           </div>
 
-        </article>
-
-        <Recents />
+          { !isMobile && <span className={styles.fake_col}></span>  }
+        </section>
       </main>
     </>
   );
@@ -67,16 +67,29 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const {slug} = params
-  const post = mock_posts.filter(post => post.slug == slug)[0]
-  
+  const filtered_posts = mock_posts.filter(post => post.categories.includes(`${params.slug}`) )
+
+  const posts = filtered_posts.map(post => {
+
+    const text_size = post.title.length
+    const selected = text_size > 100 ? 'xbig' :
+      text_size > 75 ? 'big' :
+      text_size > 50 ? 'medium' :
+      text_size > 25 ? 'small' :
+      'xsmall'
+
+    const style = sizes[selected]
+
+    return { ...post, style }
+  })
+
   return {
     props: {
-      post
+      posts,
     },
-    revalidate: 60 * 60 * 12
+    revalidate: 60 * 60 * 120
   }
 }
+

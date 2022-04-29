@@ -1,5 +1,4 @@
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
 
 interface IImage {
@@ -13,6 +12,7 @@ interface IPost {
   title: string;
   image: IImage
   updateAt: string;
+  categories: string[]
 }
 
 interface PostCardProps {
@@ -23,10 +23,8 @@ interface PostCardProps {
 
 export function FlexiblePost({ post, customStyle }: PostCardProps) {
 
-  const { asPath } = useRouter();
-
   return (
-    <Link href={`/posts/${post.slug}`}>
+    <Link href={`/post/${post.slug}`}>
       <a 
         className={styles.card} 
         style={{
@@ -42,9 +40,13 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
           <time>{post.updateAt} </time>
 
           <div className={styles.categories}>
-            <span className={styles.category}>
-              Programação
-            </span>
+            {
+              post.categories.map(cat => (
+                <span className={styles.category} key={cat}>
+                  { cat }
+                </span>
+              ))
+            }            
           </div>
         </article>
       </a>
