@@ -1,7 +1,27 @@
+import React, { ChangeEvent, useContext } from 'react';
+import { useRouter } from 'next/router'
+
+import StoreContext from '../context/store'
 import SEO from '../components/SEO';
 import styles from './home.module.scss';
 
 export default function Home() {
+
+  const { state, setState } = useContext(StoreContext)
+  const router = useRouter()
+
+  function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
+
+    setState({
+      ...state,
+      search: e.target.value
+    })
+  }
+
+  function handleClick() {
+    router.push('/posts/')
+  }
+
   return (
     <>
       <SEO title="Dev News!" excludeTitleSuffix />
@@ -10,7 +30,6 @@ export default function Home() {
         <section className={styles.section}>
 
           <div className={styles.content}>
-            {/* <span>Hello Dev!!</span> */}
             <h1>
               Como ser um <br />
               <span> Desenvolvedor? </span> <br />
@@ -24,7 +43,15 @@ export default function Home() {
               className={styles.input}
               placeholder="Pesquise por titulo, tema ou categoria"
               type="text" 
+              onChange={handleKeyPress}
             />
+
+            <button 
+              className={styles.button}
+              onClick={handleClick}
+            >
+              Buscar
+            </button>
           </div>
 
           <div className={styles.presentationImage}>

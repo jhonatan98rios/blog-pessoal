@@ -42,7 +42,7 @@ export const mock_posts = [
     updateAt: '24/04/2022',
     categories: [
       'python',
-      'testes',
+      'programação',
     ]
   },
   {
@@ -61,8 +61,8 @@ export const mock_posts = [
         Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.Quem num gosta di mé, boa gentis num é.Manduma pindureta quium dia nois paga.Suco de cevadiss deixa as pessoas mais interessantis.`,
     updateAt: '24/04/2022',
     categories: [
-      'python',
-      'testes',
+      'sass',
+      'css',
     ]
   },
   {
@@ -81,8 +81,8 @@ export const mock_posts = [
         Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.Quem num gosta di mé, boa gentis num é.Manduma pindureta quium dia nois paga.Suco de cevadiss deixa as pessoas mais interessantis.`,
     updateAt: '24/04/2022',
     categories: [
-      'python',
-      'testes',
+      'javascript',
+      'programação',
     ]
   },
 ]

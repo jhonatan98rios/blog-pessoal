@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { ChangeEvent, useContext, useState } from 'react';
+import StoreContext from '../../../context/store';
+
 import useDeviceDetect from '../../../hooks/useDevice';
 import { ActiveLink } from '../ActiveLink';
+
 import styles from './styles.module.scss';
 
 export function Header() {
 
+  const router = useRouter()
   const {isMobile} = useDeviceDetect()
   const [checked, setChecked] = useState(false);
+  const { state, setState } = useContext(StoreContext)
+
+  function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
+    setState({
+      ...state,
+      search: e.target.value
+    })
+  }
 
   function handleCheckbox() {
-    if (checked) {
-      setChecked(false)
-      document.querySelector('body').style.overflowY = 'auto'
-    } else {
-      setChecked(true)
-      document.querySelector('body').style.overflowY = 'hidden'
+    if (isMobile) {
+      document.querySelector('body').style.overflowY = checked ? 'auto' : 'hidden'
+      setChecked(!checked)
     }
   }
 
@@ -41,7 +51,16 @@ export function Header() {
           )
         }
 
-        <input className={styles.input} type="text" placeholder="Pesquisar pelo post" />
+        {
+          router.asPath.includes('posts') && 
+          <input 
+            className={styles.input} 
+            type="text" 
+            placeholder="Pesquisar pelo post" 
+            onChange={handleKeyPress}
+            value={state.search}
+          />
+        }
 
         {
           (!isMobile || checked) && (

@@ -3,16 +3,11 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
 const categories = [
-  { label: 'All', path: '/' },
-  { label: 'Javascript', path: 'javascript' },
+  /* { label: 'All', path: '/' }, */
   { label: 'Carreira', path: 'carreira' },
+  { label: 'Javascript', path: 'javascript' },
   { label: 'Python', path: 'python' },
-  { label: 'Testes', path: 'testes' },
-  { label: 'React', path: 'react' },
-  { label: 'Next', path: 'next' },
-  { label: 'Vue', path: 'vue' },
-  { label: 'SCSS', path: 'scss' },
-  { label: 'Node', path: 'node' },
+  { label: 'SASS', path: 'sass' },
   { label: 'Design', path: 'design' },
   { label: 'Marketing', path: 'marketing' },
 ]
@@ -20,6 +15,10 @@ const categories = [
 export function Categories() {
 
   const [category, setCategory] = useState('')
+
+  function handleClick(cat) {
+    setCategory(cat.label)
+  }
   
   return  (
     <section className={styles.container}>
@@ -34,7 +33,7 @@ export function Categories() {
           >
             <a
               className={styles.category}
-              onClick={() => setCategory(cat.label)}
+              onClick={() => handleClick(cat) }
               style={{ color: category == cat.label ? '#00FFC2' : '#fff' }}
             >
              <span className={styles.name}>{ cat.label }</span>

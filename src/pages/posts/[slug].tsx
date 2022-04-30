@@ -8,7 +8,10 @@ import { Categories } from "../../components/Posts/Categories";
 import styles from './styles.module.scss'
 import { mock_posts } from '../../mockdata/posts'
 import { sizes } from '../../services/constants'
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import StoreContext from "../../context/store";
+import { postsFilter } from "../../services/utils";
+import { useRouter } from "next/router";
 
 interface IImage {
   src: string
@@ -31,29 +34,49 @@ interface IPostsProps {
 
 export default function FilteredPosts({ posts }: IPostsProps) {
 
+  const router = useRouter()
   const { isMobile } = useDeviceDetect()
+  const { state, setState } = useContext(StoreContext)
+  const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
+
+  useEffect(() => {
+    setState({ ...state, search: '' })
+  }, [])
+
+  useEffect(() => {
+    setFilteredPosts(
+      postsFilter(state.search, posts)
+    )
+
+  }, [state.search, router.asPath])
 
   return (
     <>
       <SEO title="Posts" />
       
       <main>
-      { isMobile && <Categories /> }
-
-        {/* <Carousel /> */}
+      { isMobile && 
+        <Categories /> 
+      }
 
         <section className={styles.container}>
-          { !isMobile && <Categories /> }
+          { !isMobile &&
+           <Categories /> 
+          }
 
           <div className={styles.posts}>
-            { posts && posts.map((post, index) => (
-              <FlexiblePost post={post} key={index} 
-                customStyle={{ ...post.style }}
-              />
-            ))}
+            { filteredPosts && 
+              filteredPosts.map((post, index) => (
+                <FlexiblePost post={post} key={index} 
+                  customStyle={{ ...post.style }}
+                />
+              ))
+            }
           </div>
 
-          { !isMobile && <span className={styles.fake_col}></span>  }
+          { !isMobile && 
+            <span className={styles.fake_col}></span>  
+          }
         </section>
       </main>
     </>

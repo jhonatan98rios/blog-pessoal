@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+
 import { GetStaticProps } from "next";
 import SEO from "../../components/SEO";
 import { FlexiblePost } from "../../components/Posts/FlexiblePost";
@@ -8,6 +10,11 @@ import { Categories } from "../../components/Posts/Categories";
 import styles from './styles.module.scss'
 import { mock_posts } from '../../mockdata/posts'
 import { sizes } from '../../services/constants'
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { postsFilter } from "../../services/utils";
+
+import StoreContext from '../../context/store'
 
 interface IImage {
   src: string
@@ -31,28 +38,44 @@ interface IPostsProps {
 export default function Posts({ posts }: IPostsProps) {
 
   const { isMobile } = useDeviceDetect()
+  const { state } = useContext(StoreContext)
+  const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
+  
+  useEffect(() => {
+    setFilteredPosts(
+      postsFilter(state.search, posts)
+    )
+
+  }, [state.search])
 
   return (
     <>
       <SEO title="Posts" />
       
       <main>
-      { isMobile && <Categories /> }
-
-        {/* <Carousel /> */}
+      { isMobile && 
+        <Categories /> 
+      }
 
         <section className={styles.container}>
-          { !isMobile && <Categories /> }
+          { !isMobile &&
+           <Categories /> 
+          }
 
           <div className={styles.posts}>
-            { posts && posts.map((post, index) => (
-              <FlexiblePost post={post} key={index} 
-                customStyle={{ ...post.style }}
-              />
-            ))}
+
+            { filteredPosts && 
+              filteredPosts.map((post, index) => (
+                <FlexiblePost post={post} key={index} 
+                  customStyle={{ ...post.style }}
+                />
+              ))
+            }
           </div>
 
-          { !isMobile && <span className={styles.fake_col}></span>  }
+          { !isMobile && 
+            <span className={styles.fake_col}></span>  
+          }
         </section>
       </main>
     </>
