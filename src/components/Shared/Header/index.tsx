@@ -15,10 +15,7 @@ export function Header() {
   const { state, setState } = useContext(StoreContext)
 
   function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
-    setState({
-      ...state,
-      search: e.target.value
-    })
+    setState({ ...state, search: e.target.value })
   }
 
   function handleCheckbox() {
@@ -26,6 +23,8 @@ export function Header() {
       document.querySelector('body').style.overflowY = checked ? 'auto' : 'hidden'
       setChecked(!checked)
     }
+
+    setState({ ...state, search: '' })
   }
 
   return (
