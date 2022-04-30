@@ -12,7 +12,7 @@
     padding: 0 2rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
   
     .input {
       width: 100%;
@@ -23,6 +23,14 @@
       border: none;
       padding: 20px;
       color: #AFAFB4;
+
+      @media (max-width: 1024px) {
+        margin-left: 32px;
+      }
+
+      @media (min-width: 1025px) {
+        margin-right: auto;
+      }
     }
   
     nav {
@@ -63,7 +71,7 @@
 .menuIcon {
   width: 40px;
   height: 32px;
-  margin-right: 32px;
+  margin-right: auto;
   position: relative;
 
   .icon_menu {

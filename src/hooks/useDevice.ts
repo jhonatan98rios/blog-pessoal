@@ -10,9 +10,8 @@ export default function useDeviceDetect() {
     }
   }
 
-  
-
   React.useEffect(() => {
+    deviceVerification()
     window.addEventListener("resize", deviceVerification);
     return () => window.removeEventListener("resize", deviceVerification);
   }, []);

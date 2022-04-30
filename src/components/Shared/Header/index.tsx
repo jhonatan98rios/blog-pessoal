@@ -47,10 +47,15 @@ export function Header() {
           (!isMobile || checked) && (
             <nav className={isMobile ? styles.navbar : null}>
               <ActiveLink href="/" activeClassName={styles.active}>
-                <a>Inicio</a>
+                <a onClick={handleCheckbox}>
+                  Inicio
+                </a>
               </ActiveLink>
+
               <ActiveLink href="/posts" activeClassName={styles.active}>
-                <a>Posts</a>
+                <a onClick={handleCheckbox}>
+                  Posts
+                </a>
               </ActiveLink>
               <a href="https://jhonatan-dev-rios.herokuapp.com/" target="_blank" rel="noopener noreferrer"> Sobre mim </a>
               <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
