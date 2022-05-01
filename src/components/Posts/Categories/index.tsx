@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import StoreContext from '../../../context/store';
 import styles from './styles.module.scss';
 
 const categories = [
+  { label: 'Ver todos', path: '/' },
   { label: 'Carreira', path: 'carreira' },
   { label: 'Javascript', path: 'javascript' },
   { label: 'Python', path: 'python' },
@@ -14,10 +16,17 @@ const categories = [
 export function Categories() {
 
   const [category, setCategory] = useState('')
+  const { state, setState } = useContext(StoreContext)
 
   function handleClick(cat) {
     setCategory(cat.label)
+    setState({
+      ...state,
+      search: ''
+    })
   }
+
+
   
   return  (
     <section className={styles.container}>

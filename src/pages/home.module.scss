@@ -34,6 +34,10 @@
 
     .content {
 
+      @media (max-width: 1024px) {
+        zoom: 1.25;
+      }
+
       > span {
         font-size: 1.5rem;
         font-weight: bold;
@@ -74,12 +78,16 @@
 
       .button {
         width: 100%;
-        padding: 10px;
+        padding: 14px;
         border-radius: 8px;
         border: none;
         margin-top: 0.5rem;
         background-color: var(--secondary);
         color: #fff;
+
+        @media (max-width: 1024px) {
+          padding: 16px;
+        }
       }
     }
     

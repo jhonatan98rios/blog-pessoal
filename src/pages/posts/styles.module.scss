@@ -13,19 +13,6 @@
     min-height: calc(100vh - 18rem);
   }
 
-  .posts {
-    max-width: 596px;
-    width: calc(100% - 64px);
-    margin: 0 auto;
-
-    @media(min-width: 1025px) {
-      display: grid;                                                
-      grid-auto-rows: 10px;                                         
-      grid-gap: 20px;                                               
-      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-    }
-  }
-
   .fake_col {
     width: 100%;
     max-width: 288px;

@@ -2,10 +2,11 @@
 
 .posts {
   max-width: 596px;
-  width: calc(100% - 64px);
   margin: 0 auto;
-
+  width: calc(100% - 16px);
+  
   @media(min-width: 1025px) {
+    width: calc(100% - 64px);
     display: grid;                                                
     grid-auto-rows: 10px;                                         
     grid-gap: 20px;                                               
