@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import styles from './styles.module.scss';
 
 import { mock_posts } from '../../../mockdata/posts'
+import styles from './styles.module.scss';
 
-
-function getExcerpt(html) {
+function getExcerpt(html: string) {
 
   const cleanText = html.replace(/<\/?[^>]+(>|$)/g, "");
   const excerpt = cleanText.substring(0, 150) + '...'

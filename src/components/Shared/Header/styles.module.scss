@@ -4,6 +4,7 @@
   background-color: var(--gray700);
   position: fixed;
   top: 0;
+  z-index: 99;
 
   .content {
     max-width: 1212px;

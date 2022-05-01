@@ -7,23 +7,7 @@ import { mock_posts } from '../../mockdata/posts'
 import React from 'react';
 import { Recents } from '../../components/Post/Recents';
 
-
-interface IImage {
-  src: string
-  alt: string
-  title: string
-}
-
-interface PostProps {
-  post: {
-    slug: string
-    title: string
-    content: string
-    image: IImage
-    updateAt: string
-  }
-}
-
+import { PostProps } from '../../types'
 
 export default function Post({ post }: PostProps) {
   const router = useRouter()
@@ -38,7 +22,6 @@ export default function Post({ post }: PostProps) {
       
       <main className={styles.container}>
         <article className={styles.post}>
-
           <img className={styles.image} src={post.image.src} alt={post.image.alt} />
 
           <div className={styles.text}>
@@ -51,7 +34,6 @@ export default function Post({ post }: PostProps) {
               dangerouslySetInnerHTML={{ __html: post.content }} 
             /> 
           </div>
-
         </article>
 
         <Recents />
@@ -67,16 +49,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-
   const {slug} = params
   const post = mock_posts.filter(post => post.slug == slug)[0]
   
   return {
-    props: {
-      post
-    },
+    props: { post },
     revalidate: 60 * 60 * 12
   }
 }

@@ -12,6 +12,11 @@
   padding: 0px 30px 24px;
   margin-bottom: 16px;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.005);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
+  }
   
   @media(min-width: 1025px) {
     width: 288px;
@@ -40,21 +45,25 @@
     display: flex;
     margin-top: 12px;
 
+    @media (min-width: 1215px) {
+      justify-content: center;
+    }
+
     .category {
-      padding: 6px 0;
-      font-size: rem(10);
+      padding: 8px 0;
+      font-size: rem(12);
       background-color: #37384A;
+      /* background-color: #00FFC2;
+      color:  #37384A;
+      font-weight: bold; */
       border-radius: 8px;
-      width: 80px;
+      width: 100%;
+      max-width: 140px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.5s;
-      margin-right: 4px;
+      margin-right: 8px;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
       
-      &:hover {
-        color: #00FFC2;
-      }
     }
   }
-
 }

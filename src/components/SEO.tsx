@@ -1,12 +1,5 @@
 import Head from 'next/head';
-
-interface SEOProps {
-  title: string;
-  description?: string;
-  image?: string;
-  excludeTitleSuffix?: boolean;
-  indexPage?: boolean;
-}
+import { SEOProps } from '../types'
 
 export default function SEO({
   title,

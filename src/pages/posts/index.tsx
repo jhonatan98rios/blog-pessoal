@@ -1,39 +1,19 @@
-import React, { useContext } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import { GetStaticProps } from "next";
+
 import SEO from "../../components/SEO";
-import { FlexiblePost } from "../../components/Posts/FlexiblePost";
-import useDeviceDetect from "../../hooks/useDevice";
 import { Categories } from "../../components/Posts/Categories";
-/* import { Carousel } from '../../components/Carousel' */
+import { Masonry } from  '../../components/Posts/Masonry'
 
-import styles from './styles.module.scss'
-import { mock_posts } from '../../mockdata/posts'
 import { sizes } from '../../services/constants'
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { postsFilter } from "../../services/utils";
-
+import { calcTextSize, postsFilter } from "../../services/utils";
+import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/store'
 
-interface IImage {
-  src: string
-  alt: string
-  title: string
-}
+import { mock_posts } from '../../mockdata/posts'
+import { IPostsProps, IPost } from '../../types'
 
-interface IPost {
-  slug: string
-  title: string
-  image: IImage
-  updateAt: string
-  categories: string[]
-  style: object
-}
-
-interface IPostsProps {
-  posts: IPost[]
-}
+import styles from './styles.module.scss'
 
 export default function Posts({ posts }: IPostsProps) {
 
@@ -61,17 +41,8 @@ export default function Posts({ posts }: IPostsProps) {
           { !isMobile &&
            <Categories /> 
           }
-
-          <div className={styles.posts}>
-
-            { filteredPosts && 
-              filteredPosts.map((post, index) => (
-                <FlexiblePost post={post} key={index} 
-                  customStyle={{ ...post.style }}
-                />
-              ))
-            }
-          </div>
+          
+          <Masonry posts={filteredPosts} />
 
           { !isMobile && 
             <span className={styles.fake_col}></span>  
@@ -84,19 +55,9 @@ export default function Posts({ posts }: IPostsProps) {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-
   const posts = mock_posts.map(post => {
-
-    const text_size = post.title.length
-    const selected = text_size > 100 ? 'xbig' :
-      text_size > 75 ? 'big' :
-      text_size > 50 ? 'medium' :
-      text_size > 25 ? 'small' :
-      'xsmall'
-
-    const style = sizes[selected]
-
-    return { ...post, style }
+    const selected = calcTextSize(post.title)
+    return { ...post, style: sizes[selected] }
   })
 
   return {

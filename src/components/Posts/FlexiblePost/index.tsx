@@ -1,28 +1,9 @@
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 import styles from './styles.module.scss';
 
-interface IImage {
-  src: string,
-  alt: string
-  title: string
-}
-
-interface IPost {
-  slug: string;
-  title: string;
-  image: IImage
-  updateAt: string;
-  categories: string[]
-}
-
-interface PostCardProps {
-  post: IPost
-  customStyle: object
-}
-
+import { PostCardProps } from '../../../types'
 
 export function FlexiblePost({ post, customStyle }: PostCardProps) {
-
   return (
     <Link href={`/post/${post.slug}`}>
       <a 
@@ -31,7 +12,6 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
           ...customStyle,
           backgroundImage: `url(${post.image.src})`
         }}
-
       >
         <article>
           <span className="likes" />

@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useContext } from 'react';
 import { useRouter } from 'next/router'
 
-import StoreContext from '../context/store'
 import SEO from '../components/SEO';
+
+import StoreContext from '../context/store'
 import styles from './home.module.scss';
 
 export default function Home() {
@@ -11,11 +12,7 @@ export default function Home() {
   const router = useRouter()
 
   function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
-
-    setState({
-      ...state,
-      search: e.target.value
-    })
+    setState({ ...state, search: e.target.value })
   }
 
   function handleClick() {

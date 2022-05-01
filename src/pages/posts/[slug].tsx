@@ -1,36 +1,20 @@
+import React, { useContext, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import SEO from "../../components/SEO";
-import { FlexiblePost } from "../../components/Posts/FlexiblePost";
-import useDeviceDetect from "../../hooks/useDevice";
-import { Categories } from "../../components/Posts/Categories";
-/* import { Carousel } from '../../components/Carousel' */
-
-import styles from './styles.module.scss'
-import { mock_posts } from '../../mockdata/posts'
-import { sizes } from '../../services/constants'
-import { useContext, useEffect, useState } from "react";
-import StoreContext from "../../context/store";
-import { postsFilter } from "../../services/utils";
 import { useRouter } from "next/router";
 
-interface IImage {
-  src: string
-  alt: string
-  title: string
-}
+import SEO from "../../components/SEO";
+import { Masonry } from "../../components/Posts/Masonry";
+import { Categories } from "../../components/Posts/Categories";
 
-interface IPost {
-  slug: string
-  title: string
-  image: IImage
-  updateAt: string
-  categories: string[]
-  style: object
-}
+import useDeviceDetect from "../../hooks/useDevice";
+import { sizes } from '../../services/constants'
+import { postsFilter } from "../../services/utils";
+import StoreContext from "../../context/store";
 
-interface IPostsProps {
-  posts: IPost[]
-}
+import { mock_posts } from '../../mockdata/posts'
+import { IPostsProps, IPost } from '../../types'
+
+import styles from './styles.module.scss'
 
 export default function FilteredPosts({ posts }: IPostsProps) {
 
@@ -55,24 +39,15 @@ export default function FilteredPosts({ posts }: IPostsProps) {
       <SEO title="Posts" />
       
       <main>
-      { isMobile && 
-        <Categories /> 
-      }
-
+        { isMobile && 
+          <Categories /> 
+        }
         <section className={styles.container}>
           { !isMobile &&
            <Categories /> 
           }
 
-          <div className={styles.posts}>
-            { filteredPosts && 
-              filteredPosts.map((post, index) => (
-                <FlexiblePost post={post} key={index} 
-                  customStyle={{ ...post.style }}
-                />
-              ))
-            }
-          </div>
+          <Masonry posts={filteredPosts} />
 
           { !isMobile && 
             <span className={styles.fake_col}></span>  
@@ -95,7 +70,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const filtered_posts = mock_posts.filter(post => post.categories.includes(`${params.slug}`) )
 
   const posts = filtered_posts.map(post => {
-
     const text_size = post.title.length
     const selected = text_size > 100 ? 'xbig' :
       text_size > 75 ? 'big' :
@@ -104,14 +78,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       'xsmall'
 
     const style = sizes[selected]
-
     return { ...post, style }
   })
 
   return {
-    props: {
-      posts,
-    },
+    props: { posts },
     revalidate: 60 * 60 * 120
   }
 }

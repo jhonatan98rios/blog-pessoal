@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
 const categories = [
-  /* { label: 'All', path: '/' }, */
   { label: 'Carreira', path: 'carreira' },
   { label: 'Javascript', path: 'javascript' },
   { label: 'Python', path: 'python' },
