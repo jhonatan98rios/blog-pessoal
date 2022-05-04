@@ -8,7 +8,7 @@ export default function SEO({
   excludeTitleSuffix = false,
   indexPage = true,
 }: SEOProps) {
-  const pageTitle = `${title} ${!excludeTitleSuffix ? '| Dev News' : ''}`;
+  const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
 
   const pageImage = image
     ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}`
