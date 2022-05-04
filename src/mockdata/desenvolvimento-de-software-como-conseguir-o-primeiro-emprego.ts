@@ -100,7 +100,7 @@ export const post_1 = {
     `,
   updateAt: '24/04/2022',
   categories: [
-    'programação',
+    'programacao',
     'carreira',
   ] 
 }

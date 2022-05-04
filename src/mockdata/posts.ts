@@ -42,7 +42,7 @@ export const mock_posts = [
     updateAt: '24/04/2022',
     categories: [
       'python',
-      'programação',
+      'programacao',
     ]
   },
   {
@@ -82,7 +82,7 @@ export const mock_posts = [
     updateAt: '24/04/2022',
     categories: [
       'javascript',
-      'programação',
+      'programacao',
     ]
   },
 ]

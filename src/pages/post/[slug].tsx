@@ -43,9 +43,10 @@ export default function Post({ post }: PostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = mock_posts.map(post => `/post/${post.slug}`)
   return {
-    paths: [],
-    fallback: true
+    paths,
+    fallback: false
   }
 }
 

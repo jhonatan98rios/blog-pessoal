@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 
 const categories = [
   { label: 'Ver todos', path: '/' },
+  { label: 'Programação', path: 'programacao' },
   { label: 'Carreira', path: 'carreira' },
   { label: 'Javascript', path: 'javascript' },
   { label: 'Python', path: 'python' },
@@ -25,7 +26,6 @@ export function Categories() {
       search: ''
     })
   }
-
 
   
   return  (
