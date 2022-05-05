@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { SEOProps } from '../types'
+import { SEOProps } from '../../../types'
 
 export default function SEO({
   title,

@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
-import SEO from '../../components/SEO';
+import SEO from '../../components/Shared/SEO';
 import styles from './styles.module.scss'
 
 import { mock_posts } from '../../mockdata/posts'

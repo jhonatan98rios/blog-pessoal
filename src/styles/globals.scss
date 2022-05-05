@@ -38,6 +38,10 @@ body {
   @media(max-width: 1024px) {
     padding-top: 70px;
   }
+
+  @media (max-width: 425px) {
+    padding-top: 4rem;
+  }
 }
 
 body, input, textarea, select, button {

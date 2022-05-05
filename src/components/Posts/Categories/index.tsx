@@ -7,11 +7,7 @@ const categories = [
   { label: 'Ver todos', path: '/' },
   { label: 'Programação', path: 'programacao' },
   { label: 'Carreira', path: 'carreira' },
-  { label: 'Javascript', path: 'javascript' },
-  { label: 'Python', path: 'python' },
-  { label: 'SASS', path: 'sass' },
-  { label: 'Design', path: 'design' },
-  { label: 'Marketing', path: 'marketing' },
+  { label: 'Software', path: 'software' },
 ]
 
 export function Categories() {
@@ -42,7 +38,7 @@ export function Categories() {
             <a
               className={styles.category}
               onClick={() => handleClick(cat) }
-              style={{ color: category == cat.label ? '#00FFC2' : '#fff' }}
+              style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
             >
              <span className={styles.name}>{ cat.label }</span>
              {/* <span className={styles.amount}> 10 </span> */}

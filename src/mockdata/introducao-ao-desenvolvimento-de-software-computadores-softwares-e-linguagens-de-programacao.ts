@@ -78,6 +78,6 @@ export const post_2 = {
   updateAt: '24/04/2022',
   categories: [
     'programacao',
-    'carreira',
+    'software',
   ] 
 }

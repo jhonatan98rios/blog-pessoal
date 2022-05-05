@@ -17,6 +17,10 @@
       scroll-snap-type: x mandatory;
       padding: 16px 32px;
 
+      @media (max-width: 425px) {
+        padding: 8px 32px;
+      }
+
       &::-webkit-scrollbar {
         display: none;
       }

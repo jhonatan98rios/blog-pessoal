@@ -1,14 +1,16 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
-import SEO from '../components/SEO';
+import SEO from '../components/Shared/SEO';
 
 import StoreContext from '../context/store'
 import styles from './home.module.scss';
+import PresentationImage from '../components/Home/PresentationImage';
 
 export default function Home() {
 
   const { state, setState } = useContext(StoreContext)
+  const [error, setError] = useState(false)
   const router = useRouter()
 
   function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
@@ -16,8 +18,19 @@ export default function Home() {
   }
 
   function handleClick() {
-    router.push('/posts/')
+    if (state.search.length > 3) {
+      router.push('/posts/')
+    } else {
+      setError(true)
+    }
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError(false)
+    }, 500)
+    
+  }, [error])
 
   return (
     <>
@@ -37,8 +50,8 @@ export default function Home() {
             </p>
 
             <input 
-              className={styles.input}
-              placeholder="Pesquise por titulo, tema ou categoria"
+              className={`${styles.input} ${error ? styles.warning : ''}`}
+              placeholder='Pesquise por titulo ou categoria'
               type="text" 
               onChange={handleKeyPress}
             />
@@ -51,12 +64,7 @@ export default function Home() {
             </button>
           </div>
 
-          <div className={styles.presentationImage}>
-            <img src="/home/blue.png" alt="Home image" />
-            <img src="/home/gray.png" alt="Home image" />
-            <img src="/home/white.png" alt="Home image" />
-            <img src="/home/black.png" alt="Home image" />
-          </div>
+          <PresentationImage />
         </section>
       </main>
     </>

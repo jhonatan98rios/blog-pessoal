@@ -1,9 +1,8 @@
-@import '../styles/mixins.scss';
-
-@include animation-mixin(rotation_1, 0deg, 360deg);
-@include animation-mixin(rotation_2, 360deg, 0deg);
-@include animation-mixin(rotation_3, 0deg, 360deg);
-@include animation-mixin(rotation_4, 360deg, 0deg);
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
 
 .main {
   max-width: 1212px;
@@ -18,7 +17,15 @@
     padding-top: 10rem;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
+    zoom: .9;
+  }
+
+  @media (max-width: 400px) {
+    zoom: .8;
+  }
+
+  @media (max-width: 340px) {
     zoom: .75;
   }
 
@@ -35,7 +42,8 @@
     .content {
 
       @media (max-width: 1024px) {
-        zoom: 1.25;
+        width: 100%;
+        max-width: 360px;
       }
 
       > span {
@@ -48,6 +56,11 @@
         line-height: 3.2rem;
         font-weight: 900;
         margin-top: 1rem;
+
+        @media (max-width: 1024px) {
+          font-size: 3.6rem;
+          line-height: 3.6rem;
+        }
     
         span {
           color: var(--secondary);
@@ -58,6 +71,11 @@
         font-size: 1.5rem;
         line-height: 2.25rem;
         margin-top: 1rem;
+
+        @media (max-width: 1024px) {
+          font-size: 1.6rem;
+          line-height: 2.3rem;
+        }
     
         span {
           margin-top: 2.5rem;
@@ -66,7 +84,6 @@
 
       .input {
         width: 100%;
-        max-width: 365px;
         height: 48px;
         background-color: #484861;
         border-radius: 8px;
@@ -74,6 +91,19 @@
         margin-top: 1rem;
         padding: 20px;
         color: #AFAFB4;
+        
+        @media (min-width: 1025px) {
+          max-width: 365px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 1.4rem;
+          line-height: 2.1rem;
+        }
+      }
+
+      .warning {
+        animation: blinker .5s linear;
       }
 
       .button {
@@ -84,57 +114,14 @@
         margin-top: 0.5rem;
         background-color: var(--secondary);
         color: #fff;
-
-        @media (max-width: 1024px) {
-          padding: 16px;
-        }
-      }
-    }
-    
-    .presentationImage {
-      max-width: 360px;
-      height: 360px;
-      width: 100%;
-      position: relative;
-
-      @media (max-width: 1024px) {
-        display: none;
-      }
-  
-      img {
-        top: 0;
-        position: absolute;
-
-        &:nth-child(1) {
-          animation: rotation_1 36s linear infinite;
-          filter: blur(2px);
-        }
+        height: 48px;
+        padding: 10px;
         
-        &:nth-child(2) {
-          animation: rotation_2 12s linear infinite;
-        }
-
-        &:nth-child(3) {
-          animation: rotation_3 24s linear infinite;
-          filter: blur(1px);
-        }
-
-        &:nth-child(4) {
-          animation: rotation_4 6s linear infinite;
+        @media (max-width: 1024px) {
+          margin-top: 0.75rem;
+          font-size: 1.4rem;
         }
       }
     }
   }
 }
-
-@keyframes rotation {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-

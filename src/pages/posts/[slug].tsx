@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 
-import SEO from "../../components/SEO";
+import SEO from "../../components/Shared/SEO";
 import { Masonry } from "../../components/Posts/Masonry";
 import { Categories } from "../../components/Posts/Categories";
 

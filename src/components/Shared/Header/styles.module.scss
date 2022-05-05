@@ -6,6 +6,10 @@
   top: 0;
   z-index: 99;
 
+  @media (max-width: 425px) {
+    height: 4rem;
+  }
+
   .content {
     max-width: 1212px;
     height: 5rem;
@@ -14,6 +18,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    @media (max-width: 425px) {
+      height: 4rem;
+      padding: 0 1.5rem;
+    }
   
     .input {
       width: 100%;
@@ -25,12 +34,17 @@
       padding: 20px;
       color: #AFAFB4;
 
+      @media (min-width: 1025px) {
+        margin-right: auto;
+      }
+
       @media (max-width: 1024px) {
         margin-left: 32px;
       }
 
-      @media (min-width: 1025px) {
-        margin-right: auto;
+      @media (max-width: 425px) {
+        height: 40px;
+        margin-left: 20px;
       }
     }
   
@@ -74,6 +88,10 @@
   height: 32px;
   margin-right: auto;
   position: relative;
+
+  @media (max-width: 425px) {
+    zoom: .75;
+  }
 
   .icon_menu {
     display: none;
@@ -150,5 +168,10 @@
     a {
       margin: 0 auto;
     }
+  }
+
+  @media (max-width: 425px) {
+    top: 4rem;
+    height: calc(100vh - 4rem);
   }
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GetStaticProps } from "next";
 
-import SEO from "../../components/SEO";
+import SEO from "../../components/Shared/SEO";
 import { Categories } from "../../components/Posts/Categories";
 import { Masonry } from  '../../components/Posts/Masonry'
 
