@@ -62,8 +62,9 @@ export default function FilteredPosts({ posts }: IPostsProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const paths = mock_posts.map(
-    (post) => post.categories.map(
+  const allPosts = await getAllPosts()
+  const paths = allPosts.map(
+    (post) => post.categories.split(',').map(
       (cat) => `/posts/${cat}`
     )
   ).flat()

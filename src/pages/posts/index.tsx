@@ -13,7 +13,6 @@ import { calcTextSize, postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/store'
 
-import { mock_posts } from '../../mockdata/posts'
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'

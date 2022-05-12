@@ -3,11 +3,12 @@ import { useRouter } from 'next/router'
 import SEO from '../../components/Shared/SEO';
 import styles from './styles.module.scss'
 
-import { mock_posts } from '../../mockdata/posts'
 import React from 'react';
 import { Recents } from '../../components/Post/Recents';
 
 import { PostProps } from '../../types'
+import { getAllPosts } from '../../services/client';
+import { adapter } from '../../services/adapter';
 
 export default function Post({ post }: PostProps) {
   const router = useRouter()
@@ -43,7 +44,10 @@ export default function Post({ post }: PostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = mock_posts.map(post => `/post/${post.slug}`)
+
+  const allPosts = await getAllPosts()
+  const paths = allPosts.map(post => `/post/${post.slug}`)
+
   return {
     paths,
     fallback: false
@@ -52,7 +56,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
-  const post = mock_posts.filter(post => post.slug == slug)[0]
+
+  const allPosts = await getAllPosts()
+  const filteredPost = allPosts.filter(post => post.slug == slug)[0]
+  const post = adapter(filteredPost)
+
+  //const post = mock_posts.filter(post => post.slug == slug)[0]
   
   return {
     props: { post },
