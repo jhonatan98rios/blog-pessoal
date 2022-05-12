@@ -15,6 +15,8 @@ import { mock_posts } from '../../mockdata/posts'
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
+import { getAllPosts } from "../../services/client";
+import { adapter } from "../../services/adapter";
 
 export default function FilteredPosts({ posts }: IPostsProps) {
 
@@ -74,9 +76,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const filtered_posts = mock_posts.filter(post => post.categories.includes(`${params.slug}`) )
+  const data = await getAllPosts()
 
-  const posts = filtered_posts.map(post => {
+  let posts = data.map(content => {
+    let post = adapter(content)
+
     const text_size = post.title.length
     const selected = text_size > 100 ? 'xbig' :
       text_size > 75 ? 'big' :
@@ -87,6 +91,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const style = sizes[selected]
     return { ...post, style }
   })
+
+  posts = posts.filter(post => post.categories.includes(`${params.slug}`) )
+
+  console.log(posts)
+  console.log('>>>> filtered_posts')
+
 
   return {
     props: { posts },

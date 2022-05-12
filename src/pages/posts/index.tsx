@@ -5,6 +5,9 @@ import SEO from "../../components/Shared/SEO";
 import { Categories } from "../../components/Posts/Categories";
 import { Masonry } from  '../../components/Posts/Masonry'
 
+import { adapter } from '../../services/adapter'
+
+import { getAllPosts } from '../../services/client'
 import { sizes } from '../../services/constants'
 import { calcTextSize, postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
@@ -55,7 +58,12 @@ export default function Posts({ posts }: IPostsProps) {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = mock_posts.map(post => {
+
+  const data = await getAllPosts()
+
+  const posts = data.map(content => {
+    let post = adapter(content)
+
     const selected = calcTextSize(post.title)
     return { ...post, style: sizes[selected] }
   })
