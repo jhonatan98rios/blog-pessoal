@@ -10,7 +10,7 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
         className={styles.card} 
         style={{
           ...customStyle,
-          backgroundImage: `url(${post.image.src})`
+          backgroundImage: `url(${post.banner.src})`
         }}
       >
         <article>

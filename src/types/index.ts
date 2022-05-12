@@ -10,7 +10,7 @@ interface IImage {
 export interface IPost {
   slug: string
   title: string
-  image: IImage
+  banner: IImage
   content: string,
   updateAt: string
   categories: string[]

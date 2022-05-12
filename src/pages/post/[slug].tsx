@@ -22,7 +22,7 @@ export default function Post({ post }: PostProps) {
       
       <main className={styles.container}>
         <article className={styles.post}>
-          <img className={styles.image} src={post.image.src} alt={post.image.alt} />
+          <img className={styles.image} src={post.banner.src} alt={post.banner.alt} />
 
           <div className={styles.text}>
             <div className={styles.header}>

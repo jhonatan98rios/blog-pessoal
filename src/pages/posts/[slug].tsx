@@ -94,10 +94,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   posts = posts.filter(post => post.categories.includes(`${params.slug}`) )
 
-  console.log(posts)
-  console.log('>>>> filtered_posts')
-
-
   return {
     props: { posts },
     revalidate: 60 * 60 * 120

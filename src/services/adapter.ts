@@ -10,7 +10,7 @@ export function adapter(post: DjangoPost) {
 
   return {
     ...post,
-    image: {src: post.banner, alt:"", title: ""},
-    categories: post.categories.split(',').map(cat => cat.trim())
+    banner: {src: post.banner, alt:"", title: ""},
+    categories: post.categories.split(',')
   }
 }
