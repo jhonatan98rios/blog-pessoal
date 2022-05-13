@@ -44,3 +44,13 @@ export function calcTextSize(text: string) {
     'xsmall'
   )
 }
+
+export function getExcerpt(html: string) {
+
+  const cleanText = html.replace(/<\/?[^>]+(>|$)/g, "");
+  const excerpt = cleanText.substring(0, 150) + '...'
+
+  console.log(excerpt)
+
+  return excerpt
+}

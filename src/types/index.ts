@@ -24,6 +24,7 @@ export interface PostCardProps {
 
 export interface PostProps {
   post: Partial<IPost>
+  posts: ExpandedPost[]
 }
 
 export interface IPostsProps {
@@ -41,4 +42,38 @@ export interface SEOProps {
 export interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
   activeClassName: string;
+}
+
+
+export interface DjangoPost {
+  id: number
+  slug: string
+  title: string
+  banner_src: string
+  banner_alt: string
+  banner_title: string
+  updatedAt: string
+  categories: string
+  content: string
+  seo_title: string
+  seo_description: string
+  seo_keywords: string
+}
+
+export interface ExpandedPost {
+  seo_title: string
+  seo_description: string
+  seo_keywords: string
+  slug: string
+  title: string
+  banner: {
+    src: string
+    alt: string
+    title: string
+  }
+  updatedAt: string
+  content: string
+  excerpt: string,
+  categories: string[]
+  style: unknown
 }

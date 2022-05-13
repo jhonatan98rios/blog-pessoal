@@ -13,14 +13,3 @@ export async function getAllPosts() {
         console.log(error);
     }
 }
-
-export async function getPostById(id) {
-    try {
-        const result = await axios.get(BASE_URL + 'posts/' + id)
-        const data = result.data;
-        return data
-        
-    } catch (error) {
-        console.log(error);
-    }
-}

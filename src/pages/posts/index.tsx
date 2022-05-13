@@ -8,8 +8,7 @@ import { Masonry } from  '../../components/Posts/Masonry'
 import { adapter } from '../../services/adapter'
 
 import { getAllPosts } from '../../services/client'
-import { sizes } from '../../services/constants'
-import { calcTextSize, postsFilter } from "../../services/utils";
+import { postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/store'
 

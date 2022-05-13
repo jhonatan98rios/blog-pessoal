@@ -10,7 +10,7 @@ import { PostProps } from '../../types'
 import { getAllPosts } from '../../services/client';
 import { adapter } from '../../services/adapter';
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -37,7 +37,7 @@ export default function Post({ post }: PostProps) {
           </div>
         </article>
 
-        <Recents />
+        <Recents posts={posts} />
       </main>
     </>
   );
@@ -57,12 +57,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
 
-  const allPosts = await getAllPosts()
-  const filteredPost = allPosts.filter(post => post.slug == slug)[0]
-  const post = adapter(filteredPost)
+  const data = await getAllPosts()
+  const posts = data.map(post => adapter(post)) 
+  const post = posts.filter(post => post.slug == slug)[0]
   
   return {
-    props: { post },
+    props: { posts, post },
     revalidate: 60 * 60 * 12
   }
 }
