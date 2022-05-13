@@ -6,11 +6,6 @@ import { calcTextSize, getExcerpt } from "./utils";
 
 export function adapter(post: DjangoPost): Partial<ExpandedPost> {
 
-  const selected = calcTextSize(post.title)
-  let excerpt = getExcerpt(post.content)
-  console.log('excerpt')
-  console.log(excerpt)
-
   return {
     seo_title: post.seo_title,
     seo_description: post.seo_description,
@@ -24,8 +19,10 @@ export function adapter(post: DjangoPost): Partial<ExpandedPost> {
     },
     updatedAt: post.updatedAt,
     content: post.content,
-    excerpt: excerpt,
+    excerpt: getExcerpt(post.content),
     categories: post.categories.split(','),
-    style: sizes[selected]
+    style: sizes[
+      calcTextSize(post.title)
+    ]
   }
 }

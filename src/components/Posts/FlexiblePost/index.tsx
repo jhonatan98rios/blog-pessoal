@@ -17,7 +17,7 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
           <span className="likes" />
 
           <h3 className={styles.title}> {post.title} </h3>
-          {/* <time>{post.updateAt} </time> */}
+          <time>{post.updateAt} </time>
 
           <div className={styles.categories}>
             {
