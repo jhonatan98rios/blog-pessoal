@@ -19,7 +19,11 @@ export default function Post({ post, posts }: PostProps) {
 
   return (
     <>
-      <SEO title="Post" />
+      <SEO
+        title={post.seo_title}
+        description={post.seo_description}
+        keywords={post.seo_keywords}
+      />
       
       <main className={styles.container}>
         <article className={styles.post}>
@@ -28,7 +32,7 @@ export default function Post({ post, posts }: PostProps) {
           <div className={styles.text}>
             <div className={styles.header}>
               <h1> {post.title} </h1>
-              <time> {post.updateAt} </time>
+              <time> {post.updatedAt} </time>
             </div>
             <div 
               className={styles.static_content}

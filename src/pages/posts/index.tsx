@@ -31,7 +31,11 @@ export default function Posts({ posts }: IPostsProps) {
 
   return (
     <>
-      <SEO title="Posts" />
+      <SEO
+        title={`Posts`}
+        description="Quer saber como ser um programador? Confira nossos posts e seja bem vindo ao mundo da programação!"
+        keywords={`${state.search}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
+      />
       
       <main>
       { isMobile && 

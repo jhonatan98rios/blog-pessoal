@@ -23,7 +23,7 @@ export interface PostCardProps {
 }
 
 export interface PostProps {
-  post: Partial<IPost>
+  post: Partial<ExpandedPost>
   posts: ExpandedPost[]
 }
 
@@ -32,11 +32,12 @@ export interface IPostsProps {
 }
 
 export interface SEOProps {
-  title: string;
-  description?: string;
-  image?: string;
-  excludeTitleSuffix?: boolean;
-  indexPage?: boolean;
+  title: string
+  description?: string
+  keywords?: string
+  image?: string
+  excludeTitleSuffix?: boolean
+  indexPage?: boolean
 }
 
 export interface ActiveLinkProps extends LinkProps {
