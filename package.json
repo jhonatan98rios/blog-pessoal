@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next -v",
     "start": "npx http-server out -p $PORT",
     "test": "jest",
     "export": "next build && next export"
