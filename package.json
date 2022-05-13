@@ -9,12 +9,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "npx http-server out -p $PORT",
     "test": "jest",
     "export": "next build && next export"
   },
   "dependencies": {
     "@prismicio/client": "^5.0.0",
+    "axios": "^0.27.2",
     "date-fns": "^2.22.1",
     "next": "10.2.3",
     "prismic-dom": "^2.2.5",
@@ -37,6 +38,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "http-server": "14.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "prettier": "2.3.0",

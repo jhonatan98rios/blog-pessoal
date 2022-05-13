@@ -3,7 +3,7 @@ import { baseImage, genImage } from '../services/utils'
 export const post_2 = {
   slug: 'introducao-ao-desenvolvimento-de-software-computadores-softwares-e-linguagens-de-programacao',
   title: 'Introdução ao desenvolvimento de software: Computadores, Softwares e Linguagens de Programação',
-  image: baseImage(
+  banner: baseImage(
     'https://www.oficinadanet.com.br/imagens/post/24414/pc-gamer-barato.jpg',
     'Imagem de uma mulher jogando no computador',
     'Mulher jogando'

@@ -4,6 +4,7 @@ import { SEOProps } from '../../../types'
 export default function SEO({
   title,
   description,
+  keywords,
   image,
   excludeTitleSuffix = false,
   indexPage = true,
@@ -21,6 +22,7 @@ export default function SEO({
       {pageImage && <meta name="image" content={pageImage} />}
       {!indexPage && <meta name="robots" content="noindex,nofollow" />}
 
+
       <meta httpEquiv="x-ua-compatible" content="IE=edge,chrome=1" />
       <meta name="MobileOptimized" content="320" />
       <meta name="HandheldFriendly" content="True" />
@@ -28,6 +30,7 @@ export default function SEO({
       <meta name="msapplication-TileColor" content="#302F38" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="google" content="notranslate" />
+      <meta name="keywords" content={keywords} />
 
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />

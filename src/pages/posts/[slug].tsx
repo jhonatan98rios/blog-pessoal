@@ -11,10 +11,11 @@ import { sizes } from '../../services/constants'
 import { postsFilter } from "../../services/utils";
 import StoreContext from "../../context/store";
 
-import { mock_posts } from '../../mockdata/posts'
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
+import { getAllPosts } from "../../services/client";
+import { adapter } from "../../services/adapter";
 
 export default function FilteredPosts({ posts }: IPostsProps) {
 
@@ -36,7 +37,11 @@ export default function FilteredPosts({ posts }: IPostsProps) {
 
   return (
     <>
-      <SEO title="Posts" />
+      <SEO
+        title={`Posts | ${router.asPath.split('/')[2]}`}
+        description="Quer saber como ser um programador? Confira nossos posts e seja bem vindo ao mundo da programação!"
+        keywords={`${router.asPath.split('/')[2]}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
+      />
       
       <main>
         { isMobile && 
@@ -60,8 +65,9 @@ export default function FilteredPosts({ posts }: IPostsProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const paths = mock_posts.map(
-    (post) => post.categories.map(
+  const allPosts = await getAllPosts()
+  const paths = allPosts.map(
+    (post) => post.categories.split(',').map(
       (cat) => `/posts/${cat}`
     )
   ).flat()
@@ -74,19 +80,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const filtered_posts = mock_posts.filter(post => post.categories.includes(`${params.slug}`) )
-
-  const posts = filtered_posts.map(post => {
-    const text_size = post.title.length
-    const selected = text_size > 100 ? 'xbig' :
-      text_size > 75 ? 'big' :
-      text_size > 50 ? 'medium' :
-      text_size > 25 ? 'small' :
-      'xsmall'
-
-    const style = sizes[selected]
-    return { ...post, style }
-  })
+  const data = await getAllPosts()
+  let posts = data
+  .filter(post => post.categories.includes(`${params.slug}`) )
+  .map(content => adapter(content))
 
   return {
     props: { posts },

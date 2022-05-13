@@ -3,13 +3,14 @@ import { useRouter } from 'next/router'
 import SEO from '../../components/Shared/SEO';
 import styles from './styles.module.scss'
 
-import { mock_posts } from '../../mockdata/posts'
 import React from 'react';
 import { Recents } from '../../components/Post/Recents';
 
 import { PostProps } from '../../types'
+import { getAllPosts } from '../../services/client';
+import { adapter } from '../../services/adapter';
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -18,16 +19,20 @@ export default function Post({ post }: PostProps) {
 
   return (
     <>
-      <SEO title="Post" />
+      <SEO
+        title={post.seo_title}
+        description={post.seo_description}
+        keywords={post.seo_keywords}
+      />
       
       <main className={styles.container}>
         <article className={styles.post}>
-          <img className={styles.image} src={post.image.src} alt={post.image.alt} />
+          <img className={styles.image} src={post.banner.src} alt={post.banner.alt} title={post.banner.title} />
 
           <div className={styles.text}>
             <div className={styles.header}>
               <h1> {post.title} </h1>
-              <time> {post.updateAt} </time>
+              <time> {post.updatedAt} </time>
             </div>
             <div 
               className={styles.static_content}
@@ -36,14 +41,17 @@ export default function Post({ post }: PostProps) {
           </div>
         </article>
 
-        <Recents />
+        <Recents posts={posts} />
       </main>
     </>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = mock_posts.map(post => `/post/${post.slug}`)
+
+  const allPosts = await getAllPosts()
+  const paths = allPosts.map(post => `/post/${post.slug}`)
+
   return {
     paths,
     fallback: false
@@ -52,10 +60,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
-  const post = mock_posts.filter(post => post.slug == slug)[0]
+
+  const data = await getAllPosts()
+  const posts = data.map(post => adapter(post)) 
+  const post = posts.filter(post => post.slug == slug)[0]
   
   return {
-    props: { post },
+    props: { posts, post },
     revalidate: 60 * 60 * 12
   }
 }
