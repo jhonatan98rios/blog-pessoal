@@ -60,8 +60,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const allPosts = await getAllPosts()
   const filteredPost = allPosts.filter(post => post.slug == slug)[0]
   const post = adapter(filteredPost)
-
-  //const post = mock_posts.filter(post => post.slug == slug)[0]
   
   return {
     props: { post },

@@ -1,3 +1,6 @@
+import { sizes } from "./constants";
+import { calcTextSize } from "./utils";
+
 export interface DjangoPost {
   slug: string
   title: string
@@ -8,9 +11,18 @@ export interface DjangoPost {
 
 export function adapter(post: DjangoPost) {
 
+  const selected = calcTextSize(post.title)
+
   return {
-    ...post,
-    banner: {src: post.banner, alt:"", title: ""},
-    categories: post.categories.split(',')
+    slug: post.slug,
+    title: post.title,
+    banner: {
+      src: post.banner,
+      alt: '',
+      title: '',
+    },
+    content: post.content,
+    categories: post.categories.split(','),
+    style: sizes[selected]
   }
 }

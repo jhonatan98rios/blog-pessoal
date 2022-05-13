@@ -59,13 +59,7 @@ export default function Posts({ posts }: IPostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
-
-  const posts = data.map(content => {
-    let post = adapter(content)
-
-    const selected = calcTextSize(post.title)
-    return { ...post, style: sizes[selected] }
-  })
+  const posts = data.map(content => adapter(content))
 
   return {
     props: {
