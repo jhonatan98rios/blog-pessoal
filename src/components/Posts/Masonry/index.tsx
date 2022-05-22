@@ -4,7 +4,7 @@ import { FlexiblePost } from "../../../components/Posts/FlexiblePost";
 
 import { IPostsProps } from '../../../types'
 
-export function Masonry({ posts }: IPostsProps) {
+export function Masonry({ posts }: Partial<IPostsProps>) {
   return (
     <div className={styles.posts}>
 

@@ -3,14 +3,8 @@ import React, { useContext, useState } from 'react';
 import StoreContext from '../../../context/store';
 import styles from './styles.module.scss';
 
-const categories = [
-  { label: 'Ver todos', path: '' },
-  { label: 'Programação', path: 'programacao' },
-  { label: 'Carreira', path: 'carreira' },
-  { label: 'Software', path: 'software' },
-]
 
-export function Categories() {
+export function Categories({ categories }) {
 
   const [category, setCategory] = useState('')
   const { state, setState } = useContext(StoreContext)
@@ -22,7 +16,6 @@ export function Categories() {
       search: ''
     })
   }
-
   
   return  (
     <section className={styles.container}>

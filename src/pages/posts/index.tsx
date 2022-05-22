@@ -7,7 +7,7 @@ import { Masonry } from  '../../components/Posts/Masonry'
 
 import { adapter } from '../../services/adapter'
 
-import { getAllPosts } from '../../services/client'
+import { getAllCategories, getAllPosts } from '../../services/client'
 import { postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/store'
@@ -16,7 +16,7 @@ import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
 
-export default function Posts({ posts }: IPostsProps) {
+export default function Posts({ posts, categories }: IPostsProps) {
 
   const { isMobile } = useDeviceDetect()
   const { state } = useContext(StoreContext)
@@ -39,12 +39,12 @@ export default function Posts({ posts }: IPostsProps) {
       
       <main>
       { isMobile && 
-        <Categories /> 
+        <Categories categories={categories} /> 
       }
 
         <section className={styles.container}>
           { !isMobile &&
-           <Categories /> 
+           <Categories categories={categories} /> 
           }
           
           <Masonry posts={filteredPosts} />
@@ -62,11 +62,13 @@ export default function Posts({ posts }: IPostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
+  const categories = await getAllCategories()
   const posts = data.map(content => adapter(content))
 
   return {
     props: {
       posts,
+      categories
     },
     revalidate: 60 * 60 * 120
   }

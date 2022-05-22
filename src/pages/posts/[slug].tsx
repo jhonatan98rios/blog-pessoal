@@ -13,10 +13,10 @@ import StoreContext from "../../context/store";
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
-import { getAllPosts } from "../../services/client";
+import { getAllCategories, getAllPosts } from "../../services/client";
 import { adapter } from "../../services/adapter";
 
-export default function FilteredPosts({ posts }: IPostsProps) {
+export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
   const router = useRouter()
   const { isMobile } = useDeviceDetect()
@@ -44,11 +44,11 @@ export default function FilteredPosts({ posts }: IPostsProps) {
       
       <main>
         { isMobile && 
-          <Categories /> 
+          <Categories categories={categories} /> 
         }
         <section className={styles.container}>
           { !isMobile &&
-           <Categories /> 
+           <Categories categories={categories} /> 
           }
 
           <Masonry posts={filteredPosts} />
@@ -80,11 +80,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data = await getAllPosts()
-
-  console.log('data')
-
-  console.log(params.slug)
-  let posts = data
+  const categories = await getAllCategories()
+  const posts = data
 
   .map(content => adapter(content))
   .filter(post => {
@@ -98,7 +95,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   })
 
   return {
-    props: { posts },
+    props: { posts, categories },
     revalidate: 60 * 60 * 120
   }
 }

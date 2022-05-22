@@ -34,6 +34,7 @@ export interface PostProps {
 
 export interface IPostsProps {
   posts: IPost[]
+  categories: ICategory[]
 }
 
 export interface SEOProps {
