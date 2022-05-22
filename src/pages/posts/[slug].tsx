@@ -7,7 +7,6 @@ import { Masonry } from "../../components/Posts/Masonry";
 import { Categories } from "../../components/Posts/Categories";
 
 import useDeviceDetect from "../../hooks/useDevice";
-import { sizes } from '../../services/constants'
 import { postsFilter } from "../../services/utils";
 import StoreContext from "../../context/store";
 
@@ -67,8 +66,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const allPosts = await getAllPosts()
   const paths = allPosts.map(
-    (post) => post.categories.split(',').map(
-      (cat) => `/posts/${cat}`
+    (post) => post.categories.map(
+      (cat) => `/posts/${cat.path}`
     )
   ).flat()
 
@@ -81,9 +80,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data = await getAllPosts()
+
+  console.log('data')
+
+  console.log(params.slug)
   let posts = data
-  .filter(post => post.categories.includes(`${params.slug}`) )
+
   .map(content => adapter(content))
+  .filter(post => {
+    let contains = false
+    post.categories.forEach(cat => {
+      if (cat.path == params.slug) {
+        contains = true
+      }
+    })
+    return contains
+  })
 
   return {
     props: { posts },

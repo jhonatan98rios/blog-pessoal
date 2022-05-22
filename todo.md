@@ -19,19 +19,27 @@
 - [x] categories: Text
 
 # Model level 3
-- [ ] seo_title: Text
-- [ ] seo_description: Text
-- [ ] seo_keywords: Text
+- [x] seo_title: Text
+- [x] seo_description: Text
+- [x] seo_keywords: Text
 - [x] slug: Text
 - [x] title: Text
-- [ ] banner_src: Image
-- [ ] banner_alt: Text
-- [ ] banner_title: Text
-- [ ] updatedAt: Date 
-- [ ] content: RichText
-- [ ] images: List(Images)
+- [x] banner: Image (src, alt, title)
+- [x] content: RichText
+- [x] images: List(Images)
+- [ ] updatedAt: Date
 - [ ] categories: List(Text)
 
+## Interface
+- [ ] Acessibilidade
+- [ ] Performance
+- [ ] Rodapé
+- [ ] SEO
+- [ ] Utilizar imagens sem direitos
+- [ ] Implementar Adsense
+- [ ] Implementar Google Analytics
+- [ ] Implementar ld json schema nos posts
+ 
 ## Posts e Categories
 - [x] Alterar o nome da image para banner no frontend
 - [x] Adicionar alt e title para o banner e nas imagens
@@ -40,5 +48,5 @@
 ## Post
 - [x] Implementar coleta de dados no getStaticProps 
 - [x] Gerar páginas no getStaticPaths
+- [x] Implementar richtext no conteúdo
 - [ ] Implementar SEO
-- [ ] Implementar richtext no conteúdo

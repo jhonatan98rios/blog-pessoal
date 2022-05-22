@@ -18,7 +18,7 @@ const DEFAULT_STORE = {
 
 const StoreContext = createContext<PropsStoreContext>(DEFAULT_STORE)
 
-const StoreContextProvider: React.FC = ({ children }) => {
+const StoreContextProvider = ({ children }) => {
   const [state, setState] = useState(DEFAULT_STORE.state);
 
   return (

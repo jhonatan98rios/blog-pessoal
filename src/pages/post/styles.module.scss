@@ -77,6 +77,15 @@
           border-radius: 8px;
           color: #00FFC2;
         }
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          max-height: 360px;
+          border-radius: 8px;
+
+          margin: 2rem 0;
+        }
       }
     }
   }

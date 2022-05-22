@@ -22,8 +22,8 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
           <div className={styles.categories}>
             {
               post.categories.map(cat => (
-                <span className={styles.category} key={cat}>
-                  { cat }
+                <span className={styles.category} key={cat.label}>
+                  { cat.label }
                 </span>
               ))
             }            

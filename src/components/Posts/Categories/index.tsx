@@ -4,7 +4,7 @@ import StoreContext from '../../../context/store';
 import styles from './styles.module.scss';
 
 const categories = [
-  { label: 'Ver todos', path: '/' },
+  { label: 'Ver todos', path: '' },
   { label: 'Programação', path: 'programacao' },
   { label: 'Carreira', path: 'carreira' },
   { label: 'Software', path: 'software' },
@@ -41,7 +41,6 @@ export function Categories() {
               style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
             >
              <span className={styles.name}>{ cat.label }</span>
-             {/* <span className={styles.amount}> 10 </span> */}
             </a>
           </Link>
         </li> 

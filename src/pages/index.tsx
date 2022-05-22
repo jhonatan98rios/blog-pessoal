@@ -19,7 +19,7 @@ export default function Home() {
 
   function handleClick() {
     if (state.search.length > 3) {
-      router.push('/posts/')
+      router.push('/posts')
     } else {
       setError(true)
     }

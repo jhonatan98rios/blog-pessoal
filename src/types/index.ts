@@ -1,10 +1,15 @@
 import { LinkProps } from "next/link";
 import { CSSProperties, ReactElement } from "react";
 
-interface IImage {
+export interface IImage {
   src: string
   alt: string
   title: string
+}
+
+export interface ICategory {
+  label: string
+  path: string
 }
 
 export interface IPost {
@@ -13,7 +18,7 @@ export interface IPost {
   banner: IImage
   content: string,
   updateAt: string
-  categories: string[]
+  categories: Array<ICategory>
   style: CSSProperties
 }
 
@@ -34,6 +39,8 @@ export interface IPostsProps {
 export interface SEOProps {
   title: string
   description?: string
+  slug?: string
+  banner?: string,
   keywords?: string
   image?: string
   excludeTitleSuffix?: boolean
@@ -45,16 +52,13 @@ export interface ActiveLinkProps extends LinkProps {
   activeClassName: string;
 }
 
-
 export interface DjangoPost {
   id: number
   slug: string
   title: string
-  banner_src: string
-  banner_alt: string
-  banner_title: string
+  images: Array<IImage>
   updatedAt: string
-  categories: string
+  categories: Array<ICategory>
   content: string
   seo_title: string
   seo_description: string
@@ -75,6 +79,6 @@ export interface ExpandedPost {
   updatedAt: string
   content: string
   excerpt: string,
-  categories: string[]
+  categories: Array<ICategory>
   style: unknown
 }
