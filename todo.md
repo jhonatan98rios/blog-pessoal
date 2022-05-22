@@ -33,11 +33,11 @@
 ## Interface
 - [x] Implementar ld json schema nos posts
 - [ ] Implementar Google Analytics
-- [ ] Implementar Adsense
+- [ ] Implementar Adsense *
 - [ ] Acessibilidade
 - [ ] Performance
 - [ ] Rodapé
-- [ ] SEO
+- [ ] SEO *
 - [ ] Utilizar imagens sem direitos
  
 ## Posts e Categories

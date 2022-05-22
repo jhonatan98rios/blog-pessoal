@@ -1,4 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
+import React from 'react';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -16,6 +18,14 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+
+          <Script
+            id="Adsense-id"
+            data-ad-client="ca-pub-1739197497968733"
+            async={true}
+            strategy="beforeInteractive"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          />
         </Head>
         <body>
           <Main />

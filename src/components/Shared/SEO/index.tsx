@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import { SEOProps } from '../../../types'
 
 import { jsonLdGenerator } from '../../../services/json-ld'
+
+import { SEOProps } from '../../../types'
 
 export default function SEO({
   title,
@@ -13,11 +14,10 @@ export default function SEO({
   excludeTitleSuffix = false,
   indexPage = true,
 }: SEOProps) {
+  
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
+  const pageImage = image ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}` : null;
 
-  const pageImage = image
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}`
-    : null;
   return (
     <Head>
       <title>{pageTitle}</title>
@@ -25,7 +25,6 @@ export default function SEO({
       {description && <meta name="description" content={description} />}
       {pageImage && <meta name="image" content={pageImage} />}
       {!indexPage && <meta name="robots" content="noindex,nofollow" />}
-
 
       <meta httpEquiv="x-ua-compatible" content="IE=edge,chrome=1" />
       <meta name="MobileOptimized" content="320" />
