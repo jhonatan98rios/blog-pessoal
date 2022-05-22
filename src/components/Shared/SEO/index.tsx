@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Script from 'next/script'
 import { SEOProps } from '../../../types'
 
 import { jsonLdGenerator } from '../../../services/json-ld'
@@ -59,15 +58,16 @@ export default function SEO({
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="620" />
 
-      <Script 
+      <script 
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLdGenerator({
+        key="jsonld"
+        dangerouslySetInnerHTML={
+          jsonLdGenerator({
             url:  `https://jhonatan-teixeira-rios-blog.herokuapp.com/post/${slug}`,
-            title: pageTitle,
+            title: title,
             src: banner
           })
-        }}
+        }
       />
     </Head>
   );

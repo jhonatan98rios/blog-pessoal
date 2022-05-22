@@ -27,23 +27,23 @@
 - [x] banner: Image (src, alt, title)
 - [x] content: RichText
 - [x] images: List(Images)
+- [x] categories: List(Text)
 - [ ] updatedAt: Date
-- [ ] categories: List(Text)
 
 ## Interface
+- [x] Implementar ld json schema nos posts
+- [ ] Implementar Google Analytics
+- [ ] Implementar Adsense
 - [ ] Acessibilidade
 - [ ] Performance
 - [ ] Rodapé
 - [ ] SEO
 - [ ] Utilizar imagens sem direitos
-- [ ] Implementar Adsense
-- [ ] Implementar Google Analytics
-- [ ] Implementar ld json schema nos posts
  
 ## Posts e Categories
 - [x] Alterar o nome da image para banner no frontend
 - [x] Adicionar alt e title para o banner e nas imagens
-- [ ] Separar categorias em uma lista 
+- [x] Separar categorias em uma lista 
 
 ## Post
 - [x] Implementar coleta de dados no getStaticProps 
