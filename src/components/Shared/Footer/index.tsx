@@ -46,6 +46,10 @@ export function Footer() {
           ))
         }
       </ul>
+      <p className={styles.copyright}>
+        Todos os textos, imagens e vídeos presentes na página são autorais ou de bancoas de imagens abertos, por tanto sem restrições de uso. <br />
+        Não há qualquer restrição de uso do conteúdo citado, sendo ele produzido unicamente para fins didáticos.
+      </p>
     </footer>
   );
 }

@@ -22,7 +22,12 @@ export function Recents({ posts }: RecentsProps) {
               <a>
                 <h6 className={styles.title}>{ post.title }</h6>
                 <time>{ post.updatedAt }</time>
-                <p className={styles.excerpt}>{ post.excerpt }</p>
+                <p 
+                  className={styles.excerpt} 
+                  dangerouslySetInnerHTML={{
+                    __html: post.excerpt
+                  }} 
+                />
               </a>
             </Link>
           </li> 

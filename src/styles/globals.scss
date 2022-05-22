@@ -11,9 +11,10 @@
   --gray100: #f4f6fc;
   --gray300: #a8a8b3;
   --gray700: #37384A;
-  --gray800: #272730;
-  --gray850: #1f2729;
-  --gray900: #121214;
+  //--gray800: #272730;
+  --gray800: #121214;
+  --gray850: #09090E;
+  --gray900: #030309;
   --secondary: #8b96ff;
   --primary: #8b96ff;
 }
@@ -31,7 +32,8 @@
 }
 
 body {
-  background: var(--gray800);
+  //background: var(--gray800);
+  background-image: linear-gradient(to bottom, var(--gray800) 50%, var(--gray900) 100%);
   color: var(--white);
   overflow-x: hidden;
 

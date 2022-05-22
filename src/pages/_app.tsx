@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <GlobalContext>
       <Header />
       <Component {...pageProps} />
-      {/* <Footer /> */}
+      <Footer />
       <ins 
         className="adsbygoogle"
         style={{ display: 'block' }}

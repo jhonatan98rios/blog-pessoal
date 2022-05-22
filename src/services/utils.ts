@@ -46,9 +46,9 @@ export function calcTextSize(text: string) {
 }
 
 export function getExcerpt(html: string) {
-
-  const cleanText = html.replace(/<\/?[^>]+(>|$)/g, "");
-  const excerpt = cleanText.substring(0, 150) + '...'
+  
+  const short = html.substring(0, 160) + '...'
+  const excerpt = short.replace(/<\/?[^>]+(>|$)/g, "");
 
   return excerpt
 }

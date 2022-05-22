@@ -32,7 +32,7 @@
     margin-bottom: 12px;
     font-size: rem(20);
     font-weight: 900;
-    text-shadow: 2px 2px 4px #000;
+    text-shadow: 2px 2px 2px #000, 0px 0px 6px #000;
 
     @media (max-width: 1024px) {
       font-size: rem(24);
