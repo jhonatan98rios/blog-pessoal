@@ -31,15 +31,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-
-          <ins 
-            className="adsbygoogle"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-1739197497968733"
-            data-ad-slot="6382729267"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
         </body>
       </Html>
     );
