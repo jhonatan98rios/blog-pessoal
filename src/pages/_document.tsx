@@ -19,6 +19,7 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
 
+          {/* ADSENSE */}
           <Script
             id="Adsense-id"
             data-ad-client="ca-pub-1739197497968733"
@@ -27,6 +28,41 @@ class MyDocument extends Document {
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             crossOrigin="anonymous"
           />
+
+          {/* Google Analytics GA4 */}
+          <Script
+            async={true}
+            src="https://www.googletagmanager.com/gtag/js?id=G-CSRS3918KR"
+          />
+          <Script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-CSRS3918KR');
+              `
+            }}
+          />
+
+
+          {/* Google Analytics UA */}
+          <Script
+            async={true}
+            src="https://www.googletagmanager.com/gtag/js?id=UA-207352506-2"
+          />
+          <Script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'UA-207352506-2');
+              `
+            }}
+          />
+
+
         </Head>
         <body>
           <Main />
