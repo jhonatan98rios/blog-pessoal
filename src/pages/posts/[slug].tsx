@@ -54,7 +54,14 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
           <Masonry posts={filteredPosts} />
 
           { !isMobile && 
-            <span className={styles.fake_col}></span>  
+            <ins 
+              className={"adsbygoogle " + styles.fake_col}
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-1739197497968733"
+              data-ad-slot="7846772608"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            />
           }
         </section>
       </main>
