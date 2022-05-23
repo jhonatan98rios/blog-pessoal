@@ -36,7 +36,7 @@ export default function Home() {
     <>
       <SEO 
         title="Como ser um desenvolvedor?"
-        description="COnetúdos sobre programação, design e muito mais!"
+        description="Conteúdos sobre programação, design e muito mais!"
         excludeTitleSuffix 
       />
 

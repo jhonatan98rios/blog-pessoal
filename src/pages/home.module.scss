@@ -63,7 +63,7 @@
         }
     
         span {
-          color: var(--secondary);
+          color: var(--primary);
         }
       }
     
@@ -91,6 +91,7 @@
         margin-top: 1rem;
         padding: 20px;
         color: #ffffff;
+        font-size: 1.2rem;
         
         &::placeholder {
           text-shadow: 1px 1px 3px #0009;
@@ -117,12 +118,13 @@
         border-radius: 8px;
         border: none;
         margin-top: 0.5rem;
-        background-color: var(--secondary);
+        background-color: var(--primary);
         color: #fff;
-        text-shadow: 1px 1px 3px #0009;
+        text-shadow: 1px 1px 3px #000;
         height: 48px;
         padding: 10px;
-        
+        font-size: 1.2rem;
+                
         @media (max-width: 1024px) {
           margin-top: 0.75rem;
           font-size: 1.4rem;

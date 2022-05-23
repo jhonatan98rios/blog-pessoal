@@ -37,8 +37,8 @@ export function Footer() {
       <ul className={styles.social}>
         {
           social.map((s, i) => (
-            <li>
-              <Link href={s.link} key={i}>
+            <li key={i}>
+              <Link href={s.link}>
                 <a target="_blank" rel="noopener noreferrer">
                   <img 
                     className={styles.image} 
