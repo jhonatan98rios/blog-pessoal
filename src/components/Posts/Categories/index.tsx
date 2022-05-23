@@ -24,7 +24,7 @@ export function Categories({ categories }) {
       </h3>
       <nav className={styles.categories}>
       { categories.map((cat, index) => 
-        <li  key={index}>
+        <li key={index}>
           <Link 
             href={`/posts/${ cat.path }`}
           >

@@ -90,7 +90,12 @@
         border: none;
         margin-top: 1rem;
         padding: 20px;
-        color: #AFAFB4;
+        color: #ffffff;
+        
+        &::placeholder {
+          text-shadow: 1px 1px 3px #0009;
+          color: #c0c0c4;
+        }
         
         @media (min-width: 1025px) {
           max-width: 365px;
@@ -114,6 +119,7 @@
         margin-top: 0.5rem;
         background-color: var(--secondary);
         color: #fff;
+        text-shadow: 1px 1px 3px #0009;
         height: 48px;
         padding: 10px;
         

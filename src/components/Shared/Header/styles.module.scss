@@ -33,6 +33,10 @@
       border: none;
       padding: 20px;
       color: #AFAFB4;
+      
+      &::placeholder {
+        color: #c0c0c4;
+      }
 
       @media (min-width: 1025px) {
         margin-right: auto;

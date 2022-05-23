@@ -10,9 +10,12 @@
     justify-content: center;
     align-items: center;
 
-    .image {
-      width: 36px;
-      margin: 0px 8px;
+    li {
+      list-style: none;
+
+      .image {
+        margin: 0px 8px;
+      }
     }
   }
 

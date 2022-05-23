@@ -34,7 +34,11 @@ export default function Home() {
 
   return (
     <>
-      <SEO title="Como ser um desenvolvedor?" excludeTitleSuffix />
+      <SEO 
+        title="Como ser um desenvolvedor?"
+        description="COnetúdos sobre programação, design e muito mais!"
+        excludeTitleSuffix 
+      />
 
       <main className={styles.main}>
         <section className={styles.section}>

@@ -1,5 +1,4 @@
-import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { baseImage } from '../../../services/utils';
 import styles from './styles.module.scss';
 
@@ -37,12 +36,21 @@ export function Footer() {
     <footer className={styles.footer}>
       <ul className={styles.social}>
         {
-          social.map(s => (
-            <Link href={s.link}>
-              <a target="_blank" rel="noopener noreferrer">
-                <img className={styles.image} src={s.src} alt={s.alt} title={s.title} />
-              </a>
-            </Link>
+          social.map((s, i) => (
+            <li>
+              <Link href={s.link} key={i}>
+                <a target="_blank" rel="noopener noreferrer">
+                  <img 
+                    className={styles.image} 
+                    src={s.src}
+                    alt={s.alt}
+                    title={s.title}
+                    width={36}
+                    height={36}
+                  />
+                </a>
+              </Link>
+            </li>
           ))
         }
       </ul>
