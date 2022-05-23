@@ -22,22 +22,24 @@ export function Categories({ categories }) {
       <h3 className={styles.header}>
         Categorias
       </h3>
-      <nav className={styles.categories}>
-      { categories.map((cat, index) => 
-        <li key={index}>
-          <Link 
-            href={`/posts/${ cat.path }`}
-          >
-            <a
-              className={styles.category}
-              onClick={() => handleClick(cat) }
-              style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
-            >
-             <span className={styles.name}>{ cat.label }</span>
-            </a>
-          </Link>
-        </li> 
-      )}
+      <nav>
+        <ul className={styles.categories}>
+          { categories.map((cat, index) => 
+            <li key={index}>
+              <Link 
+                href={`/posts/${ cat.path }`}
+              >
+                <a
+                  className={styles.category}
+                  onClick={() => handleClick(cat) }
+                  style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
+                >
+                <span className={styles.name}>{ cat.label }</span>
+                </a>
+              </Link>
+            </li> 
+          )}
+        </ul>
     </nav>
     </section>
   )
