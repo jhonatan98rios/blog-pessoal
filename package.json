@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next -v",
-    "start": "npx http-server out -p $PORT",
+    "build": "next build",
+    "start": "next start",
     "test": "jest",
     "export": "next build && next export"
   },

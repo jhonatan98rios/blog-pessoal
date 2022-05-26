@@ -32,13 +32,14 @@
 
 ## Interface
 - [x] Implementar ld json schema nos posts
-- [ ] Implementar Google Analytics
-- [ ] Implementar Adsense *
+- [x] Implementar Adsense
+- [x] Implementar Google Analytics
+- [x] Rodapé
+- [x] Utilizar imagens sem direitos
+- [x] SEO
 - [ ] Acessibilidade
 - [ ] Performance
-- [ ] Rodapé
-- [ ] SEO *
-- [ ] Utilizar imagens sem direitos
+- [ ] Voltar a deployar utilizando next js
  
 ## Posts e Categories
 - [x] Alterar o nome da image para banner no frontend
@@ -49,4 +50,9 @@
 - [x] Implementar coleta de dados no getStaticProps 
 - [x] Gerar páginas no getStaticPaths
 - [x] Implementar richtext no conteúdo
-- [ ] Implementar SEO
+- [x] Implementar SEO
+
+## Devops (mês que vem)
+- [] Comprar um domínio
+- [] Migrar para S3 com cloudfront
+- [] Criar uma pipeline que teste o código, compile e envie para o S3
