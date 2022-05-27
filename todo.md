@@ -28,9 +28,14 @@
 - [x] content: RichText
 - [x] images: List(Images)
 - [x] categories: List(Text)
-- [ ] updatedAt: Date
+- [x] updatedAt: Date
 
-## Interface
+## Back-end
+- [x] Implementar PostgreSQL
+- [ ] Remover todos os segredos do projeto
+- [ ] Proteger as urls admins
+
+## Front-end
 - [x] Implementar ld json schema nos posts
 - [x] Implementar Adsense
 - [x] Implementar Google Analytics

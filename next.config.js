@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
   eslint: {
     // Warning: This allows production builds to successfully complete even if
