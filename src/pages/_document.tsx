@@ -22,9 +22,8 @@ class MyDocument extends Document {
           {/* ADSENSE */}
           <script
             id="Adsense-id"
-            data-ad-client="ca-pub-1739197497968733"
             async={true}
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
             crossOrigin="anonymous"
           />
 
@@ -44,7 +43,6 @@ class MyDocument extends Document {
             }}
           />
 
-
           {/* Google Analytics UA */}
           <script
             async={true}
@@ -60,7 +58,6 @@ class MyDocument extends Document {
               `
             }}
           />
-
 
         </Head>
         <body>
