@@ -26,6 +26,11 @@ class MyDocument extends Document {
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
             crossOrigin="anonymous"
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(adsbygoogle = window.adsbygoogle || []).push({});`
+            }}
+          />
 
           {/* Google Analytics GA4 */}
           <script
