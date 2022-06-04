@@ -20,21 +20,20 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
 
           {/* ADSENSE */}
-          <Script
+          <script
             id="Adsense-id"
             data-ad-client="ca-pub-1739197497968733"
             async={true}
-            strategy="beforeInteractive"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             crossOrigin="anonymous"
           />
 
           {/* Google Analytics GA4 */}
-          <Script
+          <script
             async={true}
             src="https://www.googletagmanager.com/gtag/js?id=G-CSRS3918KR"
           />
-          <Script
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -47,11 +46,11 @@ class MyDocument extends Document {
 
 
           {/* Google Analytics UA */}
-          <Script
+          <script
             async={true}
             src="https://www.googletagmanager.com/gtag/js?id=UA-207352506-2"
           />
-          <Script
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
