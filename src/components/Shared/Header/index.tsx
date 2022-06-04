@@ -75,7 +75,13 @@ export function Header() {
                   Posts
                 </a>
               </ActiveLink>
-              <a href="https://jhonatan-dev-rios.herokuapp.com/" target="_blank" rel="noopener noreferrer"> Sobre mim </a>
+
+              <ActiveLink href="/autor" activeClassName={styles.active}>
+                <a onClick={handleCheckbox}>
+                  Sobre o autor
+                </a>
+              </ActiveLink>
+              
               <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
             </nav>
           )

@@ -17,6 +17,8 @@
   --gray900: #030309;
   --secondary: #40E0D0;
   --primary: #8b96ff;
+
+  --overflow: auto;
 }
 
 @media (max-width: 1080px) {
@@ -73,4 +75,8 @@ ul {
 
 .carousel-active {
   cursor: grabbing !important;
+}
+
+body {
+  overflow-y: var(--overflow);
 }
