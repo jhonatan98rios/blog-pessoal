@@ -38,13 +38,13 @@ export default function Posts({ posts, categories }: IPostsProps) {
       />
       
       <main>
-        <h2 className="no-display"> Posts </h2>
 
       { isMobile && 
         <Categories categories={categories} /> 
       }
-
         <section className={styles.container}>
+          <h2 className="no-display"> Posts </h2>
+
           { !isMobile &&
            <Categories categories={categories} /> 
           }
