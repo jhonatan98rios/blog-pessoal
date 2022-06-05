@@ -43,7 +43,7 @@ class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-CSRS3918KR');
+                gtag('config', 'G-CSRS3918KR', { 'anonymize_ip': true });
               `
             }}
           />
@@ -59,7 +59,7 @@ class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'UA-207352506-2');
+                gtag('config', 'UA-207352506-2', { 'anonymize_ip': true });
               `
             }}
           />
