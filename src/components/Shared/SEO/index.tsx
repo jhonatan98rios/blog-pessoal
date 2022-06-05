@@ -8,44 +8,45 @@ export default function SEO({
   title,
   description,
   slug = '',
-  banner = '',
-  keywords,
-  image = '',
+  image,
+  keywords = '',
   excludeTitleSuffix = false,
   indexPage = true,
 }: SEOProps) {
   
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
-  const pageImage = image ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}` : null;
+  const default_keywords = 'Como ser um desenvolvedor?, blog de tecnologia, blog de programação, blog de design, blog de tecnologia, linguagens de programação, programação web, desenvolvimento de aplicativos,'
+  const pageKeywords = default_keywords + keywords
+  const pageImage = image ? image : 'https://jhonatan-teixeira-rios-blog.herokuapp.com/logo.png'
 
   return (
     <Head>
       <title>{pageTitle}</title>
 
       {description && <meta name="description" content={description} />}
-      {pageImage && <meta name="image" content={pageImage} />}
       {!indexPage && <meta name="robots" content="noindex,nofollow" />}
+      <meta name="image" content={pageImage} />
 
-      <meta httpEquiv="x-ua-compatible" content="IE=edge,chrome=1" />
+      <meta httpEquiv="x-ua-compatible" content="IE=edge" />
       <meta name="MobileOptimized" content="320" />
       <meta name="HandheldFriendly" content="True" />
       <meta name="theme-color" content="#302F38" />
       <meta name="msapplication-TileColor" content="#302F38" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="google" content="notranslate" />
-      <meta name="keywords" content={keywords} />
+      <meta name="keywords" content={pageKeywords} />
 
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:locale" content="pt_BR" />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content="blog" />
       <meta property="og:site_name" content={pageTitle} />
       <meta property="og:image" content={pageImage} />
       <meta property="og:image:secure_url" content={pageImage} />
       <meta property="og:image:alt" content="Thumbnail" />
       <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="360" />
 
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:card" content="summary_large_image" />
@@ -54,8 +55,9 @@ export default function SEO({
       <meta name="twitter:image" content={pageImage} />
       <meta name="twitter:image:src" content={pageImage} />
       <meta name="twitter:image:alt" content="Thumbnail" />
-      <meta name="twitter:image:width" content="1200" />
-      <meta name="twitter:image:height" content="620" />
+      <meta property="twitter:image:type" content="image/png" />
+      <meta name="twitter:image:width" content="800" />
+      <meta name="twitter:image:height" content="360" />      
 
       <script 
         type="application/ld+json"
@@ -64,7 +66,7 @@ export default function SEO({
           jsonLdGenerator({
             url:  `https://jhonatan-teixeira-rios-blog.herokuapp.com/post/${slug}`,
             title: title,
-            src: banner
+            src: pageImage
           })
         }
       />

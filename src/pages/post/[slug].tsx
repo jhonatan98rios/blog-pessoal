@@ -23,7 +23,7 @@ export default function Post({ post, posts }: PostProps) {
         title={post.seo_title}
         description={post.seo_description}
         slug={post.slug}
-        banner={post.banner.src}
+        image={post.banner.src}
         keywords={post.seo_keywords}
       />
       

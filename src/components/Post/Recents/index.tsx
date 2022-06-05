@@ -15,23 +15,25 @@ export function Recents({ posts }: RecentsProps) {
       <h3 className={styles.header}>
         Recentes
       </h3>
-      <nav className={styles.recents}>
-        { posts.slice(0, 3).map((post, index) => 
-          <li className={styles.post} key={index}> 
-            <Link href={post.slug}>
-              <a>
-                <h6 className={styles.title}>{ post.title }</h6>
-                <time>{ post.updatedAt }</time>
-                <p 
-                  className={styles.excerpt} 
-                  dangerouslySetInnerHTML={{
-                    __html: post.excerpt
-                  }} 
-                />
-              </a>
-            </Link>
-          </li> 
-        )}
+      <nav >
+        <ul className={styles.recents}>
+          { posts.slice(0, 3).map((post, index) => 
+            <li className={styles.post} key={index}> 
+              <Link href={post.slug}>
+                <a>
+                  <h6 className={styles.title}>{ post.title }</h6>
+                  <time>{ post.updatedAt }</time>
+                  <p 
+                    className={styles.excerpt} 
+                    dangerouslySetInnerHTML={{
+                      __html: post.excerpt
+                    }} 
+                  />
+                </a>
+              </Link>
+            </li> 
+          )}
+        </ul>
       </nav>
     </aside>
   );

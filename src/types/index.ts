@@ -41,7 +41,6 @@ export interface SEOProps {
   title: string
   description?: string
   slug?: string
-  banner?: string,
   keywords?: string
   image?: string
   excludeTitleSuffix?: boolean
