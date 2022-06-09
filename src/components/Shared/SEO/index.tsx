@@ -73,15 +73,15 @@ export default function SEO({
       />
 
       {/* ADSENSE */}
+      <script
+        id="Adsense-id"
+        async={true}
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
+        crossOrigin="anonymous"
+      />
       {
         hasADS && 
         <>
-          <script
-            id="Adsense-id"
-            async={true}
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
-            crossOrigin="anonymous"
-          />
           <script
             dangerouslySetInnerHTML={{
               __html: `(adsbygoogle = window.adsbygoogle || []).push({});`
