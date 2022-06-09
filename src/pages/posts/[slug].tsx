@@ -40,6 +40,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
         title={`Posts | ${router.asPath.split('/')[2]}`}
         description="Quer saber como ser um programador? Confira nossos posts e seja bem vindo ao mundo da programação!"
         keywords={`${router.asPath.split('/')[2]}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
+        hasADS={true}
       />
       
       <main>

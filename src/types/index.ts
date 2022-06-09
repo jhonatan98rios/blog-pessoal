@@ -45,6 +45,7 @@ export interface SEOProps {
   image?: string
   excludeTitleSuffix?: boolean
   indexPage?: boolean
+  hasADS?: boolean
 }
 
 export interface ActiveLinkProps extends LinkProps {

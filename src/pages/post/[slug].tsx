@@ -9,6 +9,7 @@ import { Recents } from '../../components/Post/Recents';
 import { PostProps } from '../../types'
 import { getAllPosts } from '../../services/client';
 import { adapter } from '../../services/adapter';
+import Head from 'next/head';
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
@@ -25,6 +26,7 @@ export default function Post({ post, posts }: PostProps) {
         slug={post.slug}
         image={post.banner.src}
         keywords={post.seo_keywords}
+        hasADS={true}
       />
       
       <main className={styles.container}>
@@ -45,6 +47,14 @@ export default function Post({ post, posts }: PostProps) {
 
         <Recents posts={posts} />
       </main>
+      <ins 
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-1739197497968733"
+        data-ad-slot="6382729267"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
     </>
   );
 }

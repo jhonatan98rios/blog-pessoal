@@ -12,6 +12,7 @@ export default function SEO({
   keywords = '',
   excludeTitleSuffix = false,
   indexPage = true,
+  hasADS=false
 }: SEOProps) {
   
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
@@ -70,6 +71,18 @@ export default function SEO({
           })
         }
       />
+
+      {/* ADSENSE */}
+      {
+        hasADS && 
+          <script
+            id="Adsense-id"
+            async={true}
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
+            crossOrigin="anonymous"
+          />
+      }
+      
     </Head>
   );
 }
