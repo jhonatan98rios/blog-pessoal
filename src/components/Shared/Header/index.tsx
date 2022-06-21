@@ -50,29 +50,20 @@ export function Header() {
           )
         }
 
-        {
-          router.asPath.includes('posts') && 
-          <input 
-            className={styles.input} 
-            type="text" 
-            placeholder="Pesquisar pelo post" 
-            onChange={handleKeyPress}
-            value={state.search}
-          />
-        }
+        <input 
+          className={styles.input} 
+          type="text" 
+          placeholder="Pesquisar pelo post" 
+          onChange={handleKeyPress}
+          value={state.search}
+        />
 
         {
           (!isMobile || checked) && (
             <nav className={isMobile ? styles.navbar : null}>
               <ActiveLink href="/" activeClassName={styles.active}>
                 <a onClick={handleCheckbox}>
-                  Inicio
-                </a>
-              </ActiveLink>
-
-              <ActiveLink href="/posts" activeClassName={styles.active}>
-                <a onClick={handleCheckbox}>
-                  Posts
+                  Todos os posts
                 </a>
               </ActiveLink>
 

@@ -27,7 +27,7 @@ export function Categories({ categories }) {
           { categories.map((cat, index) => 
             <li key={index}>
               <Link 
-                href={`/posts/${ cat.path }`}
+                href={`/${ cat.path }`}
               >
                 <a
                   className={styles.category}
