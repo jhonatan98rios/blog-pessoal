@@ -9,7 +9,6 @@ import { Recents } from '../../components/Post/Recents';
 import { PostProps } from '../../types'
 import { getAllPosts } from '../../services/client';
 import { adapter } from '../../services/adapter';
-import Head from 'next/head';
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
