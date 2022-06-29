@@ -10,6 +10,8 @@ import { PostProps } from '../../types'
 import { getAllPosts } from '../../services/client';
 import { adapter } from '../../services/adapter';
 
+import { formateDate } from '../../services/date'
+
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
 
@@ -35,7 +37,7 @@ export default function Post({ post, posts }: PostProps) {
           <div className={styles.text}>
             <div className={styles.header}>
               <h1> {post.title} </h1>
-              <time> {post.updatedAt} </time>
+              <time> {formateDate(post.updatedAt)} </time>
             </div>
             <div 
               className={styles.static_content}

@@ -78,7 +78,9 @@ ul {
 }
 
 body {
-  overflow-y: var(--overflow);
+  @media (max-width: 768px) {
+    overflow-y: var(--overflow);
+  }
 }
 
 .no-display {

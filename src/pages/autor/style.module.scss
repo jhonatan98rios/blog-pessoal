@@ -26,6 +26,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        @media (max-width: 768px) {
+            padding-top: 50px;
+        }
         
 
         .avatar {
@@ -76,7 +80,7 @@
         }
     }
 
-    .small {
+    /* .small {
         position: fixed;
         left: -200px;
         bottom: -250px;
@@ -97,22 +101,22 @@
         top: -40px;
         z-index: -1;
         opacity: .3;
-    }
+    } */
 
     @media (max-width: 1024px) {
         height: calc(100vh - 220px);
 
-        .section {
+        /* .section {
             padding-top: 32px;
         }
 
         .big {
             right: -650px;
-        }
+        } */
     }
 
     @media (max-width: 768px) {
-        height: calc(72vh);
+        height: auto;
     }
 }
 

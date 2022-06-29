@@ -28,9 +28,9 @@ export default function Autor() {
       <main className={styles.main}>
 
         {/* SVGs */}
-        <img className={styles.small} src="autor/small.svg" alt="vetor circular" />
+        {/* <img className={styles.small} src="autor/small.svg" alt="vetor circular" />
         <img className={styles.medium} src="autor/medium.svg" alt="vetor circular" />
-        <img className={styles.big} src="autor/big.svg" alt="vetor circular" />
+        <img className={styles.big} src="autor/big.svg" alt="vetor circular" /> */}
 
         {/* Content */}
         <section className={styles.section}>

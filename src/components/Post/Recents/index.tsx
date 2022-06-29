@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import { ExpandedPost } from '../../../types';
 
+import { formateDate } from '../../../services/date'
+
 import styles from './styles.module.scss';
 
 interface RecentsProps {
@@ -22,7 +24,7 @@ export function Recents({ posts }: RecentsProps) {
               <Link href={post.slug}>
                 <a>
                   <h6 className={styles.title}>{ post.title }</h6>
-                  <time>{ post.updatedAt }</time>
+                  <time>{ formateDate(post.updatedAt) }</time>
                   <p 
                     className={styles.excerpt} 
                     dangerouslySetInnerHTML={{
