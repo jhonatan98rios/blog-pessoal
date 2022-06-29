@@ -50,13 +50,16 @@ export function Header() {
           )
         }
 
-        <input 
-          className={styles.input} 
-          type="text" 
-          placeholder="Pesquisar pelo post" 
-          onChange={handleKeyPress}
-          value={state.search}
-        />
+        {
+          router.asPath == '/' && 
+          <input 
+            className={styles.input} 
+            type="text" 
+            placeholder="Pesquisar pelo post" 
+            onChange={handleKeyPress}
+            value={state.search}
+          />
+        }
 
         {
           (!isMobile || checked) && (
