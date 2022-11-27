@@ -38,24 +38,22 @@ export function Footer() {
         {
           social.map((s, i) => (
             <li key={i}>
-              <Link href={s.link}>
-                <a target="_blank" rel="noopener noreferrer">
-                  <img 
-                    className={styles.image} 
-                    src={s.src}
-                    alt={s.alt}
-                    title={s.title}
-                    width={36}
-                    height={36}
-                  />
-                </a>
+              <Link href={s.link} target="_blank" rel="noopener noreferrer">
+                <img 
+                  className={styles.image} 
+                  src={s.src}
+                  alt={s.alt}
+                  title={s.title}
+                  width={36}
+                  height={36}
+                />
               </Link>
             </li>
           ))
         }
       </ul>
       <p className={styles.copyright}>
-        Todos os textos, imagens e vídeos presentes na página são autorais ou de bancoas de imagens abertos, por tanto sem restrições de uso. <br />
+        Todos os textos, imagens e vídeos presentes na página são autorais ou de bancos de imagens abertos, por tanto sem restrições de uso. <br />
         Não há qualquer restrição de uso do conteúdo citado, sendo ele produzido unicamente para fins didáticos.
       </p>
     </footer>

@@ -28,14 +28,11 @@ export function Categories({ categories }) {
             <li key={index}>
               <Link 
                 href={`/posts/${ cat.path }`}
+                className={styles.category}
+                onClick={() => handleClick(cat) }
+                style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
               >
-                <a
-                  className={styles.category}
-                  onClick={() => handleClick(cat) }
-                  style={{ color: category == cat.label ? '#8b96ff' : '#fff' }}
-                >
                 <span className={styles.name}>{ cat.label }</span>
-                </a>
               </Link>
             </li> 
           )}

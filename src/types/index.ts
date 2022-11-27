@@ -49,7 +49,7 @@ export interface SEOProps {
 }
 
 export interface ActiveLinkProps extends LinkProps {
-  children: ReactElement;
+  children: ReactElement | String ;
   activeClassName: string;
 }
 

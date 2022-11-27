@@ -20,6 +20,8 @@ export default function SEO({
   const pageKeywords = default_keywords + keywords
   const pageImage = image ? image : 'https://jhonatan-teixeira-rios-blog.herokuapp.com/logo.png'
 
+  /* TO DO */
+
   return (
     <Head>
       <title>{pageTitle}</title>
@@ -59,6 +61,8 @@ export default function SEO({
       <meta property="twitter:image:type" content="image/png" />
       <meta name="twitter:image:width" content="800" />
       <meta name="twitter:image:height" content="360" />      
+
+      {/* TO DO */}
 
       <script 
         type="application/ld+json"

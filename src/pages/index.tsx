@@ -32,6 +32,8 @@ export default function Home() {
     
   }, [error])
 
+  /* TO DO */
+
   return (
     <>
       <SEO 
