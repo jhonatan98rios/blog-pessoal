@@ -75,8 +75,8 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const allPosts = await getAllPosts()
-  const paths = allPosts.map(
+  const data = await getAllPosts()
+  const paths = data.posts.map(
     (post) => post.categories.map(
       (cat) => `/posts/${cat.path}`
     )
@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data = await getAllPosts()
   const categories = await getAllCategories()
-  const posts = data
+  const posts = data.posts.length > 0 ? data.posts : []
 
   .map(content => adapter(content))
   .filter(post => {

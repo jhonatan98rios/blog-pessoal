@@ -3,8 +3,6 @@ import { CSSProperties, ReactElement } from "react";
 
 export interface IImage {
   src: string
-  alt: string
-  title: string
 }
 
 export interface ICategory {
@@ -74,8 +72,6 @@ export interface ExpandedPost {
   title: string
   banner: {
     src: string
-    alt: string
-    title: string
   }
   updatedAt: string
   content: string

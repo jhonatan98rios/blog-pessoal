@@ -31,7 +31,7 @@ export default function Post({ post, posts }: PostProps) {
       
       <main className={styles.container}>
         <article className={styles.post}>
-          <img className={styles.image} src={post.banner.src} alt={post.banner.alt} title={post.banner.title} />
+          <img className={styles.image} src={post.banner.src} />
 
           <div className={styles.text}>
             <div className={styles.header}>
@@ -61,9 +61,16 @@ export default function Post({ post, posts }: PostProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const allPosts = await getAllPosts()
-  const paths = allPosts.map(post => `/post/${post.slug}`)
+  const data = await getAllPosts()
 
+  console.log('allPosts')
+  console.log(data)
+
+  const paths = data.posts.length > 0 ? data.posts.map(post => `/post/${post.slug}`) : []
+  
+  console.log('paths')
+  console.log(paths)
+  
   return {
     paths,
     fallback: false
@@ -74,7 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
 
   const data = await getAllPosts()
-  const posts = data.map(post => adapter(post)) 
+  const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
   const post = posts.filter(post => post.slug == slug)[0]
   
   return {
