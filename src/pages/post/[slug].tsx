@@ -36,6 +36,7 @@ export default function Post({ post, posts }: PostProps) {
           <div className={styles.text}>
             <div className={styles.header}>
               <h1> {post.title} </h1>
+              <h2> {post.subtitle } </h2>
               <time> {post.updatedAt} </time>
             </div>
             <div 
@@ -62,14 +63,7 @@ export default function Post({ post, posts }: PostProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
 
   const data = await getAllPosts()
-
-  console.log('allPosts')
-  console.log(data)
-
   const paths = data.posts.length > 0 ? data.posts.map(post => `/post/${post.slug}`) : []
-  
-  console.log('paths')
-  console.log(paths)
   
   return {
     paths,

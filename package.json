@@ -14,7 +14,8 @@
     "dotenv": "^16.0.1",
     "next": "13.0.5",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "react-quilljs": "^1.3.3"
   },
   "devDependencies": {
     "@testing-library/dom": "*",

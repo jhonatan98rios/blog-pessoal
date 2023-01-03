@@ -70,6 +70,7 @@ export interface ExpandedPost {
   seo_keywords: string
   slug: string
   title: string
+  subtitle: string
   banner: {
     src: string
   }

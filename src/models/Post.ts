@@ -9,7 +9,7 @@ export interface PostModel {
     categories: CategoryModel[]
     createdAt: string
     updatedAt: string
-    banner: ImageModel[]
+    banner: ImageModel
     seo_title: string
     seo_description: string
     seo_keywords: string

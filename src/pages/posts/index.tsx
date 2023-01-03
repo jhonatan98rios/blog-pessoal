@@ -72,7 +72,6 @@ export default function Posts({ posts, categories }: IPostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
-  console.log(data)
   const categories = await getAllCategories()
   const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
 
