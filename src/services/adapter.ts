@@ -29,9 +29,7 @@ function contentCompositor(content: string, images: Array<ImageModel>) {
 
 export function adapter(post: PostModel): Partial<ExpandedPost> {
 
-  const src = post.images.length > 0 
-    ? post.images[0].destination + post.images[0].filename 
-    : ''
+  const src = post.banner[0].destination + post.banner[0].filename
 
   return {
     seo_title: post.seo_title,
@@ -41,7 +39,7 @@ export function adapter(post: PostModel): Partial<ExpandedPost> {
     title: post.title,
     banner: { src },
     updatedAt: post.updatedAt,
-    content: contentCompositor(post.content, post.images),
+    content: post.content,
     excerpt: getExcerpt(post.content),
     categories: post.categories,
     style: sizes[
