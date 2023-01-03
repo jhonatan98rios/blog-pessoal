@@ -29,3 +29,19 @@ export async function getAllCategories() {
 }
 
 
+
+export async function postData<T>(body: any) {
+
+    console.log(body)
+
+    axios.post('http://localhost:3333/post', body)
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+
+        console.log('issues');
+        console.log(error.response.data[0].errors.issues);
+    });
+}

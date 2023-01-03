@@ -61,3 +61,9 @@
 - [] Comprar um domínio
 - [] Migrar para S3 com cloudfront
 - [] Criar uma pipeline que teste o código, compile e envie para o S3
+
+
+## Admin
+- [ ] Página de criação de novos Posts (pode ser acessada pelo navbar)
+- [ ] Página de edição de Posts antigos (Uma opção seria adicionar um botão de edição a imagem de cada Post que levaria a rota de edição com o slug selecionado.)
+- [ ] Página de vizualização de posts (pode ser a página de posts já existente)
