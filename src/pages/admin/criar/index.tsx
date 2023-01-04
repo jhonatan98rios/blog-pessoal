@@ -35,7 +35,11 @@ export default function Create() {
 
     let categs = categories.split(',').map(categ => ({
       label: categ.trim(),
-      path: categ.trim().toLocaleLowerCase().replace(/[^a-z0-9 ]/g, '')
+      path: categ.trim()
+        .toLocaleLowerCase()
+        .replace(/ç/g, 'c')
+        .replace(/ã/g, 'a')
+        .replace(/[^a-z0-9 ]/g, '')
     }))
 
     const body = {
