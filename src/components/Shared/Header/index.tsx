@@ -76,7 +76,19 @@ export function Header() {
                 Sobre o autor
               </ActiveLink>
               
-              <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
+              <a 
+                href="https://jhonatan-dev-rios.vercel.app/projetos" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              > 
+                Portfólio 
+              </a>
+
+              <ActiveLink href="/admin/criar" activeClassName={styles.active} onClick={handleCheckbox}>
+                <div className={styles.create}>
+                  Criar Post
+                </div>
+              </ActiveLink>
             </nav>
           )
         }

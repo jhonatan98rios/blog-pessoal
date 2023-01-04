@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import SEO from '../../components/Shared/SEO';
-import { postData } from '../../services/client';
-import { fileUpload } from '../../services/fileUpload';
-import styles from './style.module.scss';
-import dynamic from 'next/dynamic'
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router'
+import SEO from '../../../components/Shared/SEO';
+import styles from './styles.module.scss'
 
+import React, { useEffect, useState } from 'react';
+
+import { PostProps } from '../../../types'
+import { getAllPosts, putData } from '../../../services/client';
+import { adapter } from '../../../services/adapter';
+import { fileUpload } from '../../../services/fileUpload';
+import dynamic from 'next/dynamic';
 
 const Quilljs = dynamic(
-  () => import('../../components/Admin/Quilljs').then((res) => res.Quilljs),
+  () => import('../../../components/Admin/Quilljs').then((res) => res.Quilljs),
   { ssr: false }
 )
 
-
-export default function Create() {
+export default function Post({ post, posts }: PostProps) {
+  const router = useRouter()
 
   const [title, setTitle] = useState('')
   const [subtitle, setSubtitle] = useState('')
   const [categories, setCategories] = useState('')
   const [seo_title, setSeoTitle] = useState('')
   const [seo_description, setSeoDescription] = useState('')
-  const [seo_keys, setSeoKeys] = useState('')
-
+  const [seo_keywords, setSeoKeys] = useState('')
   const [content, setContent] = useState('')
-
   const [banner, setBanner] = useState<any>({})
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const image = await fileUpload(event.target.files[0])
-
     setBanner(image)
   }
 
@@ -41,7 +43,7 @@ export default function Create() {
     }))
 
     const body = {
-      title, subtitle, seo_title, seo_description, seo_keys, banner, content,
+      title, subtitle, seo_title, seo_description, seo_keywords, banner, content,
       categories: categs
     }
 
@@ -50,7 +52,7 @@ export default function Create() {
     console.log('errors', errors)
     
     if (!errors.length) {
-      await postData(body)
+      await putData(post.slug, body)
 
       alert('Post criado com sucesso')
 
@@ -59,17 +61,36 @@ export default function Create() {
     }
   }
 
+  if (router.isFallback) {
+    return (<p> Loading... </p>)
+  }
+
+  useEffect(() => {
+
+    setTitle(post.title)
+    setSubtitle(post.subtitle)
+    setCategories(post.categories.map(categ => categ.label).join(', '))
+    setSeoTitle(post.seo_title)
+    setSeoDescription(post.seo_description)
+    setSeoKeys(post.seo_keywords)
+    setContent(post.content)
+    setBanner(post.banner)
+
+  }, [])
+
   return (
     <>
       <SEO
-        title="Como ser um desenvolvedor?"
-        description="Conteúdos sobre programação, design e muito mais!"
-        image="https://jhonatan-teixeira-rios-blog.herokuapp.com/autor/avatar.png"
-        excludeTitleSuffix
+        title={post.seo_title}
+        description={post.seo_description}
+        slug={post.slug}
+        image={post.banner.src}
+        keywords={post.seo_keywords}
+        hasADS={true}
       />
-
+      
       <main className={styles.main}>
-        <h1 className={styles.title}> Criação de um novo Post </h1>
+        <h1 className={styles.title}> Edição do post </h1>
         <form className={styles.form}>
 
           <label className={styles.label} htmlFor="title" >
@@ -147,14 +168,14 @@ export default function Create() {
               className={styles.input} 
               type="text" 
               name='seo_keywords' 
-              value={seo_keys} 
+              value={seo_keywords} 
               onChange={event => setSeoKeys(event.target.value)} 
             />
           </label>
 
           <label className={styles.content_label}>
             Conteúdo
-            <Quilljs setContent={setContent} />
+            <Quilljs setContent={setContent} initialContent={post.content} />
           </label>
 
           <button className={styles.button} onClick={formHandle}> Enviar </button>
@@ -164,4 +185,28 @@ export default function Create() {
       </main>
     </>
   );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const data = await getAllPosts()
+  const paths = data.posts.length > 0 ? data.posts.map(post => `/admin/editar/${post.slug}`) : []
+  
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const {slug} = params
+
+  const data = await getAllPosts()
+  const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
+  const post = posts.filter(post => post.slug == slug)[0]
+  
+  return {
+    props: { posts, post },
+    revalidate: 60 * 60 * 12
+  }
 }

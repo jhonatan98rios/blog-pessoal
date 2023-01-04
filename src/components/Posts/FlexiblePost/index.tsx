@@ -13,10 +13,15 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
         backgroundImage: `url(${post.banner.src})`
     }}>
       <article>
+
+        <Link href={`/admin/editar/${post.slug}`} target="_blank">
+          <img src="/admin/edit.svg" alt="" className={styles.edit} />
+        </Link>
+
         <span className="likes" />
 
         <h3 className={styles.title}> {post.title} </h3>
-        <time>{post.updateAt} </time>
+        {/* <time>{post.updateAt} </time> */}
 
         <div className={styles.categories}>
           {

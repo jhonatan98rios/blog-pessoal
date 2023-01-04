@@ -5,9 +5,10 @@ import 'quill/dist/quill.snow.css';
 
 interface IQuilljs {
     setContent: React.Dispatch<React.SetStateAction<string>>
+    initialContent?: string
 }
 
-export function Quilljs ({ setContent }: IQuilljs) {
+export function Quilljs ({ setContent, initialContent }: IQuilljs) {
 
     const { quill, quillRef } = useQuill();
 
@@ -65,6 +66,11 @@ export function Quilljs ({ setContent }: IQuilljs) {
 
     React.useEffect(() => {
         if (quill) {
+
+            if (initialContent) {
+                quill.root.innerHTML = initialContent
+            }
+
             quill.on('text-change', () => {
                 setContent(quill.root.innerHTML)
             });

@@ -64,8 +64,10 @@
         display: inline-block;
         position: relative;
         padding: 0 0.5rem;
-        height: 5rem;
-        line-height: 5rem;
+        //height: 5rem;
+        //line-height: 5rem;
+        line-height: 2.5rem;
+        margin-top: 1.25rem;
         color: var(--gray300);
         transition: color 0.2s;
   
@@ -180,4 +182,12 @@
     top: 4rem;
     height: calc(100vh - 4rem);
   }
+}
+
+.create {
+  background-color: var(--primary);
+  padding: 0px 16px;
+  border-radius: 12px;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 20%);
+  color: #ddd;
 }

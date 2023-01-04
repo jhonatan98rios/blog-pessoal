@@ -14,7 +14,7 @@ export function adapter(post: PostModel): Partial<ExpandedPost> {
     title: post.title,
     subtitle: post.subtitle,
     banner: post.banner,
-    updatedAt: post.updatedAt,
+    updatedAt: new Date(post.updatedAt).toLocaleDateString(),
     content: post.content,
     excerpt: getExcerpt(post.content),
     categories: post.categories,

@@ -12,21 +12,24 @@
     .form {
         display: flex;
         flex-direction: column;
+        max-width: 90%;
+        width: 1024px;
 
         .label {
             max-width: 100%;
-            width: 640px;
+            width: 1024px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 4px auto;
 
             .input {
-                max-width: 70%;
-                width: 440px;
+                max-width: 80%;
+                width: 900px;
                 border-radius: 4px;
                 border: none;
                 padding: 8px 8px;
+                margin-left: 8px;
             }
         }
 
@@ -37,7 +40,7 @@
 
         .button {
             border-radius: 4px;
-            margin-top: 16px;
+            margin-top: 0px;
             height: 32px;
         }
     }
