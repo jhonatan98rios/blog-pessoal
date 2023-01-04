@@ -8,7 +8,7 @@ import { Masonry } from  '../../components/Posts/Masonry'
 import { adapter } from '../../services/adapter'
 
 import { getAllCategories, getAllPosts } from '../../services/client'
-import { postsFilter } from "../../services/utils";
+import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/store'
 
@@ -72,8 +72,10 @@ export default function Posts({ posts, categories }: IPostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
-  const categories = await getAllCategories()
-  const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
+  const categories = getDeduplicatedCategories(data.posts)
+
+  const posts = data.posts.length > 0 ? 
+    data.posts.map(content => adapter(content)) : []
 
   return {
     props: {

@@ -1,3 +1,5 @@
+import { CategoryModel } from '../models/Category';
+import { PostModel } from '../models/Post';
 import { IPost } from '../types'
 
 export function getCategory() {
@@ -51,4 +53,22 @@ export function getExcerpt(html: string) {
   const excerpt = short.replace(/<\/?[^>]+(>|$)/g, "");
 
   return excerpt
+}
+
+export function getDeduplicatedCategories(posts: PostModel[]) {
+
+  const categories = posts.map(post => {
+    return post.categories.map(categorie => {
+      delete categorie['_id']
+      return JSON.stringify(categorie)
+    })
+  })
+
+  const flatCategories = categories.flat()
+
+  const deduplicated = [...new Set(flatCategories)].map(categorie => {
+    return JSON.parse(categorie)
+  })
+  
+  return deduplicated 
 }

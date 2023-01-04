@@ -7,7 +7,7 @@ import { Masonry } from "../../components/Posts/Masonry";
 import { Categories } from "../../components/Posts/Categories";
 
 import useDeviceDetect from "../../hooks/useDevice";
-import { postsFilter } from "../../services/utils";
+import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
 import StoreContext from "../../context/store";
 
 import { IPostsProps, IPost } from '../../types'
@@ -91,19 +91,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data = await getAllPosts()
-  const categories = await getAllCategories()
-  const posts = data.posts.length > 0 ? data.posts : []
-
-  .map(content => adapter(content))
-  .filter(post => {
-    let contains = false
-    post.categories.forEach(cat => {
-      if (cat.path == params.slug) {
-        contains = true
-      }
+  const categories = getDeduplicatedCategories(data.posts)
+  const posts = (data.posts.length > 0 ? data.posts : [])
+    .map(content => adapter(content))
+    .filter(post => {
+      let contains = false
+      post.categories.forEach(cat => {
+        if (cat.path == params.slug) {
+          contains = true
+        }
+      })
+      return contains
     })
-    return contains
-  })
 
   return {
     props: { posts, categories },
