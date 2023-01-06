@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useContext, useState } from 'react';
-import StoreContext from '../../../context/store';
+import { AuthContext } from '../../../context/auth/store';
+import StoreContext from '../../../context/search/store';
 
 import useDeviceDetect from '../../../hooks/useDevice';
 import { ActiveLink } from '../ActiveLink';
@@ -8,6 +9,8 @@ import { ActiveLink } from '../ActiveLink';
 import styles from './styles.module.scss';
 
 export function Header() {
+
+  const ctx = useContext(AuthContext)
 
   const router = useRouter()
   const {isMobile} = useDeviceDetect()
@@ -84,11 +87,14 @@ export function Header() {
                 Portfólio 
               </a>
 
-              <ActiveLink href="/admin/criar" activeClassName={styles.active} onClick={handleCheckbox}>
-                <div className={styles.create}>
-                  Criar Post
-                </div>
-              </ActiveLink>
+              {
+                ctx.isAuthenticated &&
+                <ActiveLink href="/admin/criar" activeClassName={styles.active} onClick={handleCheckbox}>
+                  <div className={styles.create}>
+                    Criar Post
+                  </div>
+                </ActiveLink>
+              }
             </nav>
           )
         }

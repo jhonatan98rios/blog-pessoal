@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import SEO from '../components/Shared/SEO';
 
-import StoreContext from '../context/store'
+import StoreContext from '../context/search/store'
 import styles from './home.module.scss';
 import PresentationImage from '../components/Home/PresentationImage';
 

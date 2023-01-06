@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
-import StoreContext from '../../../context/store';
+import StoreContext from '../../../context/search/store';
 import styles from './styles.module.scss';
 
 

@@ -32,7 +32,7 @@ export async function getAllCategories() {
 
 export async function postData<T>(body: any) {
 
-    axios.post('http://localhost:3333/post', body)
+    return axios.post('http://localhost:3333/post', body)
     .then(function (response) {
         console.log(response);
     })
@@ -47,7 +47,7 @@ export async function postData<T>(body: any) {
 
 export async function putData<T>(slug: string, body: any) {
 
-    axios.put(`http://localhost:3333/post/${slug}`, body)
+    return axios.put(`http://localhost:3333/post/${slug}`, body)
     .then(function (response) {
         console.log(response);
     })
@@ -57,4 +57,32 @@ export async function putData<T>(slug: string, body: any) {
         console.log('issues');
         console.log(error.response.data[0].errors.issues);
     });
+}
+
+export async function login({ user, password }) {
+
+    return axios.post('http://localhost:3333/user/login', {
+        user, password
+    })
+    .then(res => {
+        console.log(res.data)
+        return res.data
+    })
+    .catch(err => {
+        console.log(err.response.data.message)
+    })
+}
+
+export async function checkIn(token: string) {
+    return axios.post('http://localhost:3333/user/check-in', {
+        token
+    })
+    .then(res => {
+        console.log('check in')
+        console.log(res.data)
+        return res.data
+    })
+    .catch(err => {
+        console.log(err.response.data.message)
+    })
 }

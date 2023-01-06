@@ -4,6 +4,9 @@ import { postData } from '../../../services/client';
 import { fileUpload } from '../../../services/fileUpload';
 import styles from './style.module.scss';
 import dynamic from 'next/dynamic'
+import { GetServerSideProps } from 'next';
+import { APIClient } from '../../../services/axios';
+import { parseCookies } from 'nookies'
 
 const Quilljs = dynamic(
   () => import('../../../components/Admin/Quilljs').then((res) => res.Quilljs),
@@ -166,4 +169,23 @@ export default function Create() {
       </main>
     </>
   );
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+  const { ['nextauth.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }

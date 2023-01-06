@@ -8,7 +8,7 @@ import { Categories } from "../../components/Posts/Categories";
 
 import useDeviceDetect from "../../hooks/useDevice";
 import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
-import StoreContext from "../../context/store";
+import StoreContext from "../../context/search/store";
 
 import { IPostsProps, IPost } from '../../types'
 

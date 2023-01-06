@@ -10,7 +10,7 @@ import { adapter } from '../../services/adapter'
 import { getAllCategories, getAllPosts } from '../../services/client'
 import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
-import StoreContext from '../../context/store'
+import StoreContext from '../../context/search/store'
 
 import { IPostsProps, IPost } from '../../types'
 

@@ -1,15 +1,15 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import React, { useEffect, useState } from 'react';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic';
+import { parseCookies } from 'nookies'
+
 import SEO from '../../../components/Shared/SEO';
 import styles from './styles.module.scss'
-
-import React, { useEffect, useState } from 'react';
-
 import { PostProps } from '../../../types'
 import { getAllPosts, putData } from '../../../services/client';
 import { adapter } from '../../../services/adapter';
 import { fileUpload } from '../../../services/fileUpload';
-import dynamic from 'next/dynamic';
 
 const Quilljs = dynamic(
   () => import('../../../components/Admin/Quilljs').then((res) => res.Quilljs),
@@ -27,6 +27,15 @@ export default function Post({ post, posts }: PostProps) {
   const [seo_keywords, setSeoKeys] = useState('')
   const [content, setContent] = useState('')
   const [banner, setBanner] = useState<any>({})
+
+
+  useEffect(() => {
+    const { ['nextauth.token']: token } = parseCookies()
+    if (!token) {
+      router.push('/admin')
+    }
+  }, [])
+
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const image = await fileUpload(event.target.files[0])

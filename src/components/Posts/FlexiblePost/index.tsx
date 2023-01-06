@@ -2,8 +2,13 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 
 import { PostCardProps } from '../../../types'
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/auth/store';
 
 export function FlexiblePost({ post, customStyle }: PostCardProps) {
+
+  const ctx = useContext(AuthContext)
+
   return (
     <Link 
       href={`/post/${post.slug}`} 
@@ -13,10 +18,12 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
         backgroundImage: `url(${post.banner.src})`
     }}>
       <article>
-
-        <Link href={`/admin/editar/${post.slug}`} target="_blank">
-          <img src="/admin/edit.svg" alt="" className={styles.edit} />
-        </Link>
+        {
+          ctx.isAuthenticated &&
+          <Link href={`/admin/editar/${post.slug}`} target="_blank">
+            <img src="/admin/edit.svg" alt="" className={styles.edit} />
+          </Link>
+        }
 
         <span className="likes" />
 
