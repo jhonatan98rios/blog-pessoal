@@ -13,7 +13,7 @@ import StoreContext from "../../context/search/store";
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
-import { getAllCategories, getAllPosts } from "../../services/client";
+import { getAllPosts } from "../../services/client";
 import { adapter } from "../../services/adapter";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {

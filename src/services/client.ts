@@ -19,29 +19,14 @@ async function getAsyncData<T>(url: string): Promise<T> {
     }
 }
 
-
+/* Posts Manipulation */
 type getAllPostsReturn = {
     posts: PostModel[]
 }
 
-
 export async function getAllPosts() {
     return getAsyncData<getAllPostsReturn>('post')
 }
-
-type getAllUsersReturn = {
-    users: UserModel[]
-}
-
-export async function getAllUsers() {
-    return getAsyncData<getAllUsersReturn>('user')
-}
-
-export async function getAllCategories() {
-    return [] //getAsyncData('categories')
-}
-
-
 
 export async function postData<T>(body: any) {
 
@@ -57,7 +42,6 @@ export async function postData<T>(body: any) {
     });
 }
 
-
 export async function putData<T>(slug: string, body: any) {
 
     return axios.put(`http://localhost:3333/post/${slug}`, body)
@@ -70,6 +54,30 @@ export async function putData<T>(slug: string, body: any) {
         console.log('issues');
         console.log(error.response.data[0].errors.issues);
     });
+}
+
+
+/* Autentication and Authorization */
+type getAllUsersReturn = {
+    users: UserModel[]
+}
+
+export async function getAllUsers() {
+    return getAsyncData<getAllUsersReturn>('user')
+}
+
+export async function register({user, password}) {
+
+    return axios.post('http://localhost:3333/user/', {
+        user, password
+    })
+    .then(res => {
+        console.log(res.data)
+        return res.data
+    })
+    .catch(err => {
+        console.log(err.response.data.message)
+    })
 }
 
 export async function login({ user, password }) {

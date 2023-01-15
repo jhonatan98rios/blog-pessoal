@@ -29,7 +29,7 @@ export default function AdminsUsers() {
             <section className={styles.section}>
                 { users?.map((user, index) => {
                     return (
-                        <UserThumb content={user} />
+                        <UserThumb content={user} key={index} />
                     )
                 }) }
             </section>

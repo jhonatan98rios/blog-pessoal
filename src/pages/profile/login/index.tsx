@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { useState, useContext } from 'react'
-import { AuthContext } from '../../context/auth/store'
-import { login } from '../../services/client'
+import { AuthContext } from '../../../context/auth/store'
+import { login } from '../../../services/client'
 import styles from './style.module.scss'
 
-export default function Admin({ }) {
+export default function Login({ }) {
 
   const ctx = useContext(AuthContext)
 
@@ -46,6 +47,11 @@ export default function Admin({ }) {
               Confirmar 
             </button>
           </form>
+          
+          <Link className={styles.register} href='/profile/register'>
+            Não possui conta ainda? <span> Registrar! </span>
+          </Link>
+
         </section>
         :
         <section className={styles.main}>

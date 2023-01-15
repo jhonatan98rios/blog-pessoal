@@ -7,7 +7,7 @@ import { Masonry } from  '../../components/Posts/Masonry'
 
 import { adapter } from '../../services/adapter'
 
-import { getAllCategories, getAllPosts } from '../../services/client'
+import { getAllPosts } from '../../services/client'
 import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/search/store'

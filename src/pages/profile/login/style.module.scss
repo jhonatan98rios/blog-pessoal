@@ -15,7 +15,7 @@
     justify-content: center;
     width: 360px;
     max-width: 90%;
-
+    
     .input {
       margin: 6px 0px;
       border-radius: 6px;
@@ -23,6 +23,14 @@
       height: 32px;
       width: 100%;
       padding: 16px;
+    }
+  }
+
+  .register {
+    margin-top: 16px;
+
+    span {
+      color: var(--primary);
     }
   }
 
