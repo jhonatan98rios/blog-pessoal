@@ -4,19 +4,19 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic';
 import { parseCookies } from 'nookies'
 
-import SEO from '../../../components/Shared/SEO';
+import SEO from '../../../../components/Shared/SEO';
 import styles from './styles.module.scss'
-import { PostProps } from '../../../types'
-import { getAllPosts, putData } from '../../../services/client';
-import { adapter } from '../../../services/adapter';
-import { fileUpload } from '../../../services/fileUpload';
+import { PostProps } from '../../../../types'
+import { getAllPosts, putData } from '../../../../services/client';
+import { adapter } from '../../../../services/adapter';
+import { fileUpload } from '../../../../services/fileUpload';
 
 const Quilljs = dynamic(
-  () => import('../../../components/Admin/Quilljs').then((res) => res.Quilljs),
+  () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
   { ssr: false }
 )
 
-export default function Post({ post, posts }: PostProps) {
+export default function Post({ post }: PostProps) {
   const router = useRouter()
 
   const [title, setTitle] = useState('')
@@ -32,7 +32,7 @@ export default function Post({ post, posts }: PostProps) {
   useEffect(() => {
     const { ['nextauth.token']: token } = parseCookies()
     if (!token) {
-      router.push('/admin')
+      router.push('/login')
     }
   }, [])
 
@@ -203,7 +203,7 @@ export default function Post({ post, posts }: PostProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
 
   const data = await getAllPosts()
-  const paths = data.posts.length > 0 ? data.posts.map(post => `/admin/editar/${post.slug}`) : []
+  const paths = data.posts.length > 0 ? data.posts.map(post => `/admin/posts/editar/${post.slug}`) : []
   
   return {
     paths,

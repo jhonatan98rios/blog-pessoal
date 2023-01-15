@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import SEO from '../../../components/Shared/SEO';
-import { postData } from '../../../services/client';
-import { fileUpload } from '../../../services/fileUpload';
+import SEO from '../../../../components/Shared/SEO';
+import { postData } from '../../../../services/client';
+import { fileUpload } from '../../../../services/fileUpload';
 import styles from './style.module.scss';
 import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next';
-import { APIClient } from '../../../services/axios';
+import { APIClient } from '../../../../services/axios';
 import { parseCookies } from 'nookies'
 
 const Quilljs = dynamic(
-  () => import('../../../components/Admin/Quilljs').then((res) => res.Quilljs),
+  () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
   { ssr: false }
 )
 
@@ -179,7 +179,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: '/admin',
+        destination: '/login',
         permanent: false,
       }
     }

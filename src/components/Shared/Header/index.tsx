@@ -89,7 +89,7 @@ export function Header() {
 
               {
                 ctx.isAuthenticated &&
-                <ActiveLink href="/admin/criar" activeClassName={styles.active} onClick={handleCheckbox}>
+                <ActiveLink href="/admin/posts/criar" activeClassName={styles.active} onClick={handleCheckbox}>
                   <div className={styles.create}>
                     Criar Post
                   </div>

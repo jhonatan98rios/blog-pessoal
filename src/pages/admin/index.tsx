@@ -1,64 +1,42 @@
-import { useState, useContext } from 'react'
-import { AuthContext } from '../../context/auth/store'
-import { login } from '../../services/client'
-import styles from './style.module.scss'
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import styles from './style.module.scss';
 
-export default function Admin({ }) {
+export default function Admins() {
 
-  const ctx = useContext(AuthContext)
+    const painels = [
+        {
+            title: "Usuários",
+            icon: "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
+            link: "/admin/users"
+        },
+        {
+            title: "Posts",
+            icon: "https://cdn-icons-png.flaticon.com/512/1999/1999310.png",
+            link: "/admin/posts"
+        },
+    ]
 
-  const [ username, setUser ] = useState('')
-  const [ password, setPassword ] = useState('')
+    useEffect(() => {
 
-  async function formHandle(e: any) {
-    e.preventDefault()
+        
+    }, [])
 
-    await ctx.signIn({ username, password })
-  }
-
-  return (
-    <main>
-
-      {
-        !ctx.isAuthenticated ?
-
-        <section className={styles.main}>
-          <h1 className={styles.title}> Login </h1>
-
-          <form className={styles.form}>
-            <input 
-              className={styles.input}
-              value={username}
-              onChange={(e) => setUser(e.target.value)}
-              type="text"
-              name='user'
-            />
-            <input 
-              className={styles.input} 
-              onChange={(e) => setPassword(e.target.value)}
-              type="password" 
-              name='password' 
-            />
-            <button 
-              className={styles.button} 
-              onClick={formHandle}
-            > 
-              Confirmar 
-            </button>
-          </form>
-        </section>
-        :
-        <section className={styles.main}>
-          <p> Olá {ctx.user.username} </p>
-          <button 
-            className={styles.button} 
-            onClick={() => ctx.logout()}
-          > 
-            Logout 
-          </button>
-        </section>
-      }
-
-    </main>
-  )
+    return (
+        <main className={styles.main}>
+            <h1> Admin </h1>
+            <section className={styles.section}>
+                {
+                    painels.map((painel, index) => (
+                        <Link href={painel.link} key={index}>
+                            <div className={styles.painel}>
+                                <img className={styles.icon} src={painel.icon} alt="" />
+                                <h2>{painel.title}</h2>
+                            </div>
+                        </Link>
+                    ))
+                }
+            </section>
+        </ main>
+    )
 }

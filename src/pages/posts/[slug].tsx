@@ -91,6 +91,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data = await getAllPosts()
+
+  if (!data) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
   const categories = getDeduplicatedCategories(data.posts)
   const posts = (data.posts.length > 0 ? data.posts : [])
     .map(content => adapter(content))

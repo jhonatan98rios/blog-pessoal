@@ -1,12 +1,17 @@
 import axios from 'axios'
 import { PostModel } from '../models/Post'
+import { UserModel } from '../models/User'
 
 const BASE_URL = process.env.API_URL
 
 async function getAsyncData<T>(url: string): Promise<T> {
     try {
-        const result = await axios.get(BASE_URL + url)
+
+        const endpoint = BASE_URL + url
+
+        const result = await axios.get(endpoint)
         const data = result.data;
+
         return data
 
     } catch (error) {
@@ -22,6 +27,14 @@ type getAllPostsReturn = {
 
 export async function getAllPosts() {
     return getAsyncData<getAllPostsReturn>('post')
+}
+
+type getAllUsersReturn = {
+    users: UserModel[]
+}
+
+export async function getAllUsers() {
+    return getAsyncData<getAllUsersReturn>('user')
 }
 
 export async function getAllCategories() {

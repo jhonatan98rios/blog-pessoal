@@ -72,6 +72,16 @@ export default function Posts({ posts, categories }: IPostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
+
+  if (!data) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
   const categories = getDeduplicatedCategories(data.posts)
 
   const posts = data.posts.length > 0 ? 
