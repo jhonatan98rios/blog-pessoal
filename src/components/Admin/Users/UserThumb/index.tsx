@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './style.module.scss';
 
 export default function UserThumb({ content }) {
@@ -12,7 +13,7 @@ export default function UserThumb({ content }) {
             </div>
 
             <div className={styles.controls}>
-                <button className={styles.editButton}> Editar </button>
+                <Link href={`/admin/users/editar?user=${content.user}`} className={styles.editButton}> Editar </Link>
                 <button className={styles.deleteButton}> Apagar </button>
             </div>
         </div>

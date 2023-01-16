@@ -50,6 +50,11 @@ export function AuthContextProvider({ children }) {
       password,
     })
 
+    if (!res?.token) {
+      alert('Incorrect username/password')
+      return
+    }
+
     setCookie(undefined, 'nextauth.token', res.token, {
       maxAge: 60 * 60 * 1, // 1 hour
     })
