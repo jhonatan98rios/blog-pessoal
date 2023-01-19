@@ -179,7 +179,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/perfil/login',
         permanent: false,
       }
     }

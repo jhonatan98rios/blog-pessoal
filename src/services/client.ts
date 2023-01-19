@@ -58,14 +58,6 @@ export async function putData<T>(slug: string, body: any) {
 
 
 /* Autentication and Authorization */
-type getAllUsersReturn = {
-    users: UserModel[]
-}
-
-export async function getAllUsers() {
-    return getAsyncData<getAllUsersReturn>('user')
-}
-
 export async function register({user, password}) {
 
     return axios.post('http://localhost:3333/user/', {
@@ -100,6 +92,29 @@ export async function checkIn(token: string) {
     })
     .then(res => {
         console.log('check in')
+        console.log(res.data)
+        return res.data
+    })
+    .catch(err => {
+        console.log(err.response.data.message)
+    })
+}
+
+/* User administration */
+type getAllUsersReturn = {
+    users: UserModel[]
+}
+
+export async function getAllUsers() {
+    return getAsyncData<getAllUsersReturn>('user')
+}
+
+export async function updateUser(username: string, password: string ) {
+
+    return axios.put(`http://localhost:3333/user/${username}`, {
+        password
+    })
+    .then(res => {
         console.log(res.data)
         return res.data
     })

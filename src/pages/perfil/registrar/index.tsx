@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { register, updateUser } from '../../../../services/client'
+import { useState } from 'react'
+import { register } from '../../../services/client'
 import styles from './style.module.scss'
 
-export default function AdminUsersEdit() {
+export default function Register({ }) {
 
   const router = useRouter()
   const [ username, setUser ] = useState<string>('')
@@ -13,22 +13,20 @@ export default function AdminUsersEdit() {
   async function formHandle(e: any) {
     e.preventDefault()
 
-    const { user } = router.query
-    const result = await updateUser(user, { user: username, password })
+    const result = await register({ user: username, password })
 
     if (result) {
-      alert("Usuário editado com sucesso")
-      router.push('/admin/users')
+      alert("Usuário registrado com sucesso")
+      router.push('/perfil/login')
+    } else {
+      alert("O usuário já existe")
     }
   }
 
   return (
     <main>
       <section className={styles.main}>
-        <h1 className={styles.title}> 
-          Editar usuário: 
-          <span> { router.query.user } </span> 
-        </h1>
+        <h1 className={styles.title}> Registrar </h1>
 
         <form className={styles.form}>
           <input 
@@ -52,7 +50,7 @@ export default function AdminUsersEdit() {
           </button>
         </form>
 
-        <Link className={styles.register} href='/profile/login'>
+        <Link className={styles.register} href='/perfil/login'>
           Já possui conta? <span> Entrar! </span>
         </Link>
 

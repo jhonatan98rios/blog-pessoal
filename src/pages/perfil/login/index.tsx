@@ -48,7 +48,7 @@ export default function Login({ }) {
             </button>
           </form>
           
-          <Link className={styles.register} href='/profile/register'>
+          <Link className={styles.register} href='/perfil/registrar'>
             Não possui conta ainda? <span> Registrar! </span>
           </Link>
 

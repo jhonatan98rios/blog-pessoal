@@ -28,11 +28,10 @@ export default function Post({ post }: PostProps) {
   const [content, setContent] = useState('')
   const [banner, setBanner] = useState<any>({})
 
-
   useEffect(() => {
     const { ['nextauth.token']: token } = parseCookies()
     if (!token) {
-      router.push('/login')
+      router.push('/perfil/login')
     }
   }, [])
 
