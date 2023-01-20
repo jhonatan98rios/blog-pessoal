@@ -13,8 +13,8 @@ import StoreContext from "../../context/search/store";
 import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
-import { getAllPosts } from "../../services/client";
 import { adapter } from "../../services/adapter";
+import { getAllPosts } from "../../services/http/Admin/Posts/client";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
@@ -42,23 +42,23 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
         keywords={`${router.asPath.split('/')[2]}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
         hasADS={true}
       />
-      
+
       <main>
 
-        { isMobile && 
-          <Categories categories={categories} /> 
+        { isMobile &&
+          <Categories categories={categories} />
         }
         <section className={styles.container}>
           <h2 className="no-display"> Posts </h2>
 
           { !isMobile &&
-           <Categories categories={categories} /> 
+           <Categories categories={categories} />
           }
 
           <Masonry posts={filteredPosts} />
 
-          { !isMobile && 
-            <ins 
+          {/* { !isMobile &&
+            <ins
               className={"adsbygoogle " + styles.fake_col}
               style={{ display: 'block' }}
               data-ad-client="ca-pub-1739197497968733"
@@ -66,7 +66,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
-          }
+          } */}
         </section>
       </main>
     </>
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { posts, categories },
-    revalidate: 60 * 60 * 120
+    revalidate: 60 * 60 * 24
   }
 }
 

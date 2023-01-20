@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { register } from '../../../services/client'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../context/auth/store'
+import { register } from '../../services/http/Profile/client'
 import styles from './style.module.scss'
 
 export default function Register({ }) {
+
+  const ctx = useContext(AuthContext)
 
   const router = useRouter()
   const [ username, setUser ] = useState<string>('')
@@ -23,34 +26,42 @@ export default function Register({ }) {
     }
   }
 
+  useEffect(() => {
+    if (ctx.user) {
+      console.log(ctx.user)
+    } else {
+      console.log("Não autenticado")
+    }
+  }, [])
+
   return (
     <main>
       <section className={styles.main}>
         <h1 className={styles.title}> Registrar </h1>
 
         <form className={styles.form}>
-          <input 
+          <input
             className={styles.input}
             value={username}
             onChange={(e) => setUser(e.target.value)}
             type="text"
             name='user'
           />
-          <input 
-            className={styles.input} 
+          <input
+            className={styles.input}
             onChange={(e) => setPassword(e.target.value)}
-            type="password" 
-            name='password' 
+            type="password"
+            name='password'
           />
-          <button 
-            className={styles.button} 
+          <button
+            className={styles.button}
             onClick={formHandle}
-          > 
-            Confirmar 
+          >
+            Confirmar
           </button>
         </form>
 
-        <Link className={styles.register} href='/perfil/login'>
+        <Link className={styles.register} href='/login'>
           Já possui conta? <span> Entrar! </span>
         </Link>
 

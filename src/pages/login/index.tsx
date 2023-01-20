@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState, useContext } from 'react'
-import { AuthContext } from '../../../context/auth/store'
-import { login } from '../../../services/client'
+import { AuthContext } from '../../context/auth/store'
 import styles from './style.module.scss'
 
 export default function Login({ }) {
@@ -27,28 +26,28 @@ export default function Login({ }) {
           <h1 className={styles.title}> Login </h1>
 
           <form className={styles.form}>
-            <input 
+            <input
               className={styles.input}
               value={username}
               onChange={(e) => setUser(e.target.value)}
               type="text"
               name='user'
             />
-            <input 
-              className={styles.input} 
+            <input
+              className={styles.input}
               onChange={(e) => setPassword(e.target.value)}
-              type="password" 
-              name='password' 
+              type="password"
+              name='password'
             />
-            <button 
-              className={styles.button} 
+            <button
+              className={styles.button}
               onClick={formHandle}
-            > 
-              Confirmar 
+            >
+              Confirmar
             </button>
           </form>
-          
-          <Link className={styles.register} href='/perfil/registrar'>
+
+          <Link className={styles.register} href='/registrar'>
             Não possui conta ainda? <span> Registrar! </span>
           </Link>
 
@@ -56,11 +55,11 @@ export default function Login({ }) {
         :
         <section className={styles.main}>
           <p> Olá {ctx.user.username} </p>
-          <button 
-            className={styles.button} 
+          <button
+            className={styles.button}
             onClick={() => ctx.logout()}
-          > 
-            Logout 
+          >
+            Logout
           </button>
         </section>
       }

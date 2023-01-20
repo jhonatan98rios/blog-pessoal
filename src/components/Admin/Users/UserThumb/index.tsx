@@ -13,7 +13,7 @@ export default function UserThumb({ content }) {
             </div>
 
             <div className={styles.controls}>
-                <Link href={`/admin/users/editar?user=${content.user}`} className={styles.editButton}> Editar </Link>
+                <Link href={`/admin/users/editar`} className={styles.editButton}> Editar </Link>
                 <button className={styles.deleteButton}> Apagar </button>
             </div>
         </div>

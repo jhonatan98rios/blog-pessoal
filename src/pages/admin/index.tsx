@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from './style.module.scss';
 
 export default function Admins() {
@@ -18,11 +18,6 @@ export default function Admins() {
       link: "/admin/posts"
     },
   ]
-
-  useEffect(() => {
-
-
-  }, [])
 
   return (
     <main className={styles.main}>
@@ -50,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: '/perfil/login',
+        destination: '/login',
         permanent: false,
       }
     }

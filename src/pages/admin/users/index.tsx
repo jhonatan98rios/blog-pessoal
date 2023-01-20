@@ -2,27 +2,10 @@ import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import UserThumb from '../../../components/Admin/Users/UserThumb';
-import { getAllUsers } from '../../../services/client';
+import { getAllUsers } from '../../../services/http/Admin/Users/client';
 import styles from './style.module.scss';
 
-export default function AdminsUsers() {
-
-  const [users, setUsers] = useState([])
-
-  useEffect(() => {
-
-    const getUsers = async () => {
-      const data = await getAllUsers()
-
-      if (data?.users) {
-        setUsers(data.users)
-      }
-    }
-
-    getUsers()
-      .catch(err => console.log('Erro:', err))
-
-  }, [])
+export default function AdminsUsers({ users }) {
 
   return (
     <main className={styles.main}>
@@ -46,13 +29,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: '/perfil/login',
+        destination: '/login',
         permanent: false,
       }
     }
   }
 
+  const data = await getAllUsers()
+
+  if (!data || data.users.length == 0) {
+    return {
+      props: {
+        users: []
+      }
+    }
+  }
+
   return {
-    props: {}
+    props: {
+      users: data.users
+    }
   }
 }

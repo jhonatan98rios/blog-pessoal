@@ -1,9 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from 'next/router'
-import { checkIn, login } from '../../services/client'
 
-import { APIClient } from "../../services/axios";
+import { validateToken } from "../../services/auth/token";
+import { APIClient } from "../../infra/http/axios";
+import { login } from "../../services/http/Profile/client";
 
 type User = {
   username: string;
@@ -32,13 +33,13 @@ export function AuthContextProvider({ children }) {
   useEffect(() => {
     const { 'nextauth.token': token } = parseCookies()
 
+    console.log('trying auth...')
+
     if (token) {
-      console.log('try checkIn')
+      console.log('trying checkIn')
 
-      checkIn(token).then(res => {
-
+      validateToken(token, (res) => {
         console.log('checkIn on user: ', res.user)
-
         setUser({ username: res.user })
       })
     }
@@ -56,7 +57,7 @@ export function AuthContextProvider({ children }) {
     }
 
     setCookie(undefined, 'nextauth.token', res.token, {
-      maxAge: 60 * 60 * 1, // 1 hour
+      maxAge: 60 * 60 * 24, // 1 hour
     })
 
     const client = APIClient.getInstance()
@@ -69,6 +70,7 @@ export function AuthContextProvider({ children }) {
   }
 
   function logout() {
+    console.log('LOGOUT')
     destroyCookie(undefined, 'nextauth.token')
     setUser(null)
   }

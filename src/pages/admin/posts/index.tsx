@@ -1,28 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
-import { useEffect, useState } from 'react';
 import PostThumb from '../../../components/Admin/Posts/PostThumb';
-import { getAllPosts } from '../../../services/client';
+import { adapter } from '../../../services/adapter';
+import { getAllPosts } from '../../../services/http/Admin/Posts/client';
+import { getDeduplicatedCategories } from '../../../services/utils';
 import styles from './style.module.scss';
 
-export default function AdminsPosts() {
-
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-
-    const getPosts = async () => {
-      const data = await getAllPosts()
-
-      if (data?.posts) {
-        setPosts(data.posts)
-      }
-    }
-
-    getPosts()
-      .catch(err => console.log('Erro:', err))
-
-  }, [])
+export default function AdminsPosts({ posts }) {
 
   return (
     <main className={styles.main}>
@@ -47,13 +31,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: '/perfil/login',
+        destination: '/login',
         permanent: false,
       }
     }
   }
 
+  const data = await getAllPosts()
+
+  if (!data || data.posts.length == 0) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
+  const categories = getDeduplicatedCategories(data.posts)
+  const posts = data.posts.map(content => adapter(content))
+
   return {
-    props: {}
+    props: {
+      posts,
+      categories
+    }
   }
 }

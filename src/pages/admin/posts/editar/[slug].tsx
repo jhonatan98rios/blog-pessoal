@@ -7,9 +7,9 @@ import { parseCookies } from 'nookies'
 import SEO from '../../../../components/Shared/SEO';
 import styles from './styles.module.scss'
 import { PostProps } from '../../../../types'
-import { getAllPosts, putData } from '../../../../services/client';
 import { adapter } from '../../../../services/adapter';
-import { fileUpload } from '../../../../services/fileUpload';
+import { fileUpload } from '../../../../services/http/fileUpload';
+import { getAllPosts, updatePost } from '../../../../services/http/Admin/Posts/client';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -27,13 +27,6 @@ export default function Post({ post }: PostProps) {
   const [seo_keywords, setSeoKeys] = useState('')
   const [content, setContent] = useState('')
   const [banner, setBanner] = useState<any>({})
-
-  useEffect(() => {
-    const { ['nextauth.token']: token } = parseCookies()
-    if (!token) {
-      router.push('/perfil/login')
-    }
-  }, [])
 
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -62,9 +55,9 @@ export default function Post({ post }: PostProps) {
     const errors = Object.keys(body).filter(prop => body[prop].length == 0)
 
     console.log('errors', errors)
-    
+
     if (!errors.length) {
-      await putData(post.slug, body)
+      await updatePost(post.slug, body)
 
       alert('Post criado com sucesso')
 
@@ -100,42 +93,42 @@ export default function Post({ post }: PostProps) {
         keywords={post.seo_keywords}
         hasADS={true}
       />
-      
+
       <main className={styles.main}>
         <h1 className={styles.title}> Edição do post </h1>
         <form className={styles.form}>
 
           <label className={styles.label} htmlFor="title" >
             Titulo:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='title' 
-              value={title} 
-              onChange={event => setTitle(event.target.value)} 
+            <input
+              className={styles.input}
+              type="text"
+              name='title'
+              value={title}
+              onChange={event => setTitle(event.target.value)}
             />
           </label>
 
           <label className={styles.label} htmlFor="subtitle">
             Subtitulo:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='subtitle' 
-              value={subtitle} 
-              onChange={event => setSubtitle(event.target.value)} 
+            <input
+              className={styles.input}
+              type="text"
+              name='subtitle'
+              value={subtitle}
+              onChange={event => setSubtitle(event.target.value)}
             />
           </label>
 
           <label className={styles.label} htmlFor="categories">
             Categorias:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='categories' 
+            <input
+              className={styles.input}
+              type="text"
+              name='categories'
               value={categories}
               placeholder="Ex: Tecnologia, Programação"
-              onChange={event => setCategories(event.target.value)} 
+              onChange={event => setCategories(event.target.value)}
             />
           </label>
 
@@ -154,34 +147,34 @@ export default function Post({ post }: PostProps) {
 
           <label className={styles.label} htmlFor="seo_title">
             Titulo SEO:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='seo_title' 
-              value={seo_title} 
-              onChange={event => setSeoTitle(event.target.value)} 
+            <input
+              className={styles.input}
+              type="text"
+              name='seo_title'
+              value={seo_title}
+              onChange={event => setSeoTitle(event.target.value)}
             />
           </label>
 
           <label className={styles.label} htmlFor="seo_description">
             Descrição SEO:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='seo_description' 
-              value={seo_description} 
-              onChange={event => setSeoDescription(event.target.value)} 
+            <input
+              className={styles.input}
+              type="text"
+              name='seo_description'
+              value={seo_description}
+              onChange={event => setSeoDescription(event.target.value)}
             />
           </label>
 
           <label className={styles.label} htmlFor="seo_keywords">
             Palavras chaves SEO:
-            <input 
-              className={styles.input} 
-              type="text" 
-              name='seo_keywords' 
-              value={seo_keywords} 
-              onChange={event => setSeoKeys(event.target.value)} 
+            <input
+              className={styles.input}
+              type="text"
+              name='seo_keywords'
+              value={seo_keywords}
+              onChange={event => setSeoKeys(event.target.value)}
             />
           </label>
 
@@ -193,32 +186,33 @@ export default function Post({ post }: PostProps) {
           <button className={styles.button} onClick={formHandle}> Enviar </button>
 
         </form>
-        
+
       </main>
     </>
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
 
-  const data = await getAllPosts()
-  const paths = data.posts.length > 0 ? data.posts.map(post => `/admin/posts/editar/${post.slug}`) : []
-  
-  return {
-    paths,
-    fallback: false
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+  const { ['nextauth.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
   }
-}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const {slug} = params
+  const {slug} = ctx.params
 
   const data = await getAllPosts()
   const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
   const post = posts.filter(post => post.slug == slug)[0]
-  
+
   return {
-    props: { posts, post },
-    revalidate: 60 * 60 * 12
+    props: { posts, post }
   }
 }

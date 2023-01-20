@@ -12,11 +12,10 @@ export class APIClient {
     const { 'nextauth.token': token } = parseCookies(ctx)
 
     this.api = axios.create({
-      baseURL: 'http://localhost:3333'
+      baseURL: process.env.API_URL || 'http://localhost:3333'
     })
 
     this.api.interceptors.request.use(config => {
-      console.log(config);
       return config;
     })
 
@@ -31,5 +30,17 @@ export class APIClient {
     }
 
     return this.instance;
+  }
+
+  public async getAsyncData<T>(url: string): Promise<T> {
+    try {
+      const result = await this.api.get(url)
+      const data = result.data;
+
+      return data
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

@@ -6,8 +6,11 @@ import SEO from '../components/Shared/SEO';
 import StoreContext from '../context/search/store'
 import styles from './home.module.scss';
 import PresentationImage from '../components/Home/PresentationImage';
+import { AuthContext } from '../context/auth/store';
 
 export default function Home() {
+
+  const ctx = useContext(AuthContext)
 
   const { state, setState } = useContext(StoreContext)
   const [error, setError] = useState(false)
@@ -29,18 +32,18 @@ export default function Home() {
     setTimeout(() => {
       setError(false)
     }, 500)
-    
+
   }, [error])
 
   /* TO DO */
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Como ser um desenvolvedor?"
         description="Conteúdos sobre programação, design e muito mais!"
         image="https://jhonatan-teixeira-rios-blog.herokuapp.com/logo.png"
-        excludeTitleSuffix 
+        excludeTitleSuffix
       />
 
       <main className={styles.main}>
@@ -56,14 +59,14 @@ export default function Home() {
               design e muito mais!
             </p>
 
-            <input 
+            <input
               className={`${styles.input} ${error ? styles.warning : ''}`}
               placeholder='Pesquise por titulo ou categoria'
-              type="text" 
+              type="text"
               onChange={handleKeyPress}
             />
 
-            <button 
+            <button
               className={styles.button}
               onClick={handleClick}
             >
