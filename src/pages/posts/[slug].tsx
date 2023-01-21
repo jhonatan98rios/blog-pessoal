@@ -15,6 +15,7 @@ import { IPostsProps, IPost } from '../../types'
 import styles from './styles.module.scss'
 import { adapter } from "../../services/adapter";
 import { getAllPosts } from "../../services/http/Admin/Posts/client";
+import { NavigationControl } from "../../components/Shared/NavigationControl";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
@@ -48,6 +49,9 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
         { isMobile &&
           <Categories categories={categories} />
         }
+
+        <NavigationControl previousPath="/posts/" />
+
         <section className={styles.container}>
           <h2 className="no-display"> Posts </h2>
 

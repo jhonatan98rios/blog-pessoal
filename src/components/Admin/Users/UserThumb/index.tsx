@@ -1,21 +1,29 @@
 import Link from 'next/link';
+import { UserModel } from '../../../../models/User';
 import styles from './style.module.scss';
 
-export default function UserThumb({ content }) {
+interface IUserThumb {
+  user: UserModel
+}
 
-    return (
-        <div className={styles.user}>
-            <img className={styles.icon} src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
+export default function UserThumb({ user }: IUserThumb) {
 
-            <div className={styles.title}>
-                <p> { content.user } </p>
-                <p className={content.permission}> Admin </p>
-            </div>
+  return (
+    <div className={styles.user}>
+      <img className={styles.icon} src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
 
-            <div className={styles.controls}>
-                <Link href={`/admin/users/editar`} className={styles.editButton}> Editar </Link>
-                <button className={styles.deleteButton}> Apagar </button>
-            </div>
-        </div>
-    )
+      <div className={styles.title}>
+        <p> {user.user} </p>
+        <p className={styles.permission}> {user.role} </p>
+      </div>
+
+      <div className={styles.controls}>
+        <Link
+          href={`/admin/users/editar/${user.user}`}
+          className={styles.editButton}
+        > Editar </Link>
+        <button className={styles.deleteButton}> Apagar </button>
+      </div>
+    </div>
+  )
 }

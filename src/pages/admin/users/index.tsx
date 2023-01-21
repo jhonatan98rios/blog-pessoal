@@ -1,22 +1,32 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
-import { useEffect, useState } from 'react';
 import UserThumb from '../../../components/Admin/Users/UserThumb';
+import { NavigationControl } from '../../../components/Shared/NavigationControl';
+import { UserModel } from '../../../models/User';
 import { getAllUsers } from '../../../services/http/Admin/Users/client';
 import styles from './style.module.scss';
 
-export default function AdminsUsers({ users }) {
+interface IAdminsUsers {
+  users: UserModel[]
+}
+
+export default function AdminsUsers({ users }: IAdminsUsers) {
 
   return (
-    <main className={styles.main}>
-      <h1> Admin Users </h1>
+    <main>
+      <NavigationControl previousPath="/admin/" />
 
-      <section className={styles.section}>
-        {users?.map((user, index) => {
-          return (
-            <UserThumb content={user} key={index} />
-          )
-        })}
+
+      <section className={styles.main}>
+        <h1> Admin Users </h1>
+
+        <section className={styles.section}>
+          {users?.map((user, index) => {
+            return (
+              <UserThumb user={user} key={index} />
+            )
+          })}
+        </section>
       </section>
     </ main>
   )

@@ -9,6 +9,7 @@ import { Recents } from '../../components/Post/Recents';
 import { PostProps } from '../../types'
 import { adapter } from '../../services/adapter';
 import { getAllPosts } from '../../services/http/Admin/Posts/client';
+import { NavigationControl } from '../../components/Shared/NavigationControl';
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
@@ -28,7 +29,10 @@ export default function Post({ post, posts }: PostProps) {
         hasADS={true}
       />
 
+      <NavigationControl previousPath="/posts/" />
+
       <main className={styles.container}>
+
         <article className={styles.post}>
           <img className={styles.image} src={post.banner.src} />
 

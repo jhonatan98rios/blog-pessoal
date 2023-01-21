@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState, useContext } from 'react'
+import { NavigationControl } from '../../components/Shared/NavigationControl';
 import { AuthContext } from '../../context/auth/store'
 import styles from './style.module.scss'
 
@@ -18,6 +19,8 @@ export default function Login({ }) {
 
   return (
     <main>
+
+      <NavigationControl previousPath="/" />
 
       {
         !ctx.isAuthenticated ?

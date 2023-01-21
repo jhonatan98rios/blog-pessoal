@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import PostThumb from '../../../components/Admin/Posts/PostThumb';
+import { NavigationControl } from '../../../components/Shared/NavigationControl';
 import { adapter } from '../../../services/adapter';
 import { getAllPosts } from '../../../services/http/Admin/Posts/client';
 import { getDeduplicatedCategories } from '../../../services/utils';
@@ -9,17 +10,20 @@ import styles from './style.module.scss';
 export default function AdminsPosts({ posts }) {
 
   return (
-    <main className={styles.main}>
-      <h1> Admin Posts </h1>
+    <main>
+      <NavigationControl previousPath="/admin/" />
 
-      <section>
-        {posts?.map((post, index) => {
-          return (
-            <PostThumb content={post} key={index} />
-          )
-        })}
+      <section className={styles.main}>
+        <h1> Admin Posts </h1>
+
+        <section>
+          {posts?.map((post, index) => {
+            return (
+              <PostThumb content={post} key={index} />
+            )
+          })}
+        </section>
       </section>
-
     </ main>
   )
 }

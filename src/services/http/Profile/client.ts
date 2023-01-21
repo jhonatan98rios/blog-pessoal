@@ -48,7 +48,7 @@ export async function checkIn(token: string) {
       return res.data
     })
     .catch(err => {
-      console.log(err.response.data.message)
+      console.log(err.response?.data.message)
     })
 }
 

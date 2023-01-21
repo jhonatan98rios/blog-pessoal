@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
+import { NavigationControl } from '../../../components/Shared/NavigationControl'
 import { AuthContext } from '../../../context/auth/store'
 import { updateUserPassword } from '../../../services/http/Profile/client'
 import styles from './style.module.scss'
@@ -20,13 +21,15 @@ export default function AdminUsersEdit() {
 
     if (result) {
       alert("Usuário editado com sucesso")
-      router.push('/perfil/login')
-      //logout()
+      router.push('/login')
+      logout()
     }
   }
 
   return user?.username ? (
     <main>
+      <NavigationControl previousPath="/login/" />
+
       <section className={styles.main}>
         <h1 className={styles.title}>
           Editar senha do usuário:
@@ -56,6 +59,8 @@ export default function AdminUsersEdit() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const { ['nextauth.token']: token } = parseCookies(ctx)
+
+  console.log(token)
 
   if (!token) {
     return {

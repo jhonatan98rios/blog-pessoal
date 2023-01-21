@@ -14,6 +14,7 @@ import { IPostsProps, IPost } from '../../types'
 
 import styles from './styles.module.scss'
 import { getAllPosts } from '../../services/http/Admin/Posts/client';
+import { NavigationControl } from '../../components/Shared/NavigationControl';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 
@@ -37,11 +38,15 @@ export default function Posts({ posts, categories }: IPostsProps) {
         hasADS={true}
       />
 
+
       <main>
 
-      { isMobile &&
-        <Categories categories={categories} />
-      }
+        { isMobile &&
+          <Categories categories={categories} />
+        }
+
+        <NavigationControl previousPath="/" />
+
         <section className={styles.container}>
           <h2 className="no-display"> Posts </h2>
 
@@ -72,7 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
 
-  if (!data && data.posts.length > 0) {
+  if (!data || data.posts.length == 0) {
     return {
       props: {
         posts: [],

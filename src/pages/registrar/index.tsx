@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
+import { NavigationControl } from '../../components/Shared/NavigationControl'
 import { AuthContext } from '../../context/auth/store'
 import { register } from '../../services/http/Profile/client'
 import styles from './style.module.scss'
@@ -36,6 +37,8 @@ export default function Register({ }) {
 
   return (
     <main>
+      <NavigationControl previousPath="/" />
+
       <section className={styles.main}>
         <h1 className={styles.title}> Registrar </h1>
 
