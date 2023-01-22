@@ -10,11 +10,11 @@ import styles from './styles.module.scss';
 export function Header() {
 
   const ctx = useContext(AuthContext)
+  const { state, setState } = useContext(StoreContext)
 
   const router = useRouter()
   const {isMobile} = useDeviceDetect()
   const [checked, setChecked] = useState(false);
-  const { state, setState } = useContext(StoreContext)
 
   function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
     setState({ ...state, search: e.target.value })

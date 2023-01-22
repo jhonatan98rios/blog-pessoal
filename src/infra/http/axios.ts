@@ -25,6 +25,10 @@ export class APIClient {
     }
   }
 
+  get authorization() {
+    return this.api.defaults.headers['Authorization']
+  }
+
   static getInstance(ctx?: any): APIClient {
     if (!this.instance) {
       this.instance = new this(ctx);
@@ -52,7 +56,18 @@ export class APIClient {
     this.api.defaults.headers['Authorization'] = null
   }
 
-  get authorization() {
-    return this.api.defaults.headers['Authorization']
+
+  public async fileUpload(url: string, file: string | Blob) {
+    const body = new FormData()
+    body.append('file', file)
+
+    try {
+      const result = await this.api.post(url, body)
+      const data = result.data
+      return data
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

@@ -38,9 +38,7 @@ export default function Posts({ posts, categories }: IPostsProps) {
         hasADS={true}
       />
 
-
       <main>
-
         { isMobile &&
           <Categories categories={categories} />
         }

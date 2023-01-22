@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import SEO from '../../../../components/Shared/SEO';
-import { fileUpload } from '../../../../services/http/fileUpload';
 import styles from './style.module.scss';
 import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies'
 import { createPost } from '../../../../services/http/Admin/Posts/client';
+import { APIClient } from '../../../../infra/http/axios';
+import { useRouter } from 'next/router';
+import { NavigationControl } from '../../../../components/Shared/NavigationControl';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -13,6 +15,8 @@ const Quilljs = dynamic(
 )
 
 export default function Create() {
+
+  const router = useRouter()
 
   const [title, setTitle] = useState('')
   const [subtitle, setSubtitle] = useState('')
@@ -26,8 +30,8 @@ export default function Create() {
   const [banner, setBanner] = useState<any>({})
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const image = await fileUpload(event.target.files[0])
-
+    const client = APIClient.getInstance()
+    const image = await client.fileUpload('/post/image/', event.target.files[0])
     setBanner(image)
   }
 
@@ -58,6 +62,8 @@ export default function Create() {
 
       alert('Post criado com sucesso')
 
+      router.push('/admin/posts')
+
     } else {
       console.log('Invalid props', errors)
     }
@@ -71,8 +77,10 @@ export default function Create() {
         image="https://jhonatan-teixeira-rios-blog.herokuapp.com/autor/avatar.png"
         excludeTitleSuffix
       />
+      <NavigationControl previousPath="/admin/posts" />
 
       <main className={styles.main}>
+
         <h1 className={styles.title}> Criação de um novo Post </h1>
         <form className={styles.form}>
 

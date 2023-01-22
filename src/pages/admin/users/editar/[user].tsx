@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
+import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { useState } from 'react'
 import { UserModel } from '../../../../models/User';
@@ -17,10 +18,10 @@ export default function Login({ user }: ILogin) {
   async function formHandle(e: any) {
     e.preventDefault()
     const res = await updateUserRole(user.user, role)
-    console.log(res)
 
     if(res) {
       alert(`Permissão do usuário ${user.user} alterada com sucesso`)
+      Router.push('/admin/users/')
     }
   }
 

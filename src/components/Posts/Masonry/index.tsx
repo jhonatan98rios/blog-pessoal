@@ -8,13 +8,13 @@ export function Masonry({ posts }: Partial<IPostsProps>) {
   return (
     <div className={styles.posts}>
 
-      { posts && 
+      { posts &&
         posts.map(post => (
-          <FlexiblePost 
-            key={post.slug} 
-            post={post} 
-            customStyle={{ 
-              ...post.style 
+          <FlexiblePost
+            key={post.slug}
+            post={post}
+            customStyle={{
+              ...post.style
             }}
           />
         ))

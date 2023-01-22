@@ -8,9 +8,9 @@ import SEO from '../../../../components/Shared/SEO';
 import styles from './styles.module.scss'
 import { PostProps } from '../../../../types'
 import { adapter } from '../../../../services/adapter';
-import { fileUpload } from '../../../../services/http/fileUpload';
 import { getAllPosts, updatePost } from '../../../../services/http/Admin/Posts/client';
 import { NavigationControl } from '../../../../components/Shared/NavigationControl';
+import { APIClient } from '../../../../infra/http/axios';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -31,7 +31,8 @@ export default function Post({ post }: PostProps) {
 
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const image = await fileUpload(event.target.files[0])
+    const client = APIClient.getInstance()
+    const image = await client.fileUpload('/post/image/', event.target.files[0])
     setBanner(image)
   }
 
