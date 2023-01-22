@@ -20,7 +20,8 @@ export class APIClient {
     })
 
     if (token) {
-      this.api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      //this.api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      this.setAuthorizationHeader(token)
     }
   }
 
@@ -36,11 +37,22 @@ export class APIClient {
     try {
       const result = await this.api.get(url)
       const data = result.data;
-
       return data
 
     } catch (error) {
       console.log(error);
     }
+  }
+
+  public setAuthorizationHeader(token: string) {
+    this.api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  public deleteAuthorizationHeader() {
+    this.api.defaults.headers['Authorization'] = null
+  }
+
+  get authorization() {
+    return this.api.defaults.headers['Authorization']
   }
 }

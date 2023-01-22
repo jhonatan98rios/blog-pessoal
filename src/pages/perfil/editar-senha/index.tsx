@@ -28,7 +28,7 @@ export default function AdminUsersEdit() {
 
   return user?.username ? (
     <main>
-      <NavigationControl previousPath="/login/" />
+      <NavigationControl previousPath="/perfil/" />
 
       <section className={styles.main}>
         <h1 className={styles.title}>
@@ -59,8 +59,6 @@ export default function AdminUsersEdit() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const { ['nextauth.token']: token } = parseCookies(ctx)
-
-  console.log(token)
 
   if (!token) {
     return {

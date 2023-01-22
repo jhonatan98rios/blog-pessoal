@@ -10,6 +10,7 @@ import { PostProps } from '../../../../types'
 import { adapter } from '../../../../services/adapter';
 import { fileUpload } from '../../../../services/http/fileUpload';
 import { getAllPosts, updatePost } from '../../../../services/http/Admin/Posts/client';
+import { NavigationControl } from '../../../../components/Shared/NavigationControl';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -59,7 +60,8 @@ export default function Post({ post }: PostProps) {
     if (!errors.length) {
       await updatePost(post.slug, body)
 
-      alert('Post criado com sucesso')
+      alert('Post editado com sucesso')
+      router.push('/admin/posts')
 
     } else {
       console.log('Invalid props', errors)
@@ -93,6 +95,8 @@ export default function Post({ post }: PostProps) {
         keywords={post.seo_keywords}
         hasADS={true}
       />
+
+      <NavigationControl previousPath="/admin/posts/" />
 
       <main className={styles.main}>
         <h1 className={styles.title}> Edição do post </h1>
@@ -208,11 +212,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const {slug} = ctx.params
 
-  const data = await getAllPosts()
+  const data = await getAllPosts(ctx)
   const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
   const post = posts.filter(post => post.slug == slug)[0]
 
   return {
-    props: { posts, post }
+    props: { post }
   }
 }

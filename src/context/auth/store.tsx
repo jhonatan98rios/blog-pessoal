@@ -8,6 +8,7 @@ import { login } from "../../services/http/Profile/client";
 
 type User = {
   username: string;
+  role: string
 }
 
 type SignInData = {
@@ -39,8 +40,11 @@ export function AuthContextProvider({ children }) {
       console.log('trying checkIn')
 
       validateToken(token, (res) => {
-        console.log('checkIn on user: ', res.user)
-        setUser({ username: res.user })
+        console.log('checkIn on user: ', res)
+        setUser({ username: res.user, role: res.role })
+
+        const client = APIClient.getInstance()
+        client.setAuthorizationHeader(res.token)
       })
     }
   }, [])
@@ -56,21 +60,23 @@ export function AuthContextProvider({ children }) {
       return
     }
 
+    destroyCookie(undefined, 'nextauth.token')
+
     setCookie(undefined, 'nextauth.token', res.token, {
-      maxAge: 60 * 60 * 24, // 1 hour
+      maxAge: 60 * 60 * 24, // 1 day
     })
 
     const client = APIClient.getInstance()
-
-    client.api.defaults.headers['Authorization'] = `Bearer ${res.token}`;
+    client.setAuthorizationHeader(res.token)
+    setUser({ username: res.user, role: res.role })
 
     console.log('login on user: ', res.user)
-
-    setUser({ username: res.user })
   }
 
   function logout() {
     console.log('LOGOUT')
+    const client = APIClient.getInstance()
+    client.deleteAuthorizationHeader()
     destroyCookie(undefined, 'nextauth.token')
     setUser(null)
   }

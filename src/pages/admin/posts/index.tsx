@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const data = await getAllPosts()
+  const data = await getAllPosts(ctx)
 
   if (!data || data.posts.length == 0) {
     return {

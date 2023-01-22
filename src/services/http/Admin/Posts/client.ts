@@ -6,9 +6,9 @@ type getAllPostsReturn = {
   posts: PostModel[]
 }
 
-export async function getAllPosts() {
-  const client = APIClient.getInstance()
-  return client.getAsyncData<getAllPostsReturn>('post')
+export async function getAllPosts(ctx) {
+  const client = APIClient.getInstance(ctx)
+  return await client.getAsyncData<getAllPostsReturn>('post')
 }
 
 

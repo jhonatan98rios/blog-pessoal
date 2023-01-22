@@ -23,7 +23,7 @@
       height: 4rem;
       padding: 0 1.5rem;
     }
-  
+
     .input {
       width: 100%;
       max-width: 365px;
@@ -35,7 +35,7 @@
       color: #AFAFB4;
       font-size: 1.2rem;
       text-shadow: 1px 1px 4px #000c;
-      
+
       &::placeholder {
         color: #c0c0c4;
       }
@@ -53,13 +53,13 @@
         margin-left: 20px;
       }
     }
-  
+
     nav {
       @media (min-width: 1025px) {
         margin-left: 5rem;
         height: 5rem;
       }
-  
+
       a {
         display: inline-block;
         position: relative;
@@ -70,20 +70,15 @@
         margin-top: 1.25rem;
         color: var(--gray300);
         transition: color 0.2s;
-  
+
         & + a {
           @media (min-width: 1025px) {
             margin-left: 2rem;
           }
         }
-  
+
         &:hover {
           color: var(--white);
-        }
-  
-        &.active {
-          color: var(--white);
-          font-weight: bold;
         }
       }
     }
@@ -104,7 +99,7 @@
   .icon_menu {
     display: none;
   }
-  
+
   label {
     position: absolute;
     display: block;
@@ -114,7 +109,7 @@
     zoom: .5;
   }
 
-  
+
   label div {
     position: relative;
     top: 0;
@@ -125,35 +120,35 @@
       0.3s ease right;
     border-radius: 2px;
   }
-  
+
   label div:first-child {
     transform-origin: 0;
   }
-  
+
   label div:last-child {
     margin-bottom: 0;
     transform-origin: 60px;
   }
-  
+
   label div:nth-child(2) {
     right: 0;
     width: 60px;
   }
-  
+
   .icon_menu:checked + label:before {
     background-color: #4caf50;
   }
-  
+
   .icon_menu:checked + label div:first-child {
     top: -6px;
     transform: rotateZ(45deg);
   }
-  
+
   .icon_menu:checked + label div:last-child {
     top: 6px;
     transform: rotateZ(45deg);
   }
-  
+
   .icon_menu:checked + label div:nth-child(2) {
     width: 85px;
     top: 0;
@@ -172,7 +167,7 @@
     flex-direction: column;
     height: calc(100vh - 5rem);
     width: 100%;
-    
+
     a {
       margin: 0 auto;
     }

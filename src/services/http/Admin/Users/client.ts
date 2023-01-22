@@ -6,9 +6,9 @@ import { UserModel } from '../../../../models/User'
 type GetAllUsersReturn = {
   users: UserModel[]
 }
-export async function getAllUsers() {
-  const client = APIClient.getInstance()
-  return client.getAsyncData<GetAllUsersReturn>('user')
+export async function getAllUsers(ctx) {
+  const client = APIClient.getInstance(ctx)
+  return await client.getAsyncData<GetAllUsersReturn>('user')
 }
 
 

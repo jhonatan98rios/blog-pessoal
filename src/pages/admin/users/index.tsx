@@ -16,7 +16,6 @@ export default function AdminsUsers({ users }: IAdminsUsers) {
     <main>
       <NavigationControl previousPath="/admin/" />
 
-
       <section className={styles.main}>
         <h1> Admin Users </h1>
 
@@ -45,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const data = await getAllUsers()
+  const data = await getAllUsers(ctx)
 
   if (!data || data.users.length == 0) {
     return {

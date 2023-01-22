@@ -1,10 +1,9 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth/store';
 import StoreContext from '../../../context/search/store';
-
 import useDeviceDetect from '../../../hooks/useDevice';
-import { ActiveLink } from '../ActiveLink';
 
 import styles from './styles.module.scss';
 
@@ -37,10 +36,10 @@ export function Header() {
         {
           isMobile && (
             <div className={styles.menuIcon}>
-              <input 
-                type="checkbox" 
-                id="icon_menu" 
-                className={styles.icon_menu} 
+              <input
+                type="checkbox"
+                id="icon_menu"
+                className={styles.icon_menu}
                 checked={checked}
                 onChange={handleCheckbox}
               />
@@ -49,16 +48,16 @@ export function Header() {
                 <div></div>
                 <div></div>
               </label>
-            </div> 
+            </div>
           )
         }
 
         {
-          router.asPath.includes('posts') && 
-          <input 
-            className={styles.input} 
-            type="text" 
-            placeholder="Pesquisar pelo post" 
+          router.asPath.includes('posts') &&
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Pesquisar pelo post"
             onChange={handleKeyPress}
             value={state.search}
           />
@@ -67,33 +66,33 @@ export function Header() {
         {
           (!isMobile || checked) && (
             <nav className={isMobile ? styles.navbar : null}>
-              <ActiveLink href="/" activeClassName={styles.active} onClick={handleCheckbox}>
+              <Link href="/" className={styles.active} onClick={handleCheckbox}>
                 Inicio
-              </ActiveLink>
+              </Link>
 
-              <ActiveLink href="/posts" activeClassName={styles.active} onClick={handleCheckbox}>
+              <Link href="/posts" className={styles.active} onClick={handleCheckbox}>
                 Posts
-              </ActiveLink>
+              </Link>
 
-              <ActiveLink href="/autor" activeClassName={styles.active} onClick={handleCheckbox}>
+              <Link href="/autor" className={styles.active} onClick={handleCheckbox}>
                 Sobre o autor
-              </ActiveLink>
-              
-              <a 
-                href="https://jhonatan-dev-rios.vercel.app/projetos" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              > 
-                Portfólio 
-              </a>
+              </Link>
+
+              <Link
+                href={ctx.isAuthenticated ? '/login/':'/perfil/'}
+                className={styles.active}
+                onClick={handleCheckbox}
+              >
+                { ctx.isAuthenticated ? 'Perfil' : 'Login' }
+              </Link>
 
               {
-                ctx.isAuthenticated &&
-                <ActiveLink href="/admin/posts/criar" activeClassName={styles.active} onClick={handleCheckbox}>
+                (ctx.isAuthenticated && ctx.user.role === 'admin') &&
+                <Link href="/admin/" className={styles.active} onClick={handleCheckbox}>
                   <div className={styles.create}>
-                    Criar Post
+                    Painel Admin
                   </div>
-                </ActiveLink>
+                </Link>
               }
             </nav>
           )
@@ -102,5 +101,3 @@ export function Header() {
     </header>
   )
 }
-
-/* TO DO */

@@ -21,19 +21,11 @@ export default function Register({ }) {
 
     if (result) {
       alert("Usuário registrado com sucesso")
-      router.push('/perfil/login')
+      router.push('/login')
     } else {
       alert("O usuário já existe")
     }
   }
-
-  useEffect(() => {
-    if (ctx.user) {
-      console.log(ctx.user)
-    } else {
-      console.log("Não autenticado")
-    }
-  }, [])
 
   return (
     <main>
