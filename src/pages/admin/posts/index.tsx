@@ -19,7 +19,7 @@ export default function AdminsPosts({ posts }) {
 
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(state.search, posts)
+      postsFilter(posts, state.search)
     )
 
   }, [state.search])

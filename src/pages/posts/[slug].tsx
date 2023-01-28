@@ -30,7 +30,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(state.search, posts)
+      postsFilter(posts, state.search)
     )
 
   }, [state.search, router.asPath])

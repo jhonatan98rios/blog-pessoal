@@ -24,6 +24,7 @@ export default function Create() {
   const [seo_title, setSeoTitle] = useState('')
   const [seo_description, setSeoDescription] = useState('')
   const [seo_keywords, setSeoKeys] = useState('')
+  const [language, setLanguage] = useState('BR')
 
   const [content, setContent] = useState('')
 
@@ -49,7 +50,8 @@ export default function Create() {
     }))
 
     const body = {
-      title, subtitle, seo_title, seo_description, seo_keywords, banner, content,
+      title, subtitle, banner, content, language,
+      seo_title, seo_description, seo_keywords,
       categories: categs
     }
 
@@ -162,6 +164,18 @@ export default function Create() {
               value={seo_keywords}
               onChange={event => setSeoKeys(event.target.value)}
             />
+          </label>
+
+          <label className={styles.label} htmlFor="language">
+            Idioma:
+            <select
+              className={styles.select}
+              name='language'
+              onChange={event => setLanguage(event.target.value)}
+            >
+              <option className={styles.option} value="BR"> BR </option>
+              <option className={styles.option} value="EN"> EN </option>
+            </select>
           </label>
 
           <label className={styles.content_label}>

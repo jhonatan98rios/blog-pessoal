@@ -14,8 +14,10 @@ export interface IPost {
   slug: string
   title: string
   banner: IImage
-  content: string,
+  content: string
   updateAt: string
+  language: string
+  status: string
   categories: Array<ICategory>
   style: CSSProperties
 }

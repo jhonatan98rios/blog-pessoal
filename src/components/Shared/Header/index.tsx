@@ -79,7 +79,7 @@ export function Header() {
               </Link>
 
               <Link
-                href={ctx.isAuthenticated ? '/login/':'/perfil/'}
+                href={ctx.isAuthenticated ? '/perfil/': '/login/'}
                 className={styles.active}
                 onClick={handleCheckbox}
               >

@@ -19,20 +19,19 @@ export function genLink(href, label=null, target="_blank") {
   return `<a href="${href}" target="${target}" ${rel}> ${label ? label : href} </a>`
 }
 
-export function postsFilter(search: string | string[], posts: Array<IPost>) {
-  if (!search) return posts
-    
-  const filteredPosts = posts.filter(post => {    
-    return [...post.categories, post.title]
-      .join(' ')
-      .toLowerCase()
-      .includes(
-        search
-          .toString()
-          .toLowerCase()
-      )
-  })
-  return filteredPosts
+export function postsFilter(posts: Array<IPost>, search: string | string[]) {
+  return !search
+    ? posts
+    : posts.filter(post => {
+      return [...post.categories, post.title]
+        .join(' ')
+        .toLowerCase()
+        .includes(
+          search
+            .toString()
+            .toLowerCase()
+        )
+    })
 }
 
 
@@ -48,7 +47,7 @@ export function calcTextSize(text: string) {
 }
 
 export function getExcerpt(html: string) {
-  
+
   const short = html.substring(0, 160) + '...'
   const excerpt = short.replace(/<\/?[^>]+(>|$)/g, "");
 
@@ -69,6 +68,6 @@ export function getDeduplicatedCategories(posts: PostModel[]) {
   const deduplicated = [...new Set(flatCategories)].map(categorie => {
     return JSON.parse(categorie)
   })
-  
-  return deduplicated 
+
+  return deduplicated
 }

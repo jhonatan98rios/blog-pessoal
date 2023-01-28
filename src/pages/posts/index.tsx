@@ -23,9 +23,12 @@ export default function Posts({ posts, categories }: IPostsProps) {
   const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
 
   useEffect(() => {
+
     setFilteredPosts(
-      postsFilter(state.search, posts)
+      postsFilter(posts, state.search)
     )
+
+    console.log('NBASODNASOD')
 
   }, [state.search])
 
