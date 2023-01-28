@@ -81,4 +81,6 @@ export interface ExpandedPost {
   excerpt: string,
   categories: Array<ICategory>
   style: unknown
+  language: string
+  status: string
 }

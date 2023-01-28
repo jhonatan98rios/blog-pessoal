@@ -20,7 +20,9 @@ export function adapter(post: PostModel): Partial<ExpandedPost> {
     categories: post.categories,
     style: sizes[
       calcTextSize(post.title)
-    ]
+    ],
+    status: post.status,
+    language: post.language,
   }
 }
 

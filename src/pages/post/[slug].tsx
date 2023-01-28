@@ -10,6 +10,8 @@ import { PostProps } from '../../types'
 import { adapter } from '../../services/adapter';
 import { getAllPosts } from '../../services/http/Admin/Posts/client';
 import { NavigationControl } from '../../components/Shared/NavigationControl';
+import { postsFilterByStatus } from '../../services/utils';
+import { PostModel } from '../../models/Post';
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
@@ -78,7 +80,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
 
   const data = await getAllPosts()
-  const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
+
+  if (!data || data.posts.length == 0) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
+  const filteredPosts = postsFilterByStatus(data.posts, 'prod')
+  const posts = filteredPosts.map(content => adapter(content as PostModel))
   const post = posts.filter(post => post.slug == slug)[0]
 
   return {

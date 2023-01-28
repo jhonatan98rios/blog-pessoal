@@ -7,7 +7,7 @@ import { Masonry } from "../../components/Posts/Masonry";
 import { Categories } from "../../components/Posts/Categories";
 
 import useDeviceDetect from "../../hooks/useDevice";
-import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "../../services/utils";
 import StoreContext from "../../context/search/store";
 
 import { IPostsProps, IPost } from '../../types'
@@ -16,6 +16,7 @@ import styles from './styles.module.scss'
 import { adapter } from "../../services/adapter";
 import { getAllPosts } from "../../services/http/Admin/Posts/client";
 import { NavigationControl } from "../../components/Shared/NavigationControl";
+import { PostModel } from "../../models/Post";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
@@ -30,7 +31,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(posts, state.search)
+      postsFilterBySearch(posts, state.search)
     )
 
   }, [state.search, router.asPath])
@@ -105,9 +106,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  const categories = getDeduplicatedCategories(data.posts)
-  const posts = (data.posts.length > 0 ? data.posts : [])
-    .map(content => adapter(content))
+  const filteredPosts = postsFilterByStatus(data.posts, 'prod')
+  const categories = getDeduplicatedCategories(filteredPosts)
+  const posts = (filteredPosts.length > 0 ? filteredPosts : [])
+    .map(content => adapter(content as PostModel))
     .filter(post => {
       let contains = false
       post.categories.forEach(cat => {

@@ -8,6 +8,7 @@ import { createPost } from '../../../../services/http/Admin/Posts/client';
 import { APIClient } from '../../../../infra/http/axios';
 import { useRouter } from 'next/router';
 import { NavigationControl } from '../../../../components/Shared/NavigationControl';
+import { Select } from '../../../../components/Shared/Select';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -27,7 +28,6 @@ export default function Create() {
   const [language, setLanguage] = useState('BR')
 
   const [content, setContent] = useState('')
-
   const [banner, setBanner] = useState<any>({})
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -166,17 +166,15 @@ export default function Create() {
             />
           </label>
 
-          <label className={styles.label} htmlFor="language">
-            Idioma:
-            <select
-              className={styles.select}
-              name='language'
-              onChange={event => setLanguage(event.target.value)}
-            >
-              <option className={styles.option} value="BR"> BR </option>
-              <option className={styles.option} value="EN"> EN </option>
-            </select>
-          </label>
+          <Select
+            label="Idioma"
+            value={language}
+            callback={setLanguage}
+            options={[
+              { value: 'BR', text: 'BR' },
+              { value: 'EN', text: 'EN' }
+            ]}
+          />
 
           <label className={styles.content_label}>
             Conteúdo

@@ -6,7 +6,7 @@ import { Categories } from "../../components/Posts/Categories";
 import { Masonry } from  '../../components/Posts/Masonry'
 import { adapter } from '../../services/adapter'
 
-import { getDeduplicatedCategories, postsFilter } from "../../services/utils";
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "../../services/utils";
 import useDeviceDetect from "../../hooks/useDevice";
 import StoreContext from '../../context/search/store'
 
@@ -15,6 +15,7 @@ import { IPostsProps, IPost } from '../../types'
 import styles from './styles.module.scss'
 import { getAllPosts } from '../../services/http/Admin/Posts/client';
 import { NavigationControl } from '../../components/Shared/NavigationControl';
+import { PostModel } from '../../models/Post';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 
@@ -23,13 +24,9 @@ export default function Posts({ posts, categories }: IPostsProps) {
   const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
 
   useEffect(() => {
-
     setFilteredPosts(
-      postsFilter(posts, state.search)
+      postsFilterBySearch(posts, state.search)
     )
-
-    console.log('NBASODNASOD')
-
   }, [state.search])
 
   return (
@@ -73,7 +70,6 @@ export default function Posts({ posts, categories }: IPostsProps) {
   );
 }
 
-
 export const getStaticProps: GetStaticProps = async () => {
 
   const data = await getAllPosts()
@@ -87,8 +83,9 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   }
 
-  const categories = getDeduplicatedCategories(data.posts)
-  const posts = data.posts.map(content => adapter(content))
+  const filteredPosts = postsFilterByStatus(data.posts, 'prod')
+  const categories = getDeduplicatedCategories(filteredPosts)
+  const posts = filteredPosts.map(content => adapter(content as PostModel))
 
   return {
     props: {

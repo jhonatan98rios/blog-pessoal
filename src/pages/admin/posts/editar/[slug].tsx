@@ -11,6 +11,7 @@ import { adapter } from '../../../../services/adapter';
 import { getAllPosts, updatePost } from '../../../../services/http/Admin/Posts/client';
 import { NavigationControl } from '../../../../components/Shared/NavigationControl';
 import { APIClient } from '../../../../infra/http/axios';
+import { Select } from '../../../../components/Shared/Select';
 
 const Quilljs = dynamic(
   () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -26,6 +27,9 @@ export default function Post({ post }: PostProps) {
   const [seo_title, setSeoTitle] = useState('')
   const [seo_description, setSeoDescription] = useState('')
   const [seo_keywords, setSeoKeys] = useState('')
+  const [language, setLanguage] = useState('BR')
+  const [status, setStatus] = useState('dev')
+
   const [content, setContent] = useState('')
   const [banner, setBanner] = useState<any>({})
 
@@ -50,7 +54,8 @@ export default function Post({ post }: PostProps) {
     }))
 
     const body = {
-      title, subtitle, seo_title, seo_description, seo_keywords, banner, content,
+      title, subtitle, banner, content, language, status,
+      seo_title, seo_description, seo_keywords,
       categories: categs
     }
 
@@ -83,6 +88,8 @@ export default function Post({ post }: PostProps) {
     setSeoKeys(post.seo_keywords)
     setContent(post.content)
     setBanner(post.banner)
+    setLanguage(post.language)
+    setStatus(post.status)
 
   }, [])
 
@@ -182,6 +189,26 @@ export default function Post({ post }: PostProps) {
               onChange={event => setSeoKeys(event.target.value)}
             />
           </label>
+
+          <Select
+            label="Idioma"
+            value={language}
+            callback={setLanguage}
+            options={[
+              { value: 'BR', text: 'BR' },
+              { value: 'EN', text: 'EN' }
+            ]}
+          />
+
+          <Select
+            label="Status"
+            value={status}
+            callback={setStatus}
+            options={[
+              { value: 'dev', text: 'DEV' },
+              { value: 'prod', text: 'PROD' }
+            ]}
+          />
 
           <label className={styles.content_label}>
             Conteúdo

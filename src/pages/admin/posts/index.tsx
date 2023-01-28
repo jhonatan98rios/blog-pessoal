@@ -7,7 +7,7 @@ import StoreContext from '../../../context/search/store'
 import PostThumb from '../../../components/Admin/Posts/PostThumb'
 import { getAllPosts } from '../../../services/http/Admin/Posts/client'
 import { NavigationControl } from '../../../components/Shared/NavigationControl'
-import { getDeduplicatedCategories, postsFilter } from '../../../services/utils'
+import { getDeduplicatedCategories, postsFilterBySearch } from '../../../services/utils'
 
 import { IPost } from '../../../types'
 import styles from './style.module.scss'
@@ -19,7 +19,7 @@ export default function AdminsPosts({ posts }) {
 
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(posts, state.search)
+      postsFilterBySearch(posts, state.search)
     )
 
   }, [state.search])
