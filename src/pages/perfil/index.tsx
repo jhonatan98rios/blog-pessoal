@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useState, useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { NavigationControl } from '../../components/Shared/NavigationControl';
 import { AuthContext } from '../../context/auth/store'
 import styles from './style.module.scss'
@@ -12,14 +12,20 @@ export default function Login({ }) {
   const ctx = useContext(AuthContext)
   const router = useRouter()
 
-  async function logout() {
+  function logout() {
     ctx.logout()
     router.push('/login')
   }
 
+  useEffect(() => {
+    if (!ctx.isAuthenticated) {
+      logout()
+    }
+  })
+
   return (
     <main>
-      <NavigationControl previousPath="/" />
+      <NavigationControl previousPath="/posts" />
 
       <section className={styles.main}>
         {

@@ -24,8 +24,7 @@ export default function Login({ }) {
 
   return (
     <main>
-
-      <NavigationControl previousPath="/" />
+      <NavigationControl previousPath="/posts" />
 
       <section className={styles.main}>
         <h1 className={styles.title}> Login </h1>

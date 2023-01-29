@@ -22,7 +22,7 @@ export default function Admins() {
 
   return (
     <main >
-      <NavigationControl previousPath="/" />
+      <NavigationControl previousPath="/posts" />
 
       <section className={styles.main}>
         <h1> Admin </h1>

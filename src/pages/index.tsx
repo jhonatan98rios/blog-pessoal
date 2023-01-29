@@ -7,6 +7,7 @@ import StoreContext from '../context/search/store'
 import styles from './home.module.scss';
 import PresentationImage from '../components/Home/PresentationImage';
 import { AuthContext } from '../context/auth/store';
+import { GetServerSideProps } from 'next';
 
 export default function Home() {
 
@@ -79,4 +80,14 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+  return {
+    redirect: {
+      destination: '/posts',
+      permanent: false,
+    }
+  }
 }

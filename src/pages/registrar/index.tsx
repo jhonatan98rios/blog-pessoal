@@ -29,7 +29,7 @@ export default function Register({ }) {
 
   return (
     <main>
-      <NavigationControl previousPath="/" />
+      <NavigationControl previousPath="/posts" />
 
       <section className={styles.main}>
         <h1 className={styles.title}> Registrar </h1>

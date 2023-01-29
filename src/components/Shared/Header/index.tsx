@@ -66,9 +66,9 @@ export function Header() {
         {
           (!isMobile || checked) && (
             <nav className={isMobile ? styles.navbar : null}>
-              <Link href="/" className={styles.active} onClick={handleCheckbox}>
+              {/* <Link href="/" className={styles.active} onClick={handleCheckbox}>
                 Inicio
-              </Link>
+              </Link> */}
 
               <Link href="/posts" className={styles.active} onClick={handleCheckbox}>
                 Posts

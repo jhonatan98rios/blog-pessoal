@@ -11,6 +11,7 @@ import { getDeduplicatedCategories, postsFilterBySearch } from '../../../service
 
 import { IPost } from '../../../types'
 import styles from './style.module.scss'
+import Link from 'next/link'
 
 export default function AdminsPosts({ posts }) {
 
@@ -29,7 +30,13 @@ export default function AdminsPosts({ posts }) {
       <NavigationControl previousPath="/admin/" />
 
       <section className={styles.main}>
-        <h1> Admin Posts </h1>
+        <div className={styles.header}>
+          <h1> Admin Posts </h1>
+
+          <Link href="/admin/posts/criar">
+            <button className={styles.add}> Criar </button>
+          </Link>
+        </div>
 
         <section>
           {filteredPosts?.map((post, index) => {

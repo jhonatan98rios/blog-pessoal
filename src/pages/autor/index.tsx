@@ -27,7 +27,7 @@ export default function Autor() {
         excludeTitleSuffix
       />
 
-      <NavigationControl previousPath="/" />
+      <NavigationControl previousPath="/posts" />
 
       <main className={styles.main}>
 
