@@ -96,12 +96,10 @@ export default function Post({ post }: PostProps) {
   return (
     <>
       <SEO
-        title={post.seo_title}
-        description={post.seo_description}
-        slug={post.slug}
-        image={post.banner.src}
-        keywords={post.seo_keywords}
-        hasADS={true}
+        title="Painel administrativo | Editar Post"
+        description="Acesso aos recursos administrativos"
+        keywords="posts, painel administrativo, editar post"
+        hasADS={false}
       />
 
       <NavigationControl previousPath="/admin/posts/" />

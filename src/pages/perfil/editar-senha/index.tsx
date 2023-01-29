@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 import { useState, useContext } from 'react'
 import { NavigationControl } from '../../../components/Shared/NavigationControl'
+import SEO from '../../../components/Shared/SEO'
 import { AuthContext } from '../../../context/auth/store'
 import { updateUserPassword } from '../../../services/http/Profile/client'
 import styles from './style.module.scss'
@@ -27,32 +28,40 @@ export default function AdminUsersEdit() {
   }
 
   return user?.username ? (
-    <main>
-      <NavigationControl previousPath="/perfil/" />
+    <>
+      <SEO
+        title="Perfil | Editar a senha"
+        description="Editar a senha do perfil"
+        keywords="perfil, editar a senha"
+        hasADS={false}
+      />
+      <main>
+        <NavigationControl previousPath="/perfil/" />
 
-      <section className={styles.main}>
-        <h1 className={styles.title}>
-          Editar senha do usuário:
-          <span> {user.username} </span>
-        </h1>
+        <section className={styles.main}>
+          <h1 className={styles.title}>
+            Editar senha do usuário:
+            <span> {user.username} </span>
+          </h1>
 
-        <form className={styles.form}>
-          <input
-            autoComplete="off"
-            className={styles.input}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name='password'
-          />
-          <button
-            className={styles.button}
-            onClick={formHandle}
-          >
-            Confirmar
-          </button>
-        </form>
-      </section>
-    </main>
+          <form className={styles.form}>
+            <input
+              autoComplete="off"
+              className={styles.input}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name='password'
+            />
+            <button
+              className={styles.button}
+              onClick={formHandle}
+            >
+              Confirmar
+            </button>
+          </form>
+        </section>
+      </main>
+    </>
   ) : <div />
 }
 

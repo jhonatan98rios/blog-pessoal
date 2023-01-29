@@ -74,11 +74,12 @@ export default function Create() {
   return (
     <>
       <SEO
-        title="Como ser um desenvolvedor?"
-        description="Conteúdos sobre programação, design e muito mais!"
-        image="https://jhonatan-teixeira-rios-blog.herokuapp.com/autor/avatar.png"
-        excludeTitleSuffix
+        title="Painel administrativo | Criar Post"
+        description="Acesso aos recursos administrativos"
+        keywords="posts, painel administrativo, criar post"
+        hasADS={false}
       />
+
       <NavigationControl previousPath="/admin/posts" />
 
       <main className={styles.main}>

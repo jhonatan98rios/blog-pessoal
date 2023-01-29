@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import UserThumb from '../../../components/Admin/Users/UserThumb';
 import { NavigationControl } from '../../../components/Shared/NavigationControl';
+import SEO from '../../../components/Shared/SEO';
 import { UserModel } from '../../../models/User';
 import { getAllUsers } from '../../../services/http/Admin/Users/client';
 import styles from './style.module.scss';
@@ -13,21 +14,30 @@ interface IAdminsUsers {
 export default function AdminsUsers({ users }: IAdminsUsers) {
 
   return (
-    <main>
-      <NavigationControl previousPath="/admin/" />
+    <>
+      <SEO
+        title="Painel administrativo | Usuários"
+        description="Acesso aos recursos administrativos"
+        keywords="usuários, painel administrativo"
+        hasADS={false}
+      />
 
-      <section className={styles.main}>
-        <h1> Admin Users </h1>
+      <main>
+        <NavigationControl previousPath="/admin/" />
 
-        <section className={styles.section}>
-          {users?.map((user, index) => {
-            return (
-              <UserThumb user={user} key={index} />
-            )
-          })}
+        <section className={styles.main}>
+          <h1> Admin Users </h1>
+
+          <section className={styles.section}>
+            {users?.map((user, index) => {
+              return (
+                <UserThumb user={user} key={index} />
+              )
+            })}
+          </section>
         </section>
-      </section>
-    </ main>
+      </ main>
+    </>
   )
 }
 

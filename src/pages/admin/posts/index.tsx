@@ -12,6 +12,7 @@ import { getDeduplicatedCategories, postsFilterBySearch } from '../../../service
 import { IPost } from '../../../types'
 import styles from './style.module.scss'
 import Link from 'next/link'
+import SEO from '../../../components/Shared/SEO'
 
 export default function AdminsPosts({ posts }) {
 
@@ -26,27 +27,36 @@ export default function AdminsPosts({ posts }) {
   }, [state.search])
 
   return (
-    <main>
-      <NavigationControl previousPath="/admin/" />
+    <>
+      <SEO
+        title="Painel administrativo | Posts"
+        description="Acesso aos recursos administrativos"
+        keywords="posts, painel administrativo"
+        hasADS={false}
+      />
 
-      <section className={styles.main}>
-        <div className={styles.header}>
-          <h1> Admin Posts </h1>
+      <main>
+        <NavigationControl previousPath="/admin/" />
 
-          <Link href="/admin/posts/criar">
-            <button className={styles.add}> Criar </button>
-          </Link>
-        </div>
+        <section className={styles.main}>
+          <div className={styles.header}>
+            <h1> Admin Posts </h1>
 
-        <section>
-          {filteredPosts?.map((post, index) => {
-            return (
-              <PostThumb content={post} key={index} />
-            )
-          })}
+            <Link href="/admin/posts/criar">
+              <button className={styles.add}> Criar </button>
+            </Link>
+          </div>
+
+          <section>
+            {filteredPosts?.map((post, index) => {
+              return (
+                <PostThumb content={post} key={index} />
+              )
+            })}
+          </section>
         </section>
-      </section>
-    </ main>
+      </ main>
+    </>
   )
 }
 

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { NavigationControl } from '../../components/Shared/NavigationControl'
+import SEO from '../../components/Shared/SEO'
 import { AuthContext } from '../../context/auth/store'
 import { register } from '../../services/http/Profile/client'
 import styles from './style.module.scss'
@@ -28,39 +29,48 @@ export default function Register({ }) {
   }
 
   return (
-    <main>
-      <NavigationControl previousPath="/posts" />
+    <>
+      <SEO
+        title="Registrar"
+        description="Crie sua conta"
+        keywords="registrar, criar sua conta"
+        hasADS={false}
+      />
 
-      <section className={styles.main}>
-        <h1 className={styles.title}> Registrar </h1>
+      <main>
+        <NavigationControl previousPath="/posts" />
 
-        <form className={styles.form}>
-          <input
-            className={styles.input}
-            value={username}
-            onChange={(e) => setUser(e.target.value)}
-            type="text"
-            name='user'
-          />
-          <input
-            className={styles.input}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name='password'
-          />
-          <button
-            className={styles.button}
-            onClick={formHandle}
-          >
-            Confirmar
-          </button>
-        </form>
+        <section className={styles.main}>
+          <h1 className={styles.title}> Registrar </h1>
 
-        <Link className={styles.register} href='/login'>
-          Já possui conta? <span> Entrar! </span>
-        </Link>
+          <form className={styles.form}>
+            <input
+              className={styles.input}
+              value={username}
+              onChange={(e) => setUser(e.target.value)}
+              type="text"
+              name='user'
+            />
+            <input
+              className={styles.input}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name='password'
+            />
+            <button
+              className={styles.button}
+              onClick={formHandle}
+            >
+              Confirmar
+            </button>
+          </form>
 
-      </section>
-    </main>
+          <Link className={styles.register} href='/login'>
+            Já possui conta? <span> Entrar! </span>
+          </Link>
+
+        </section>
+      </main>
+    </>
   )
 }

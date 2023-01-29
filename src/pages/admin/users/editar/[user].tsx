@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { useState } from 'react'
+import { NavigationControl } from '../../../../components/Shared/NavigationControl';
+import SEO from '../../../../components/Shared/SEO';
 import { UserModel } from '../../../../models/User';
 import { getOneUser, updateUserRole } from '../../../../services/http/Admin/Users/client';
 import styles from './style.module.scss'
@@ -13,7 +15,7 @@ interface ILogin {
 
 export default function Login({ user }: ILogin) {
 
-  const [role, setRole] = useState(undefined)
+  const [role, setRole] = useState(user.role)
 
   async function formHandle(e: any) {
     e.preventDefault()
@@ -26,29 +28,39 @@ export default function Login({ user }: ILogin) {
   }
 
   return (
-    <main>
-      <section className={styles.main}>
-        <h1 className={styles.title}> Usuário: {user.user} </h1>
+    <>
+      <SEO
+        title="Painel administrativo | Editar permissões de usuários"
+        description="Acesso aos recursos administrativos"
+        keywords="usuários, painel administrativo, edição, permissões"
+        hasADS={false}
+      />
 
-        <form className={styles.form}>
+      <main>
+        <NavigationControl previousPath="/admin/users" />
 
-          <label className={styles.label} htmlFor='roles'> Editar permissão:
-            <select className={styles.select} name="roles" value={role} onChange={e => setRole(e.target.value)}>
-              <option value="read">Leitor</option>
-              <option value="write">Escritor</option>
-              <option value="admin">Administrador</option>
-            </select>
-          </label>
+        <section className={styles.main}>
+          <h1 className={styles.title}> Usuário: {user.user} </h1>
 
-          <button
-            className={styles.button}
-            onClick={formHandle}
-          >
-            Confirmar
-          </button>
-        </form>
-      </section>
-    </main>
+          <form className={styles.form}>
+            <label className={styles.label} htmlFor='roles'> Editar permissão:
+              <select className={styles.select} name="roles" value={role} onChange={e => setRole(e.target.value)}>
+                <option value="read">Leitor</option>
+                <option value="write">Escritor</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </label>
+
+            <button
+              className={styles.button}
+              onClick={formHandle}
+            >
+              Confirmar
+            </button>
+          </form>
+        </section>
+      </main>
+    </>
   )
 }
 

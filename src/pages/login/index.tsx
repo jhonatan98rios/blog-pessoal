@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useState, useContext } from 'react'
 import { NavigationControl } from '../../components/Shared/NavigationControl';
+import SEO from '../../components/Shared/SEO';
 import { AuthContext } from '../../context/auth/store'
 import styles from './style.module.scss'
 
@@ -23,40 +24,49 @@ export default function Login({ }) {
   }
 
   return (
-    <main>
-      <NavigationControl previousPath="/posts" />
+    <>
+      <SEO
+        title="Login"
+        description="Acesse sua conta"
+        keywords="login, acesse sua conta"
+        hasADS={false}
+      />
 
-      <section className={styles.main}>
-        <h1 className={styles.title}> Login </h1>
+      <main>
+        <NavigationControl previousPath="/posts" />
 
-        <form className={styles.form}>
-          <input
-            className={styles.input}
-            value={username}
-            onChange={(e) => setUser(e.target.value)}
-            type="text"
-            name='user'
-          />
-          <input
-            className={styles.input}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name='password'
-          />
-          <button
-            className={styles.button}
-            onClick={formHandle}
-          >
-            Confirmar
-          </button>
-        </form>
+        <section className={styles.main}>
+          <h1 className={styles.title}> Login </h1>
 
-        <Link className={styles.register} href='/registrar'>
-          Não possui conta ainda? <span> Registrar! </span>
-        </Link>
+          <form className={styles.form}>
+            <input
+              className={styles.input}
+              value={username}
+              onChange={(e) => setUser(e.target.value)}
+              type="text"
+              name='user'
+            />
+            <input
+              className={styles.input}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name='password'
+            />
+            <button
+              className={styles.button}
+              onClick={formHandle}
+            >
+              Confirmar
+            </button>
+          </form>
 
-      </section>
-    </main>
+          <Link className={styles.register} href='/registrar'>
+            Não possui conta ainda? <span> Registrar! </span>
+          </Link>
+
+        </section>
+      </main>
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useContext, useEffect } from 'react'
 import { NavigationControl } from '../../components/Shared/NavigationControl';
+import SEO from '../../components/Shared/SEO';
 import { AuthContext } from '../../context/auth/store'
 import styles from './style.module.scss'
 
@@ -24,32 +25,40 @@ export default function Login({ }) {
   })
 
   return (
-    <main>
-      <NavigationControl previousPath="/posts" />
+    <>
+      <SEO
+        title="Perfil"
+        description="Informações detalhadas sobre o seu perfil"
+        keywords="perfil"
+        hasADS={false}
+      />
+      <main>
+        <NavigationControl previousPath="/posts" />
 
-      <section className={styles.main}>
-        {
-          ctx.isAuthenticated &&
-          <>
-            <p> Olá {ctx.user.username} </p>
+        <section className={styles.main}>
+          {
+            ctx.isAuthenticated &&
+            <>
+              <p> Olá {ctx.user.username} </p>
 
-            <Link
-              href="/perfil/editar-senha"
-              className={styles.button}
-            >
-              Editar a senha
-            </Link>
+              <Link
+                href="/perfil/editar-senha"
+                className={styles.button}
+              >
+                Editar a senha
+              </Link>
 
-            <button
-              className={styles.button}
-              onClick={() => logout()}
-            >
-              Logout
-            </button>
-          </>
-        }
-      </section>
-    </main>
+              <button
+                className={styles.button}
+                onClick={() => logout()}
+              >
+                Logout
+              </button>
+            </>
+          }
+        </section>
+      </main>
+    </>
   )
 }
 

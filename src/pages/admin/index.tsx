@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { parseCookies } from 'nookies';
 import { useEffect } from 'react';
 import { NavigationControl } from '../../components/Shared/NavigationControl';
+import SEO from '../../components/Shared/SEO';
 import styles from './style.module.scss';
 
 export default function Admins() {
@@ -21,25 +22,34 @@ export default function Admins() {
   ]
 
   return (
-    <main >
-      <NavigationControl previousPath="/posts" />
+    <>
+      <SEO
+        title="Painel administrativo"
+        description="Acesso os recursos administrativos"
+        keywords="usuários, posts, painel administrativo"
+        hasADS={false}
+      />
 
-      <section className={styles.main}>
-        <h1> Admin </h1>
-        <section className={styles.section}>
-          {
-            painels.map((painel, index) => (
-              <Link href={painel.link} key={index}>
-                <div className={styles.painel}>
-                  <img className={styles.icon} src={painel.icon} alt="" />
-                  <h2>{painel.title}</h2>
-                </div>
-              </Link>
-            ))
-          }
+      <main >
+        <NavigationControl previousPath="/posts" />
+
+        <section className={styles.main}>
+          <h1> Admin </h1>
+          <section className={styles.section}>
+            {
+              painels.map((painel, index) => (
+                <Link href={painel.link} key={index}>
+                  <div className={styles.painel}>
+                    <img className={styles.icon} src={painel.icon} alt="" />
+                    <h2>{painel.title}</h2>
+                  </div>
+                </Link>
+              ))
+            }
+          </section>
         </section>
-      </section>
-    </ main>
+      </ main>
+    </>
   )
 }
 
