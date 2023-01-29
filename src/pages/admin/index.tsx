@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import { useEffect } from 'react';
 import { NavigationControl } from '../../components/Shared/NavigationControl';
 import SEO from '../../components/Shared/SEO';
 import styles from './style.module.scss';

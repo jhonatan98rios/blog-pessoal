@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react'
 import { NavigationControl } from '../../components/Shared/NavigationControl';
 import SEO from '../../components/Shared/SEO';
 import { AuthContext } from '../../context/auth/store'
+import useDidMountEffect from '../../hooks/useDidMountEffect ';
 import styles from './style.module.scss'
 
 export default function Login({ }) {
@@ -18,11 +19,11 @@ export default function Login({ }) {
     router.push('/login')
   }
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (!ctx.isAuthenticated) {
       logout()
     }
-  })
+  }, [ctx.isAuthenticated])
 
   return (
     <>

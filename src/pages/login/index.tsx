@@ -61,7 +61,7 @@ export default function Login({ }) {
           </form>
 
           <Link className={styles.register} href='/registrar'>
-            Não possui conta ainda? <span> Registrar! </span>
+            Não possui conta ainda? <span> Registrar </span>
           </Link>
 
         </section>

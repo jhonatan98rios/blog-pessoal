@@ -42,14 +42,8 @@ export async function checkIn(token: string) {
   return client.api.post('/user/check-in', {
     token
   })
-    .then(res => {
-      console.log('check in')
-      console.log(res.data)
-      return res.data
-    })
-    .catch(err => {
-      console.log(err.response?.data.message)
-    })
+    .then(res => res.data)
+    .catch(err => console.log(err.response?.data.message))
 }
 
 export async function updateUserPassword(username: string, password: string) {

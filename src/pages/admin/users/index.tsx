@@ -1,8 +1,12 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
+import { useContext, useEffect, useState } from 'react';
 import UserThumb from '../../../components/Admin/Users/UserThumb';
 import { NavigationControl } from '../../../components/Shared/NavigationControl';
 import SEO from '../../../components/Shared/SEO';
+import { AuthContext } from '../../../context/auth/store';
+import useDidMountEffect from '../../../hooks/useDidMountEffect ';
 import { UserModel } from '../../../models/User';
 import { getAllUsers } from '../../../services/http/Admin/Users/client';
 import styles from './style.module.scss';
@@ -11,7 +15,22 @@ interface IAdminsUsers {
   users: UserModel[]
 }
 
-export default function AdminsUsers({ users }: IAdminsUsers) {
+export default function AdminsUsers({ users }) {
+
+  const ctx = useContext(AuthContext)
+  const router = useRouter()
+
+  function logout() {
+    ctx.logout()
+    router.push('/login')
+  }
+
+  useDidMountEffect(() => {
+    if (!ctx.isAuthenticated) {
+      logout()
+    }
+  }, [ctx])
+
 
   return (
     <>
@@ -57,6 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const data = await getAllUsers(ctx)
 
   if (!data || data.users.length == 0) {
+    console.log('Erro no getAllUsers')
     return {
       props: {
         users: []

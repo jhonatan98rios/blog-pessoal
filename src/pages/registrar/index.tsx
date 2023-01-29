@@ -66,7 +66,7 @@ export default function Register({ }) {
           </form>
 
           <Link className={styles.register} href='/login'>
-            Já possui conta? <span> Entrar! </span>
+            Já possui conta? <span> Entrar </span>
           </Link>
 
         </section>

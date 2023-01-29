@@ -78,9 +78,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const { user } = await getOneUser(ctx.params.user as string)
+  const data = await getOneUser(ctx.params.user as string)
+
+  if (!data || !data.user) {
+
+    console.log('Erro no getAllUsers')
+
+    return {
+      props: {
+        user: null
+      }
+    }
+  }
 
   return {
-    props: { user }
+    props: {
+      user: data.user
+    }
   }
 }

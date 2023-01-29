@@ -9,7 +9,7 @@ export class APIClient {
 
   constructor(ctx?: any) {
 
-    const { 'nextauth.token': token } = parseCookies(ctx)
+    console.log("New instance")
 
     this.api = axios.create({
       baseURL: process.env.API_URL || 'http://localhost:3333'
@@ -19,22 +19,22 @@ export class APIClient {
       return config;
     })
 
-    if (token) {
-      //this.api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    if (ctx) {
+      const { 'nextauth.token': token } = parseCookies(ctx)
       this.setAuthorizationHeader(token)
     }
   }
 
-  get authorization() {
-    return this.api.defaults.headers['Authorization']
-  }
-
   static getInstance(ctx?: any): APIClient {
-    if (!this.instance) {
+    if (!this.instance || ctx) {
       this.instance = new this(ctx);
     }
 
     return this.instance;
+  }
+
+  get authorization() {
+    return this.api.defaults.headers['Authorization']
   }
 
   public async getAsyncData<T>(url: string): Promise<T> {
@@ -52,8 +52,16 @@ export class APIClient {
     this.api.defaults.headers['Authorization'] = `Bearer ${token}`;
   }
 
-  public deleteAuthorizationHeader() {
+  public async deleteAuthorizationHeader() {
     this.api.defaults.headers['Authorization'] = null
+  }
+
+  public async deleteUserToken(user: string) {
+    try {
+      await this.api.delete(`/user/logout/${user}`)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 

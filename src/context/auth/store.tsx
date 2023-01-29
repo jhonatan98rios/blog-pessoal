@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 import { validateToken } from "../../services/auth/token";
 import { APIClient } from "../../infra/http/axios";
@@ -28,6 +28,7 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState<User | null>(null)
+  const router = useRouter()
 
   const isAuthenticated = !!user;
 
@@ -39,13 +40,19 @@ export function AuthContextProvider({ children }) {
     if (token) {
       console.log('trying checkIn')
 
-      validateToken(token, (res) => {
-        console.log('checkIn on user: ', res)
-        setUser({ username: res.user, role: res.role })
+      validateToken(token,
+        (res) => {
+          console.log('checkIn on user: ', res)
+          setUser({ username: res.user, role: res.role })
+          const client = APIClient.getInstance()
+          client.setAuthorizationHeader(res.token)
 
-        const client = APIClient.getInstance()
-        client.setAuthorizationHeader(res.token)
-      })
+        },
+        (err: string) => {
+          console.log(err)
+          logout()
+        }
+      )
     }
   }, [])
 
@@ -78,7 +85,13 @@ export function AuthContextProvider({ children }) {
     const client = APIClient.getInstance()
     client.deleteAuthorizationHeader()
     destroyCookie(undefined, 'nextauth.token')
+
+    if (user?.username) {
+      client.deleteUserToken(user.username)
+    }
+
     setUser(null)
+    router.push('/login/')
   }
 
   return (

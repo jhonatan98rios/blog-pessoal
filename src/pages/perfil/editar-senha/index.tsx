@@ -22,8 +22,8 @@ export default function AdminUsersEdit() {
 
     if (result) {
       alert("Usuário editado com sucesso")
-      router.push('/login')
       logout()
+      router.push('/login')
     }
   }
 
