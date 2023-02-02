@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useContext, useState } from 'react';
-import { AuthContext } from '../../../context/auth/store';
-import StoreContext from '../../../context/search/store';
-import useDeviceDetect from '../../../hooks/useDevice';
+import { AuthContext } from 'context/auth/store';
+import StoreContext from 'context/search/store';
+import useDeviceDetect from 'hooks/useDevice';
 
 import styles from './styles.module.scss';
 

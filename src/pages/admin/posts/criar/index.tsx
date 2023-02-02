@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import SEO from '../../../../components/Shared/SEO';
+import React, { useState } from 'react';
+import { SEO, NavigationControl, Select } from 'components/Shared';
 import styles from './style.module.scss';
 import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies'
-import { createPost } from '../../../../services/http/Admin/Posts/client';
-import { APIClient } from '../../../../infra/http/axios';
+import { createPost } from 'services/http/Admin/Posts/client';
+import { APIClient } from 'infra/http/axios';
 import { useRouter } from 'next/router';
-import { NavigationControl } from '../../../../components/Shared/NavigationControl';
-import { Select } from '../../../../components/Shared/Select';
 
 const Quilljs = dynamic(
-  () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
+  () => import('components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
   { ssr: false }
 )
 

@@ -1,5 +1,5 @@
-import { APIClient } from "../../../../infra/http/axios";
-import { PostModel } from '../../../../models/Post'
+import { APIClient } from "infra/http/axios";
+import { PostModel } from 'models/Post'
 
 
 type getAllPostsReturn = {

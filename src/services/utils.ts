@@ -1,6 +1,6 @@
-import { CategoryModel } from '../models/Category';
-import { PostModel } from '../models/Post';
-import { IPost } from '../types'
+import { CategoryModel } from 'models/Category';
+import { PostModel } from 'models/Post';
+import { IPost } from 'types'
 
 export function getCategory() {
   return window.location.hash.substr(1);

@@ -1,20 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GetStaticProps } from "next";
 
-import SEO from "../../components/Shared/SEO";
-import { Categories } from "../../components/Posts/Categories";
-import { Masonry } from  '../../components/Posts/Masonry'
-import { adapter } from '../../services/adapter'
+import { SEO } from "components/Shared";
+import { Categories } from "components/Posts/Categories";
+import { Masonry } from  'components/Posts/Masonry'
+import { adapter } from 'services/adapter'
 
-import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "../../services/utils";
-import useDeviceDetect from "../../hooks/useDevice";
-import StoreContext from '../../context/search/store'
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
+import useDeviceDetect from "hooks/useDevice";
+import StoreContext from 'context/search/store'
 
-import { IPostsProps, IPost } from '../../types'
+import { getAllPosts } from 'services/http/Admin/Posts/client';
+import { PostModel } from 'models/Post';
 
+import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
-import { getAllPosts } from '../../services/http/Admin/Posts/client';
-import { PostModel } from '../../models/Post';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 

@@ -1,12 +1,13 @@
+import { useContext } from 'react'
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useContext, useEffect } from 'react'
-import { NavigationControl } from '../../components/Shared/NavigationControl';
-import SEO from '../../components/Shared/SEO';
-import { AuthContext } from '../../context/auth/store'
-import useDidMountEffect from '../../hooks/useDidMountEffect ';
+
+import { SEO, NavigationControl } from 'components/Shared';
+import { AuthContext } from 'context/auth/store'
+import useDidMountEffect from 'hooks/useDidMountEffect ';
+
 import styles from './style.module.scss'
 
 export default function Login({ }) {

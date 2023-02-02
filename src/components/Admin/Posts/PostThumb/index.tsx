@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { IPost } from '../../../../types';
+import { IPost } from 'types';
 import styles from './style.module.scss';
 
 interface IPostThumb {

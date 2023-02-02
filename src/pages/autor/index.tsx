@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { NavigationControl } from '../../components/Shared/NavigationControl';
-import SEO from '../../components/Shared/SEO';
+import { SEO, NavigationControl } from 'components/Shared';
 import styles from './style.module.scss';
 
-
 export default function Autor() {
-
 
   useEffect(() => {
     let root = document.querySelector<HTMLElement>(':root');
@@ -15,8 +12,6 @@ export default function Autor() {
       root.style.setProperty('--overflow', 'auto');
     }
   }, [])
-
-  /* TO DO */
 
   return (
     <>
@@ -57,5 +52,3 @@ export default function Autor() {
     </>
   );
 }
-
-/* TO DO */

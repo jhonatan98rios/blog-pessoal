@@ -8,9 +8,6 @@ export class APIClient {
   private static instance: APIClient;
 
   constructor(ctx?: any) {
-
-    console.log("New instance")
-
     this.api = axios.create({
       baseURL: process.env.API_URL || 'http://localhost:3333'
     })
@@ -44,7 +41,7 @@ export class APIClient {
       return data
 
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
     }
   }
 

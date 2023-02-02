@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuill } from 'react-quilljs';
 import styles from './style.module.scss';
 import 'quill/dist/quill.snow.css';
-import { APIClient } from '../../../../infra/http/axios';
+import { APIClient } from 'infra/http/axios';
 
 interface IQuilljs {
   setContent: React.Dispatch<React.SetStateAction<string>>

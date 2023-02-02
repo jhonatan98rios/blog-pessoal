@@ -1,4 +1,4 @@
-import { baseImage, genImage } from '../services/utils'
+import { baseImage, genImage } from 'services/utils'
 
 export const post = {
   slug: 'desenvolvimento-de-software-como-conseguir-o-primeiro-emprego',
@@ -10,7 +10,7 @@ export const post = {
   )
   ,
   content: `
-    
+
   `,
   updateAt: '24/04/2022',
 }

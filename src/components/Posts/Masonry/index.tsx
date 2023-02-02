@@ -1,8 +1,8 @@
 import styles from './styles.module.scss';
 
-import { FlexiblePost } from "../../../components/Posts/FlexiblePost";
+import { FlexiblePost } from "components/Posts/FlexiblePost";
 
-import { IPostsProps } from '../../../types'
+import { IPostsProps } from 'types'
 
 export function Masonry({ posts }: Partial<IPostsProps>) {
   return (

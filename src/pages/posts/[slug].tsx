@@ -2,21 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 
-import SEO from "../../components/Shared/SEO";
-import { Masonry } from "../../components/Posts/Masonry";
-import { Categories } from "../../components/Posts/Categories";
+import useDeviceDetect from "hooks/useDevice";
+import StoreContext from "context/search/store";
 
-import useDeviceDetect from "../../hooks/useDevice";
-import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "../../services/utils";
-import StoreContext from "../../context/search/store";
+import { SEO, NavigationControl } from "components/Shared";
+import { Masonry } from "components/Posts/Masonry";
+import { Categories } from "components/Posts/Categories";
 
-import { IPostsProps, IPost } from '../../types'
+import { adapter } from "services/adapter";
+import { getAllPosts } from "services/http/Admin/Posts/client";
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
+import { PostModel } from "models/Post";
 
+import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
-import { adapter } from "../../services/adapter";
-import { getAllPosts } from "../../services/http/Admin/Posts/client";
-import { NavigationControl } from "../../components/Shared/NavigationControl";
-import { PostModel } from "../../models/Post";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 

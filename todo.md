@@ -1,14 +1,16 @@
 # TODO
-- [ ] Deslogar usuário assim que tiver suas permissões removidas
+- [x] Deslogar usuário assim que tiver suas permissões removidas
   - [x] Criar endpoint que receba o usuário a ter o token deletado
   - [x] Criar service que delete o token do usuário
-  - [ ] Enviar uma requisição ao endpoint enviando o usuário que deseja deletar
+  - [x] Enviar uma requisição ao endpoint enviando o usuário que deseja deletar
 
 - [ ] Permitir recuperação de senha
-  - [ ] Criar permissão no IAM da AWS
-  - [ ] Criar serviço AWS SES
-  - [ ] Implementar abstração de envio de e-mail
-  - [ ] Implementar envio de e-mail concreto
+  - [ ] Configurar serviço AWS SES
+    - [ ] Criar permissão no IAM da AWS
+    - [ ] Criar serviço AWS SES
+  - [ ] Implementar envio de e-mail
+    - [ ] Implementar abstração de envio de e-mail
+    - [ ] Implementar envio de e-mail concreto
   - [ ] Implementar endpoint que receba o usuário
   - [ ] Implementar um serviço que gere um link unico
     - [ ] Consultar a senha do usuário

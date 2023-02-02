@@ -2,9 +2,9 @@ import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router, { useRouter } from 'next/router'
 
-import { validateToken } from "../../services/auth/token";
-import { APIClient } from "../../infra/http/axios";
-import { login } from "../../services/http/Profile/client";
+import { validateToken } from "services/auth/token";
+import { APIClient } from "infra/http/axios";
+import { login } from "services/http/Profile/client";
 
 type User = {
   username: string;

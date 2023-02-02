@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { baseImage } from '../../../services/utils';
+import { baseImage } from 'services/utils';
 import styles from './styles.module.scss';
 
 
@@ -39,8 +39,8 @@ export function Footer() {
           social.map((s, i) => (
             <li key={i}>
               <Link href={s.link} target="_blank" rel="noopener noreferrer">
-                <img 
-                  className={styles.image} 
+                <img
+                  className={styles.image}
                   src={s.src}
                   alt={s.alt}
                   title={s.title}

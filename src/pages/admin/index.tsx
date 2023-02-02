@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import { NavigationControl } from '../../components/Shared/NavigationControl';
-import SEO from '../../components/Shared/SEO';
+import { SEO, NavigationControl } from 'components/Shared';
 import styles from './style.module.scss';
 
 export default function Admins() {

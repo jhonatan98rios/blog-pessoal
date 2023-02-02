@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
-import StoreContext from '../../../context/search/store';
+import StoreContext from 'context/search/store';
 import styles from './styles.module.scss';
 
 
@@ -16,7 +16,7 @@ export function Categories({ categories }) {
       search: ''
     })
   }
-  
+
   return  (
     <section className={styles.container}>
       <h3 className={styles.header}>
@@ -24,9 +24,9 @@ export function Categories({ categories }) {
       </h3>
       <nav>
         <ul className={styles.categories}>
-          { categories.map((cat, index) => 
+          { categories.map((cat, index) =>
             <li key={index}>
-              <Link 
+              <Link
                 href={`/posts/${ cat.path }`}
                 className={styles.category}
                 onClick={() => handleClick(cat) }
@@ -34,7 +34,7 @@ export function Categories({ categories }) {
               >
                 <span className={styles.name}>{ cat.label }</span>
               </Link>
-            </li> 
+            </li>
           )}
         </ul>
     </nav>

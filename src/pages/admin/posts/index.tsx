@@ -1,18 +1,18 @@
+import Link from 'next/link'
 import { GetServerSideProps } from 'next'
 import { parseCookies } from 'nookies'
 import { useContext, useEffect, useState } from 'react'
 
-import { adapter } from '../../../services/adapter'
-import StoreContext from '../../../context/search/store'
-import PostThumb from '../../../components/Admin/Posts/PostThumb'
-import { getAllPosts } from '../../../services/http/Admin/Posts/client'
-import { NavigationControl } from '../../../components/Shared/NavigationControl'
-import { getDeduplicatedCategories, postsFilterBySearch } from '../../../services/utils'
+import StoreContext from 'context/search/store'
+import PostThumb from 'components/Admin/Posts/PostThumb'
+import { getAllPosts } from 'services/http/Admin/Posts/client'
+import { SEO, NavigationControl } from 'components/Shared'
 
-import { IPost } from '../../../types'
+import { getDeduplicatedCategories, postsFilterBySearch } from 'services/utils'
+import { adapter } from 'services/adapter'
+
+import { IPost } from 'types'
 import styles from './style.module.scss'
-import Link from 'next/link'
-import SEO from '../../../components/Shared/SEO'
 
 export default function AdminsPosts({ posts }) {
 

@@ -1,6 +1,6 @@
 //import axios from 'axios'
-import { APIClient } from "../../../../infra/http/axios";
-import { UserModel } from '../../../../models/User'
+import { APIClient } from "infra/http/axios";
+import { UserModel } from 'models/User'
 
 
 type GetAllUsersReturn = {

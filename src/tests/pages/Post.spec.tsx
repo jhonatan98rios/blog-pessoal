@@ -1,7 +1,7 @@
 import { mocked } from 'ts-jest/utils'
 import { render, screen } from '@testing-library/react'
-import Post, { getStaticProps } from '../../pages/posts/[slug]'
-import { getPrismicClient } from '../../services/prismic'
+import Post, { getStaticProps } from 'pages/posts/[slug]'
+import { getPrismicClient } from 'services/prismic'
 
 const post = {
   slug: 'test-new-post',
@@ -10,7 +10,7 @@ const post = {
   updateAt: 'December 25, 2021'
 }
 
-jest.mock('../../services/prismic')
+jest.mock('services/prismic')
 
 jest.mock('next/router', () => {
   return {
@@ -23,14 +23,14 @@ jest.mock('next/router', () => {
 })
 
 describe('Post page', () => {
-  
+
   it('renders correctly', () => {
     const { getByText } = render(
       <Post post={post} />
     )
 
     screen.logTestingPlaygroundURL()
-  
+
     // Verifoica se há um teexto Home sendo exibido na tela
     expect(getByText(post.title)).toBeInTheDocument()
   })

@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic';
 import { parseCookies } from 'nookies'
 
-import SEO from '../../../../components/Shared/SEO';
+import { SEO, NavigationControl, Select } from 'components/Shared';
+import { getAllPosts, updatePost } from 'services/http/Admin/Posts/client';
+import { adapter } from 'services/adapter';
+import { APIClient } from 'infra/http/axios';
+
 import styles from './styles.module.scss'
-import { PostProps } from '../../../../types'
-import { adapter } from '../../../../services/adapter';
-import { getAllPosts, updatePost } from '../../../../services/http/Admin/Posts/client';
-import { NavigationControl } from '../../../../components/Shared/NavigationControl';
-import { APIClient } from '../../../../infra/http/axios';
-import { Select } from '../../../../components/Shared/Select';
+import { PostProps } from 'types'
 
 const Quilljs = dynamic(
-  () => import('../../../../components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
+  () => import('components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
   { ssr: false }
 )
 

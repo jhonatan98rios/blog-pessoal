@@ -2,10 +2,11 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 import { useState, useContext } from 'react'
-import { NavigationControl } from '../../../components/Shared/NavigationControl'
-import SEO from '../../../components/Shared/SEO'
-import { AuthContext } from '../../../context/auth/store'
-import { updateUserPassword } from '../../../services/http/Profile/client'
+
+import { SEO, NavigationControl } from 'components/Shared'
+import { AuthContext } from 'context/auth/store'
+import { updateUserPassword } from 'services/http/Profile/client'
+
 import styles from './style.module.scss'
 
 export default function AdminUsersEdit() {

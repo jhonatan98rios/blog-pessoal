@@ -1,6 +1,5 @@
-import { Footer } from '../components/Shared/Footer';
-import { Header } from '../components/Shared/Header';
-import { GlobalContext } from '../context'
+import { Footer, Header } from 'components/Shared';
+import { GlobalContext } from 'context'
 
 import '../styles/globals.scss';
 

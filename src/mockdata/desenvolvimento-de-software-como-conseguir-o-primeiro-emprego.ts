@@ -1,4 +1,4 @@
-import { baseImage, genImage, genLink } from '../services/utils'
+import { baseImage, genImage, genLink } from 'services/utils'
 
 export const post_1 = {
   slug: 'desenvolvimento-de-software-como-conseguir-o-primeiro-emprego',
@@ -10,7 +10,7 @@ export const post_1 = {
   ),
   content: `
     <p>
-        Muitas pessoas desistem da área de programação após os primeiros meses de estudo, acreditando que estão distantes de seu objetivo ou mesmo que não conseguirão encontrar uma vaga ao qual seu perfil atenda os requisitos. A verdade é que a barreira de entrada pode parecer um pouco assustadora para os iniciantes, porém, o déficit de profissionais no mercado acaba forçando muitas empresas a contratarem profissionais mesmo que eles não atendam todos os requisitos. Saber avaliar quais requisitos são de fato necessários e quais devem ser priorizados também não é uma tarefa fácil para quem nunca participou de projetos profissionais e é aqui que vamos focar nossa atenção. Saber o que estudar e como estudar pode reduzir em alguns meses o tempo que você levará para conseguir seu primeiro emprego.<p> 
+        Muitas pessoas desistem da área de programação após os primeiros meses de estudo, acreditando que estão distantes de seu objetivo ou mesmo que não conseguirão encontrar uma vaga ao qual seu perfil atenda os requisitos. A verdade é que a barreira de entrada pode parecer um pouco assustadora para os iniciantes, porém, o déficit de profissionais no mercado acaba forçando muitas empresas a contratarem profissionais mesmo que eles não atendam todos os requisitos. Saber avaliar quais requisitos são de fato necessários e quais devem ser priorizados também não é uma tarefa fácil para quem nunca participou de projetos profissionais e é aqui que vamos focar nossa atenção. Saber o que estudar e como estudar pode reduzir em alguns meses o tempo que você levará para conseguir seu primeiro emprego.<p>
     <i>
         Obs: Essas dicas são baseadas na minha experiência e na de alguns colegas de profissão. Esse cenário pode variar e pode ser que existam outros planos de estudos que possam melhor se adequar ao seu perfil, então não assuma essas dicas como verdades absolutas e continue pesquisando sobre os assuntos tratados nesse artigo.
     </i>
@@ -45,9 +45,9 @@ export const post_1 = {
     <br>
     <h3> Data Science </h3>
     <p>
-        Chegando agora em Data Science, também podemos encontrar diversas opções para quem se interessa por esse mercado. As opções mais comuns de encontrarmos vagas são a de Analista de Dados e a de Engenheiro de Dados. O Analista de Dados é o profissional que utiliza de grandes quantidades de dados, programação e inteligência artificial para extrair insights, ou seja, é capaz de identificar problemas, soluções e melhorias analisando os dados coletados por seu aplicativo, loja virtual, redes sociais e campanhas de marketing. O Engenheiro de Dados é responsável por criar ferramentas de coleta, armazenamento, processamento e entrega desses dados. Ambos os profissionais que trabalham com dados precisam ter um bom conhecimento em Bancos de dados, serviços de Cloud (Google Cloud e AWS por exemplo), conhecimento sólido em linguagens de programação como Python, R, Java e Javascript. 
+        Chegando agora em Data Science, também podemos encontrar diversas opções para quem se interessa por esse mercado. As opções mais comuns de encontrarmos vagas são a de Analista de Dados e a de Engenheiro de Dados. O Analista de Dados é o profissional que utiliza de grandes quantidades de dados, programação e inteligência artificial para extrair insights, ou seja, é capaz de identificar problemas, soluções e melhorias analisando os dados coletados por seu aplicativo, loja virtual, redes sociais e campanhas de marketing. O Engenheiro de Dados é responsável por criar ferramentas de coleta, armazenamento, processamento e entrega desses dados. Ambos os profissionais que trabalham com dados precisam ter um bom conhecimento em Bancos de dados, serviços de Cloud (Google Cloud e AWS por exemplo), conhecimento sólido em linguagens de programação como Python, R, Java e Javascript.
         <br>
-        Todas essas áreas tem milhares de vagas disponíveis com vários níveis de senioridade e muitas com possibilidade de trabalho remoto. 
+        Todas essas áreas tem milhares de vagas disponíveis com vários níveis de senioridade e muitas com possibilidade de trabalho remoto.
     </p>
 
     ${genImage(baseImage(
@@ -55,7 +55,7 @@ export const post_1 = {
     'Imagem de um homem sentado em frente ao computador trabalhando',
     'Homem trabalhando'
   ))}
-    
+
     <br><br>
     <h3> O próximo passo </h3>
     <p>
@@ -78,7 +78,7 @@ export const post_1 = {
         Siga influenciadores e programadores que postem conteúdo e notícias sobre a área de tecnologia. Aqui estão alguns que vão te ajudar bastante:
         <br><br>
 
-        Filipe Deschamps: ${genLink('https://www.youtube.com/c/FilipeDeschamps')} <br> 
+        Filipe Deschamps: ${genLink('https://www.youtube.com/c/FilipeDeschamps')} <br>
         Igor Oliveira: ${genLink('https://www.youtube.com/c/Programadorbr')} <br>
         Bullas Attekita: ${genLink('https://www.youtube.com/c/AttekitaDev')} <br>
         Código Fonte TV: ${genLink('https://www.youtube.com/c/codigofontetv')} <br>
@@ -102,5 +102,5 @@ export const post_1 = {
   categories: [
     'programacao',
     'carreira',
-  ] 
+  ]
 }

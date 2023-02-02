@@ -1,5 +1,5 @@
 //import axios from 'axios'
-import { APIClient } from "../../../infra/http/axios";
+import { APIClient } from "infra/http/axios";
 
 
 /* Autentication and Authorization */
@@ -15,7 +15,7 @@ export async function register({ user, password }) {
       return res.data
     })
     .catch(err => {
-      console.log(err.response.data.message)
+      console.log(err.response?.data?.message)
     })
 }
 
@@ -31,7 +31,7 @@ export async function login({ user, password }) {
       return res.data
     })
     .catch(err => {
-      console.log(err.response.data.message)
+      console.log(err.response?.data?.message)
     })
 }
 
@@ -43,7 +43,7 @@ export async function checkIn(token: string) {
     token
   })
     .then(res => res.data)
-    .catch(err => console.log(err.response?.data.message))
+    .catch(err => console.log(err.response?.data?.message))
 }
 
 export async function updateUserPassword(username: string, password: string) {
@@ -58,6 +58,6 @@ export async function updateUserPassword(username: string, password: string) {
       return res.data
     })
     .catch(err => {
-      console.log(err.response.data.message)
+      console.log(err.response?.data?.message)
     })
 }

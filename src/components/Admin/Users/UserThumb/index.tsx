@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { UserModel } from '../../../../models/User';
+import { UserModel } from 'models/User';
 import styles from './style.module.scss';
 
 interface IUserThumb {

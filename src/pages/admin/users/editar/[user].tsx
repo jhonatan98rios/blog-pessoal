@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { useState } from 'react'
-import { NavigationControl } from '../../../../components/Shared/NavigationControl';
-import SEO from '../../../../components/Shared/SEO';
-import { UserModel } from '../../../../models/User';
-import { getOneUser, updateUserRole } from '../../../../services/http/Admin/Users/client';
+
+import { SEO, NavigationControl } from 'components/Shared';
+import { UserModel } from 'models/User';
+import { getOneUser, updateUserRole } from 'services/http/Admin/Users/client';
+
 import styles from './style.module.scss'
 
 interface ILogin {

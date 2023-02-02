@@ -1,15 +1,12 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
-import { NavigationControl } from '../../components/Shared/NavigationControl'
-import SEO from '../../components/Shared/SEO'
-import { AuthContext } from '../../context/auth/store'
-import { register } from '../../services/http/Profile/client'
+import { useState } from 'react'
+
+import { SEO, NavigationControl } from 'components/Shared'
+import { register } from 'services/http/Profile/client'
 import styles from './style.module.scss'
 
 export default function Register({ }) {
-
-  const ctx = useContext(AuthContext)
 
   const router = useRouter()
   const [ username, setUser ] = useState<string>('')
@@ -24,7 +21,7 @@ export default function Register({ }) {
       alert("Usuário registrado com sucesso")
       router.push('/login')
     } else {
-      alert("O usuário já existe")
+      alert("Erro ao se conectar. Tente novamente em alguns instantes")
     }
   }
 

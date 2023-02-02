@@ -1,17 +1,17 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
-import SEO from '../../components/Shared/SEO';
-import styles from './styles.module.scss'
-
 import React from 'react';
-import { Recents } from '../../components/Post/Recents';
 
-import { PostProps } from '../../types'
-import { adapter } from '../../services/adapter';
-import { getAllPosts } from '../../services/http/Admin/Posts/client';
-import { NavigationControl } from '../../components/Shared/NavigationControl';
-import { postsFilterByStatus } from '../../services/utils';
-import { PostModel } from '../../models/Post';
+import { adapter } from 'services/adapter';
+import { getAllPosts } from 'services/http/Admin/Posts/client';
+import { postsFilterByStatus } from 'services/utils';
+import { PostModel } from 'models/Post';
+
+import { Recents } from 'components/Post/Recents';
+import { SEO, NavigationControl } from 'components/Shared';
+
+import { PostProps } from 'types'
+import styles from './styles.module.scss'
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()

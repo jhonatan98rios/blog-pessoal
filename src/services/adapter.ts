@@ -1,7 +1,7 @@
-import { ExpandedPost } from "../types";
+import { ExpandedPost } from "types";
 import { sizes } from "./constants";
 import { calcTextSize, getExcerpt } from "./utils";
-import { PostModel } from "../models/Post";
+import { PostModel } from "models/Post";
 
 
 export function adapter(post: PostModel): Partial<ExpandedPost> {

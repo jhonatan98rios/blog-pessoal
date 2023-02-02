@@ -1,4 +1,4 @@
-import { baseImage, genImage } from '../services/utils'
+import { baseImage, genImage } from 'services/utils'
 
 export const post_2 = {
   slug: 'introducao-ao-desenvolvimento-de-software-computadores-softwares-e-linguagens-de-programacao',
@@ -79,5 +79,5 @@ export const post_2 = {
   categories: [
     'programacao',
     'software',
-  ] 
+  ]
 }

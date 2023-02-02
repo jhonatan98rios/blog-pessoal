@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import styles from './styles.module.scss';
 
-import { PostCardProps } from '../../../types'
+import { PostCardProps } from 'types'
 
 export function FlexiblePost({ post, customStyle }: PostCardProps) {
 
   return (
-    <Link 
-      href={`/post/${post.slug}`} 
-      className={styles.card} 
+    <Link
+      href={`/post/${post.slug}`}
+      className={styles.card}
       style={{
         ...customStyle,
         backgroundImage: `url(${post.banner.src})`
@@ -26,7 +26,7 @@ export function FlexiblePost({ post, customStyle }: PostCardProps) {
                 { cat.label }
               </span>
             ))
-          }            
+          }
         </div>
       </article>
     </Link>

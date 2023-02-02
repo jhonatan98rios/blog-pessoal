@@ -1,17 +1,14 @@
+import { GetServerSideProps } from 'next';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
-import SEO from '../components/Shared/SEO';
+import StoreContext from 'context/search/store'
 
-import StoreContext from '../context/search/store'
+import { SEO } from 'components/Shared';
+import PresentationImage from 'components/Home/PresentationImage';
 import styles from './home.module.scss';
-import PresentationImage from '../components/Home/PresentationImage';
-import { AuthContext } from '../context/auth/store';
-import { GetServerSideProps } from 'next';
 
 export default function Home() {
-
-  const ctx = useContext(AuthContext)
 
   const { state, setState } = useContext(StoreContext)
   const [error, setError] = useState(false)

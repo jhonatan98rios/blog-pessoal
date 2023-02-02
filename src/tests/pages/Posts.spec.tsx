@@ -1,8 +1,8 @@
 import { mocked } from 'ts-jest/utils'
 import { render, screen } from '@testing-library/react'
-import Posts, { getStaticProps } from '../../pages/posts'
+import Posts, { getStaticProps } from 'pages/posts'
 
-import { getPrismicClient } from '../../services/prismic'
+import { getPrismicClient } from 'services/prismic'
 
 const posts = [
   {
@@ -13,18 +13,18 @@ const posts = [
   }
 ]
 
-jest.mock('../../services/prismic')
+jest.mock('services/prismic')
 
 
 describe('Posts page', () => {
-  
+
   it('renders correctly', () => {
     const { getByText, getByAltText } = render(
       <Posts posts={posts} />
     )
 
     screen.logTestingPlaygroundURL()
-  
+
     // Verifoica se há um teexto Home sendo exibido na tela
     expect(getByText(posts[0].title)).toBeInTheDocument()
   })
