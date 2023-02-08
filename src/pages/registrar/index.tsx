@@ -10,12 +10,13 @@ export default function Register({ }) {
 
   const router = useRouter()
   const [ username, setUser ] = useState<string>('')
+  const [ mail, setMail ] = useState<string>('')
   const [ password, setPassword ] = useState<string>('')
 
   async function formHandle(e: any) {
     e.preventDefault()
 
-    const result = await register({ user: username, password })
+    const result = await register({ user: username, mail, password })
 
     if (result) {
       alert("Usuário registrado com sucesso")
@@ -42,17 +43,28 @@ export default function Register({ }) {
 
           <form className={styles.form}>
             <input
-              className={styles.input}
-              value={username}
-              onChange={(e) => setUser(e.target.value)}
               type="text"
               name='user'
+              value={username}
+              className={styles.input}
+              placeholder='insira seu usuário aqui'
+              onChange={(e) => setUser(e.target.value)}
             />
             <input
+              type="mail"
+              name='user'
+              value={mail}
               className={styles.input}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder='insira seu e-mail aqui'
+              onChange={(e) => setMail(e.target.value)}
+            />
+            <input
               type="password"
               name='password'
+              value={password}
+              className={styles.input}
+              placeholder='insira sua senha aqui'
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               className={styles.button}

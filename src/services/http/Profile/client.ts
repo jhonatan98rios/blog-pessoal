@@ -3,12 +3,12 @@ import { APIClient } from "infra/http/axios";
 
 
 /* Autentication and Authorization */
-export async function register({ user, password }) {
+export async function register({ user, mail, password }) {
 
   const client = APIClient.getInstance()
 
   return client.api.post('/user/', {
-    user, password
+    user, mail, password
   })
     .then(res => {
       console.log(res.data)
@@ -41,6 +41,28 @@ export async function checkIn(token: string) {
 
   return client.api.post('/user/check-in', {
     token
+  })
+    .then(res => res.data)
+    .catch(err => console.log(err.response?.data?.message))
+}
+
+export async function forgotPassword(mail: string) {
+
+  const client = APIClient.getInstance()
+
+  return client.api.post('/user/forgot-password', {
+    mail
+  })
+    .then(res => res.data)
+    .catch(err => console.log(err.response?.data?.message))
+}
+
+export async function resetPassword(mail: string, token: string, password: string, passwordConfirmation: string) {
+
+  const client = APIClient.getInstance()
+
+  return client.api.post('/user/reset-password', {
+    mail, token, password, passwordConfirmation
   })
     .then(res => res.data)
     .catch(err => console.log(err.response?.data?.message))
