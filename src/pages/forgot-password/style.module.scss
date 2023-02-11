@@ -5,6 +5,10 @@
   justify-content: center;
   height: calc(100vh - 5rem);
 
+  @media(max-width: 768px) {
+    height: calc(80vh - 8rem);
+  }
+
   .title {
     margin-bottom: 8px;
   }

@@ -22,7 +22,6 @@ export default function UserThumb({ user }: IUserThumb) {
           href={`/admin/users/editar/${user.user}`}
           className={styles.editButton}
         > Editar </Link>
-        <button className={styles.deleteButton}> Apagar </button>
       </div>
     </div>
   )

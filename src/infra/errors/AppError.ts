@@ -13,7 +13,5 @@ export class AppError implements IAppError {
     this.message = message
     this.statusCode = statusCode
     this.type = type
-
-    console.log('AppError - type: ', type)
   }
 }

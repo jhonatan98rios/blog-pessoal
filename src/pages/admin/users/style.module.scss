@@ -5,7 +5,11 @@
     justify-content: center;
     height: calc(100vh - 5rem);
 
+    @media(max-width: 768px) {
+      height: calc(80vh - 8rem);
+    }
+
     .section {
-        width: 100%;
+      width: 100%;
     }
 }
