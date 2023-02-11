@@ -4,7 +4,10 @@ import Router, { useRouter } from 'next/router'
 
 import { validateToken } from "services/auth/token";
 import { APIClient } from "infra/http/axios";
-import { login } from "services/http/Profile/client";
+/* import { login } from "services/http/Profile/__client"; */
+import { LoginService } from "services/http/Profile/LoginService";
+import Notification from "infra/errors/Notification";
+import { AxiosHttpClient } from "infra/http/AxiosHttpClient";
 
 type User = {
   username: string;
@@ -57,13 +60,23 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   async function signIn({ username, password }: SignInData) {
-    const res = await login({
+
+    const httpClient = AxiosHttpClient.getInstance()
+    const notification = new Notification()
+    const loginService = new LoginService(httpClient, notification)
+
+    const res = await loginService.execute({
       user: username,
       password,
     })
 
+    /* const res = await login({
+      user: username,
+      password,
+    }) */
+
     if (!res?.token) {
-      alert('Incorrect username/password')
+      //alert('Incorrect username/password')
       return
     }
 
@@ -73,8 +86,12 @@ export function AuthContextProvider({ children }) {
       maxAge: 60 * 60 * 24, // 1 day
     })
 
-    const client = APIClient.getInstance()
-    client.setAuthorizationHeader(res.token)
+    /* const client = APIClient.getInstance()
+    client.setAuthorizationHeader(res.token) */
+
+    const httpService = AxiosHttpClient.getInstance()
+    httpService.setAuthorizationHeader(res.token)
+
     setUser({ username: res.user, role: res.role })
 
     console.log('login on user: ', res.user)

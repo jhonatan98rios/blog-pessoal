@@ -4,7 +4,10 @@ import { useState } from 'react'
 import { SEO, NavigationControl } from 'components/Shared'
 
 import styles from './style.module.scss'
-import { forgotPassword } from 'services/http/Profile/client'
+/* import { forgotPassword } from 'services/http/Profile/__client' */
+import { ForgotPasswordService } from 'services/http/Profile/ForgotPasswordService'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient'
+import Notification from 'infra/errors/Notification'
 
 export default function Login({ }) {
 
@@ -14,8 +17,15 @@ export default function Login({ }) {
   async function formHandle(e: any) {
     e.preventDefault()
 
-    await forgotPassword(mail)
-    setSent(true)
+    const httpService = AxiosHttpClient.getInstance()
+    const notification = new Notification()
+    const forgotPasswordService = new ForgotPasswordService(httpService, notification)
+    const res = await forgotPasswordService.execute(mail)
+    //await forgotPassword(mail)
+
+    if (res) {
+      setSent(true)
+    }
   }
 
   return (
@@ -42,7 +52,7 @@ export default function Login({ }) {
                 onChange={(e) => setMail(e.target.value)}
                 type="mail"
                 name='mail'
-                placeholder='insira seu e-mail aqui'
+                placeholder='Insira seu e-mail aqui'
               />
               <button
                 className={styles.button}

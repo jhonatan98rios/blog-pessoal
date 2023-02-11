@@ -60,7 +60,7 @@ export default function Create() {
     if (!errors.length) {
       await createPost(body)
 
-      alert('Post criado com sucesso')
+      //alert('Post criado com sucesso')
 
       router.push('/admin/posts')
 

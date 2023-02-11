@@ -22,7 +22,7 @@ export default function Login({ user }: ILogin) {
     const res = await updateUserRole(user.user, role)
 
     if(res) {
-      alert(`Permissão do usuário ${user.user} alterada com sucesso`)
+      //alert(`Permissão do usuário ${user.user} alterada com sucesso`)
       Router.push('/admin/users/')
     }
   }

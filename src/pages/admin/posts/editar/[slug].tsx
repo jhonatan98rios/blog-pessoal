@@ -65,7 +65,7 @@ export default function Post({ post }: PostProps) {
     if (!errors.length) {
       await updatePost(post.slug, body)
 
-      alert('Post editado com sucesso')
+      //alert('Post editado com sucesso')
       router.push('/admin/posts')
 
     } else {

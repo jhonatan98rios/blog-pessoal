@@ -46,14 +46,14 @@ export default function Login({ }) {
               onChange={(e) => setUser(e.target.value)}
               type="text"
               name='user'
-              placeholder='insira seu e-mail aqui'
+              placeholder='Insira seu e-mail aqui'
             />
             <input
               className={styles.input}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               name='password'
-              placeholder='insira sua senha aqui'
+              placeholder='Insira sua senha aqui'
             />
             <Link className={styles.forgotPasswordLink} href='/forgot-password'>
               <span> Esqueceu sua senha? </span>

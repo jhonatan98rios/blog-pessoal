@@ -3,8 +3,10 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { SEO, NavigationControl } from 'components/Shared'
-import { register } from 'services/http/Profile/client'
 import styles from './style.module.scss'
+import { RegisterService } from 'services/http/Profile/RegisterService'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient'
+import Notification from 'infra/errors/Notification'
 
 export default function Register({ }) {
 
@@ -16,13 +18,13 @@ export default function Register({ }) {
   async function formHandle(e: any) {
     e.preventDefault()
 
-    const result = await register({ user: username, mail, password })
+    const httpService = AxiosHttpClient.getInstance()
+    const notification = new Notification()
+    const registerService = new RegisterService(httpService, notification)
+    const res = await registerService.execute({ user: username, mail, password })
 
-    if (result) {
-      alert("Usuário registrado com sucesso")
+    if (res) {
       router.push('/login')
-    } else {
-      alert("Erro ao se conectar. Tente novamente em alguns instantes")
     }
   }
 
@@ -47,7 +49,7 @@ export default function Register({ }) {
               name='user'
               value={username}
               className={styles.input}
-              placeholder='insira seu usuário aqui'
+              placeholder='Insira seu usuário aqui'
               onChange={(e) => setUser(e.target.value)}
             />
             <input
@@ -55,7 +57,7 @@ export default function Register({ }) {
               name='user'
               value={mail}
               className={styles.input}
-              placeholder='insira seu e-mail aqui'
+              placeholder='Insira seu e-mail aqui'
               onChange={(e) => setMail(e.target.value)}
             />
             <input
@@ -63,7 +65,7 @@ export default function Register({ }) {
               name='password'
               value={password}
               className={styles.input}
-              placeholder='insira sua senha aqui'
+              placeholder='Insira sua senha aqui'
               onChange={(e) => setPassword(e.target.value)}
             />
             <button

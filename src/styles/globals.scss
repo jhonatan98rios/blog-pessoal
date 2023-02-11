@@ -84,3 +84,8 @@ body {
 .no-display {
   display: none;
 }
+
+.rnc__notification-item--default {
+  background-color: var(--primary);
+  border-left: 8px solid var(--gray700);
+}
