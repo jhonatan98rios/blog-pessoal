@@ -1,11 +1,9 @@
 import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 import { useState, useContext } from 'react'
 
 import { SEO, NavigationControl } from 'components/Shared'
 import { AuthContext } from 'context/auth/store'
-/* import { updateUserPassword } from 'services/http/Profile/__client' */
 
 import styles from './style.module.scss'
 import { AxiosHttpClient } from 'infra/http/AxiosHttpClient'
@@ -15,8 +13,8 @@ import { UpdatePasswordService } from 'services/http/Profile/UpdatePasswordServi
 export default function AdminUsersEdit() {
 
   const { user, logout } = useContext(AuthContext)
-  const router = useRouter()
 
+  const [ currentPassword, setOldPassword ] = useState<string>('')
   const [ password, setPassword ] = useState<string>('')
   const [ passwordConfirmation, setPasswordConfirmation ] = useState<string>('')
 
@@ -26,14 +24,10 @@ export default function AdminUsersEdit() {
     const httpService = AxiosHttpClient.getInstance()
     const notification = new Notification()
     const updatePasswordService = new UpdatePasswordService(httpService, notification)
-    const res = await updatePasswordService.execute(user.username, password, passwordConfirmation)
-
-    //const result = await updateUserPassword(user.username, password)
+    const res = await updatePasswordService.execute(user.username, currentPassword, password, passwordConfirmation)
 
     if (res) {
-      //alert("Usuário editado com sucesso")
       logout()
-      router.push('/login')
     }
   }
 
@@ -55,6 +49,14 @@ export default function AdminUsersEdit() {
           </h1>
 
           <form className={styles.form}>
+            <input
+              autoComplete="off"
+              className={styles.input}
+              onChange={(e) => setOldPassword(e.target.value)}
+              type="password"
+              name='currentPassword'
+              placeholder='Insira aqui sua senha atual'
+            />
             <input
               autoComplete="off"
               className={styles.input}

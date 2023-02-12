@@ -9,7 +9,7 @@ export class RegisterService {
     private notification: AbstractNotification
   ) {}
 
-  execute({ user, mail, password }) {
+  execute({ user, mail, password, consent }) {
 
     if (!user.length) {
       this.notification.addError({
@@ -28,6 +28,13 @@ export class RegisterService {
     if (!password.length) {
       this.notification.addError({
         message: 'O campo senha precisa ser preenchido',
+        statusCode: 422
+      })
+    }
+
+    if (!consent) {
+      this.notification.addError({
+        message: 'Para criar uma conta é necessário concordar com o recebímento de e-mails ativando a opção ao final do formulário',
         statusCode: 422
       })
     }

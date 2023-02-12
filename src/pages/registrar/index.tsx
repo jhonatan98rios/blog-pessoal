@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { SEO, NavigationControl } from 'components/Shared'
-import styles from './style.module.scss'
 import { RegisterService } from 'services/http/Profile/RegisterService'
 import { AxiosHttpClient } from 'infra/http/AxiosHttpClient'
 import Notification from 'infra/errors/Notification'
+import styles from './style.module.scss'
 
 export default function Register({ }) {
 
@@ -14,6 +14,7 @@ export default function Register({ }) {
   const [ username, setUser ] = useState<string>('')
   const [ mail, setMail ] = useState<string>('')
   const [ password, setPassword ] = useState<string>('')
+  const [ consent, setConsent ] = useState<boolean>(false)
 
   async function formHandle(e: any) {
     e.preventDefault()
@@ -21,7 +22,7 @@ export default function Register({ }) {
     const httpService = AxiosHttpClient.getInstance()
     const notification = new Notification()
     const registerService = new RegisterService(httpService, notification)
-    const res = await registerService.execute({ user: username, mail, password })
+    const res = await registerService.execute({ user: username, mail, password, consent })
 
     if (res) {
       router.push('/login')
@@ -68,6 +69,18 @@ export default function Register({ }) {
               placeholder='Insira sua senha aqui'
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            <label htmlFor="consent" className={styles.consent}>
+              <input
+                id="consent"
+                type="checkbox"
+                name="consent"
+                checked={consent}
+                onChange={(e) => setConsent(prev => !prev)}
+              />
+              <p> Concordo em ser avisado sobre novos posts por e-mail </p>
+            </label>
+
             <button
               className={styles.button}
               onClick={formHandle}

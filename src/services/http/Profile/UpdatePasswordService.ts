@@ -9,25 +9,32 @@ export class UpdatePasswordService {
     private notification: AbstractNotification
   ) {}
 
-  execute(username: string, password: string, passwordConfirmation: string) {
+  execute(username: string, currentPassword: string, password: string, passwordConfirmation: string) {
 
     if (!username.length) {
       this.notification.addError({
-        message: 'O campo usuário precisa ser preenchido',
+        message: 'O campo "usuário" precisa ser preenchido',
+        statusCode: 422
+      })
+    }
+
+    if (!currentPassword.length) {
+      this.notification.addError({
+        message: 'O campo "senha atual" precisa ser preenchido',
         statusCode: 422
       })
     }
 
     if (!password.length) {
       this.notification.addError({
-        message: 'O campo senha precisa ser preenchido',
+        message: 'O campo "nova senha" precisa ser preenchido',
         statusCode: 422
       })
     }
 
     if (!passwordConfirmation.length) {
       this.notification.addError({
-        message: 'O campo confirmação de senha precisa ser preenchido',
+        message: 'O campo "confirmação de senha" precisa ser preenchido',
         statusCode: 422
       })
     } else if (password !== passwordConfirmation) {
@@ -43,7 +50,7 @@ export class UpdatePasswordService {
     }
 
     return this.httpClient.api.put(`/user/${username}`, {
-      password, passwordConfirmation
+      currentPassword, password, passwordConfirmation
     })
 
     .then(res => {
@@ -56,12 +63,6 @@ export class UpdatePasswordService {
       return res.data
     })
     .catch(err => {
-      /* if (err.response?.data?.message) {
-        this.notification.addError({
-          message: err.response.data.message,
-          statusCode: err.response.status
-        })
-      } */
 
       const { data, status } = err.response
       const errors = parseError(data)

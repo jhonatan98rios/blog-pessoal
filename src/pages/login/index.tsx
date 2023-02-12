@@ -20,7 +20,7 @@ export default function Login({ }) {
   async function formHandle(e: any) {
     e.preventDefault()
 
-    await ctx.signIn({ username, password })
+    await ctx.login({ username, password })
     router.push('/perfil')
   }
 

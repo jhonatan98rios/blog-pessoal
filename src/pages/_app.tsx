@@ -5,6 +5,7 @@ import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css/animate.min.css';
 import '../styles/globals.scss'
+import { ConsentBanner } from 'components/Shared/ConsentBanner';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }) {
       <Header />
       <Component {...pageProps} />
       <Footer />
+      <ConsentBanner />
     </ GlobalContext>
   );
 }

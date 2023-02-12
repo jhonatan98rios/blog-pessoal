@@ -28,6 +28,18 @@
       width: 100%;
       padding: 16px;
     }
+
+
+    .consent {
+      display: flex;
+      font-size: 0.75rem;
+      margin: 8px 0px;
+      cursor: pointer;
+
+      input[type='checkbox'] {
+        margin-right: 8px;
+      }
+    }
   }
 
   .register {
