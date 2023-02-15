@@ -1,7 +1,7 @@
 
-export abstract class AbstractHttpClient<APIClient> {
+export abstract class AbstractHttpClient<T> {
 
-  abstract api: APIClient
+  abstract api: T
   abstract getAsyncData<T>(url: string): Promise<T>
   abstract setAuthorizationHeader(token: string): void
   abstract deleteAuthorizationHeader(): void

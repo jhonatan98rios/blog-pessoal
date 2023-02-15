@@ -41,7 +41,7 @@ export default function Login({ }) {
           {
             ctx.isAuthenticated &&
             <>
-              <p> Olá {ctx.user.username} </p>
+              <p className={styles.title}> Seja bem vindo {ctx.user.username} </p>
 
               <Link
                 href="/perfil/editar-senha"

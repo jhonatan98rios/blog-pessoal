@@ -2,15 +2,17 @@ import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import axios, { AxiosInstance } from "axios";
 import { parseCookies } from "nookies";
 
-
 export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
   public api: AxiosInstance
   public static instance: AxiosHttpClient;
 
   constructor(ctx?: any) {
+
+    console.log(process.env.API_URL)
+
     this.api = axios.create({
-      baseURL: process.env.API_URL || 'http://localhost:3333'
+      baseURL: process.env.API_URL
     })
 
     this.api.interceptors.request.use(config => {
@@ -18,8 +20,6 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
     })
 
     const { 'nextauth.token': token } = ctx ? parseCookies(ctx) : parseCookies()
-
-    console.log("token: ", token)
 
     if (token) {
       this.setAuthorizationHeader(token)

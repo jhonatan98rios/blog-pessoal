@@ -1,4 +1,4 @@
-import { APIClient } from "infra/http/axios";
+import { AxiosHttpClient } from "infra/http/AxiosHttpClient";
 import { PostModel } from 'models/Post'
 
 
@@ -7,30 +7,32 @@ type getAllPostsReturn = {
 }
 
 export async function getAllPosts(ctx?) {
-  const client = APIClient.getInstance(ctx)
+  const client = AxiosHttpClient.getInstance(ctx)
   return await client.getAsyncData<getAllPostsReturn>('post')
 }
 
 
 export async function createPost<T>(body: any) {
 
-  const client = APIClient.getInstance()
+  const client = AxiosHttpClient.getInstance()
 
   return client.api.post('/post', body)
     .then(function (response) {
       console.log(response);
+      return response
     })
     .catch(function (error) {
       console.log(error);
 
       console.log('issues');
       console.log(error.response.data[0].errors.issues);
+      return error
     });
 }
 
 export async function updatePost<T>(slug: string, body: any) {
 
-  const client = APIClient.getInstance()
+  const client = AxiosHttpClient.getInstance()
 
   return client.api.put(`/post/${slug}`, body)
     .then(function (response) {

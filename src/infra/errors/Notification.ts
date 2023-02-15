@@ -44,9 +44,11 @@ export default class Notification implements AbstractNotification {
         console.log('throwMessages')
         console.log(this.errors)
 
+        const title = err.type == 'success' ? 'Sucesso' : 'Erro'
+
         Store.addNotification({
           ...notificationConfig,
-          title: `Erro: ${err.statusCode}`,
+          title,
           message: `${err.message}`,
           type: err.type ? err.type as NOTIFICATION_TYPE : notificationConfig.type
         })

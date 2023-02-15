@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuill } from 'react-quilljs';
 import styles from './style.module.scss';
 import 'quill/dist/quill.snow.css';
-import { APIClient } from 'infra/http/axios';
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
 
 interface IQuilljs {
   setContent: React.Dispatch<React.SetStateAction<string>>
@@ -26,7 +26,8 @@ export function Quilljs({ setContent, initialContent }: IQuilljs) {
 
   // Upload Image to Image Server such as AWS S3, Cloudinary, Cloud Storage, etc..
   const saveToServer = async (file: string | Blob) => {
-    const client = APIClient.getInstance()
+
+    const client = AxiosHttpClient.getInstance()
     const image = await client.fileUpload('/post/image/', file)
     insertToEditor(image.src);
   }

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { LoginService } from "services/http/Profile/LoginService";
 import Notification from "infra/errors/Notification";

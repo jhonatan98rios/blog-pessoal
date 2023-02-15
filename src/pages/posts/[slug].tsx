@@ -10,12 +10,14 @@ import { Masonry } from "components/Posts/Masonry";
 import { Categories } from "components/Posts/Categories";
 
 import { adapter } from "services/adapter";
-import { getAllPosts } from "services/http/Admin/Posts/client";
 import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
 import { PostModel } from "models/Post";
 
 import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
+import { AxiosHttpClient } from "infra/http/AxiosHttpClient";
+import Notification from "infra/errors/Notification";
+import { GetPostService } from "services/http/Admin/Posts/GetPostService";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
@@ -79,8 +81,12 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const data = await getAllPosts()
-  const paths = data.posts.map(
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  const paths = res.posts.map(
     (post) => post.categories.map(
       (cat) => `/posts/${cat.path}`
     )
@@ -94,9 +100,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const data = await getAllPosts()
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
 
-  if (!data) {
+  if (!res) {
     return {
       props: {
         posts: [],
@@ -105,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  const filteredPosts = postsFilterByStatus(data.posts, 'prod')
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
   const categories = getDeduplicatedCategories(filteredPosts)
   const posts = (filteredPosts.length > 0 ? filteredPosts : [])
     .map(content => adapter(content as PostModel))

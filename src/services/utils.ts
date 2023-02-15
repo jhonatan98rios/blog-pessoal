@@ -83,3 +83,14 @@ export function getDeduplicatedCategories(posts: Array<PostModel | IPost>) {
 
   return deduplicated
 }
+
+export function categoryParse(categories: string) {
+  return categories.split(',').map(categ => ({
+    label: categ.trim(),
+    path: categ.trim()
+      .toLocaleLowerCase()
+      .replace(/ç/g, 'c')
+      .replace(/ã/g, 'a')
+      .replace(/[^a-z0-9 ]/g, '')
+  }))
+}

@@ -5,12 +5,15 @@ import dynamic from 'next/dynamic';
 import { parseCookies } from 'nookies'
 
 import { SEO, NavigationControl, Select } from 'components/Shared';
-import { getAllPosts, updatePost } from 'services/http/Admin/Posts/client';
 import { adapter } from 'services/adapter';
-import { APIClient } from 'infra/http/axios';
 
 import styles from './styles.module.scss'
 import { PostProps } from 'types'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
+import { categoryParse } from 'services/utils';
+import Notification from 'infra/errors/Notification';
+import { UpdatePostService } from 'services/http/Admin/Posts/UpdatePostService';
+import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
 
 const Quilljs = dynamic(
   () => import('components/Admin/Posts/Quilljs').then((res) => res.Quilljs),
@@ -34,42 +37,27 @@ export default function Post({ post }: PostProps) {
 
 
   async function bannerHandleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const client = APIClient.getInstance()
+    const client = AxiosHttpClient.getInstance()
     const image = await client.fileUpload('/post/image/', event.target.files[0])
     setBanner(image)
   }
 
   async function formHandle(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-
     event.preventDefault()
 
-    let categs = categories.split(',').map(categ => ({
-      label: categ.trim(),
-      path: categ.trim()
-        .toLocaleLowerCase()
-        .replace(/ç/g, 'c')
-        .replace(/ã/g, 'a')
-        .replace(/[^a-z0-9 ]/g, '')
-    }))
+    const categs = categoryParse(categories)
 
-    const body = {
-      title, subtitle, banner, content, language, status,
+    const httpService = AxiosHttpClient.getInstance()
+    const notification = new Notification()
+    const createPostService = new UpdatePostService(httpService, notification)
+    const res = await createPostService.execute(post.slug, {
+      title, subtitle, banner, content, language,
       seo_title, seo_description, seo_keywords,
-      categories: categs
-    }
+      categories: categs,
+    })
 
-    const errors = Object.keys(body).filter(prop => body[prop].length == 0)
-
-    console.log('errors', errors)
-
-    if (!errors.length) {
-      await updatePost(post.slug, body)
-
-      //alert('Post editado com sucesso')
+    if (res) {
       router.push('/admin/posts')
-
-    } else {
-      console.log('Invalid props', errors)
     }
   }
 
@@ -237,8 +225,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const {slug} = ctx.params
 
-  const data = await getAllPosts(ctx)
-  const posts = data.posts.length > 0 ? data.posts.map(content => adapter(content)) : []
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  const posts = res.posts.length > 0 ? res.posts.map(content => adapter(content)) : []
   const post = posts.filter(post => post.slug == slug)[0]
 
   return {

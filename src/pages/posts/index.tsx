@@ -10,11 +10,13 @@ import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } f
 import useDeviceDetect from "hooks/useDevice";
 import StoreContext from 'context/search/store'
 
-import { getAllPosts } from 'services/http/Admin/Posts/client';
 import { PostModel } from 'models/Post';
 
 import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
+import Notification from 'infra/errors/Notification';
+import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 
@@ -69,9 +71,12 @@ export default function Posts({ posts, categories }: IPostsProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  const data = await getAllPosts()
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
 
-  if (!data || data.posts.length == 0) {
+  if (!res || res.posts.length == 0) {
     return {
       props: {
         posts: [],
@@ -80,7 +85,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   }
 
-  const filteredPosts = postsFilterByStatus(data.posts, 'prod')
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
   const categories = getDeduplicatedCategories(filteredPosts)
   const posts = filteredPosts.map(content => adapter(content as PostModel))
 
