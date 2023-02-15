@@ -11,25 +11,20 @@ interface IQuilljs {
 
 export function Quilljs({ setContent, initialContent }: IQuilljs) {
 
-  const { quill, quillRef } = useQuill();
+  const { quill, quillRef } = useQuill()
 
   // Insert Image(selected by user) to quill
   const insertToEditor = (url: any) => {
-    if (quill) {
-      const range = quill.getSelection();
-
-      if (range) {
-        quill.insertEmbed(range.index, 'image', url);
-      }
-    }
-  };
+    const range = quill.getSelection()
+    if (!range) return
+    quill.insertEmbed(range.index, 'image', url)
+  }
 
   // Upload Image to Image Server such as AWS S3, Cloudinary, Cloud Storage, etc..
   const saveToServer = async (file: string | Blob) => {
-
     const client = AxiosHttpClient.getInstance()
     const image = await client.fileUpload('/post/image/', file)
-    insertToEditor(image.src);
+    insertToEditor(image.src)
   }
 
   // Open Dialog to select Image File
@@ -44,27 +39,30 @@ export function Quilljs({ setContent, initialContent }: IQuilljs) {
         const file = input.files[0];
         saveToServer(file);
       }
-    };
-  };
+    }
+  }
 
   React.useEffect(() => {
-    if (quill) {
-      // Add custom handler for Image Upload
-      quill.getModule('toolbar').addHandler('image', selectLocalImage);
-    }
-  }, [quill]);
+    if (!quill) return
+
+    quill.root.innerHTML = initialContent
+
+  }, [quill])
+
 
   React.useEffect(() => {
-    if (quill) {
+    if (!quill) return
+    quill.getModule('toolbar').addHandler('image', selectLocalImage);
+  }, [quill])
 
-      if (initialContent) {
-        quill.root.innerHTML = initialContent
-      }
 
-      quill.on('text-change', () => {
-        setContent(quill.root.innerHTML)
-      });
-    }
+  React.useEffect(() => {
+    if (!quill) return
+    quill.on('text-change', () => {
+      const base64 = Buffer.from(quill.root.innerHTML).toString('base64')
+      console.log(base64)
+      setContent(base64)
+    })
   }, [quill]);
 
   return (

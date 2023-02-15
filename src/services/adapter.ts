@@ -6,6 +6,8 @@ import { PostModel } from "models/Post";
 
 export function adapter(post: PostModel): Partial<ExpandedPost> {
 
+  const decoded = new Buffer(post.content, 'base64').toString()
+
   return {
     seo_title: post.seo_title,
     seo_description: post.seo_description,
@@ -15,8 +17,8 @@ export function adapter(post: PostModel): Partial<ExpandedPost> {
     subtitle: post.subtitle,
     banner: post.banner,
     updatedAt: new Date(post.updatedAt).toLocaleDateString(),
-    content: post.content,
-    excerpt: getExcerpt(post.content),
+    content: decoded,
+    excerpt: getExcerpt(decoded),
     categories: post.categories,
     style: sizes[
       calcTextSize(post.title)
