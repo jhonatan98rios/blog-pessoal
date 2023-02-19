@@ -3,8 +3,6 @@ import { CSSProperties, ReactElement } from "react";
 
 export interface IImage {
   src: string
-  alt: string
-  title: string
 }
 
 export interface ICategory {
@@ -16,8 +14,10 @@ export interface IPost {
   slug: string
   title: string
   banner: IImage
-  content: string,
+  content: string
   updateAt: string
+  language: string
+  status: string
   categories: Array<ICategory>
   style: CSSProperties
 }
@@ -72,14 +72,15 @@ export interface ExpandedPost {
   seo_keywords: string
   slug: string
   title: string
+  subtitle: string
   banner: {
     src: string
-    alt: string
-    title: string
   }
   updatedAt: string
   content: string
   excerpt: string,
   categories: Array<ICategory>
   style: unknown
+  language: string
+  status: string
 }

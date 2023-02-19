@@ -1,0 +1,44 @@
+.thumb {
+    width: 90%;
+    display: flex;
+    margin: 16px auto;
+    max-width: 1212px;
+    align-items: center;
+    
+    .banner {
+        width: 25%;
+        max-width: 200px;
+        border-radius: 8px;
+    }
+    
+    .title {
+        width: 75%;
+        margin: 0px 16px;
+    }
+    
+    .controls {
+        width: 100px;
+        display: flex;
+        max-width: 25%;
+        flex-direction: column;
+        
+        .editButton, .deleteButton {
+            width: 100px;
+            padding: 4px;
+            margin: 4px 0px;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .editButton {
+            background-color: #38f;
+        }
+
+        .deleteButton {
+            background-color: #f33;
+        }
+    }
+}

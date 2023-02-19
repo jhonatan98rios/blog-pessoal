@@ -1,0 +1,34 @@
+.label {
+  max-width: 100%;
+  width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+
+  .input {
+    max-width: 80%;
+    width: 900px;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 8px;
+    margin-left: 8px;
+  }
+
+  .select {
+    max-width: 80%;
+    width: 900px;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 8px;
+    margin-left: 8px;
+    box-sizing: border-box;
+    appearance: none;
+    line-height: inherit;
+    outline: none;
+
+    &::-ms-expand, &:focus {
+      max-width: 80%;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 5rem);
+
+  .header {
+    width: 90%;
+    display: flex;
+    max-width: 1080px;
+    justify-content: space-between;
+
+    .add {
+      border-radius: 8px;
+      font-size: 16px;
+      padding: 12px 32px;
+      font-weight: bold;
+      line-height: 0px;
+      border: 2px solid #fff;
+      color: #fff;
+      background-color: transparent;
+    }
+  }
+}

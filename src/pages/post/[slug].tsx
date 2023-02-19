@@ -1,15 +1,19 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
-import SEO from '../../components/Shared/SEO';
-import styles from './styles.module.scss'
-
 import React from 'react';
-import { Recents } from '../../components/Post/Recents';
 
-import { PostProps } from '../../types'
-import { getAllPosts } from '../../services/client';
-import { adapter } from '../../services/adapter';
-import Head from 'next/head';
+import { adapter } from 'services/adapter';
+import { postsFilterByStatus } from 'services/utils';
+import { PostModel } from 'models/Post';
+
+import { Recents } from 'components/Post/Recents';
+import { SEO, NavigationControl } from 'components/Shared';
+
+import { PostProps } from 'types'
+import styles from './styles.module.scss'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
+import Notification from 'infra/errors/Notification';
+import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
 
 export default function Post({ post, posts }: PostProps) {
   const router = useRouter()
@@ -28,41 +32,49 @@ export default function Post({ post, posts }: PostProps) {
         keywords={post.seo_keywords}
         hasADS={true}
       />
-      
+
+      <NavigationControl previousPath="/posts/" />
+
       <main className={styles.container}>
+
         <article className={styles.post}>
-          <img className={styles.image} src={post.banner.src} alt={post.banner.alt} title={post.banner.title} />
+          <img className={styles.image} src={post.banner.src} />
 
           <div className={styles.text}>
             <div className={styles.header}>
               <h1> {post.title} </h1>
+              <h2> {post.subtitle } </h2>
               <time> {post.updatedAt} </time>
             </div>
-            <div 
+            <div
               className={styles.static_content}
-              dangerouslySetInnerHTML={{ __html: post.content }} 
-            /> 
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           </div>
         </article>
 
         <Recents posts={posts} />
       </main>
-      <ins 
+      {/* <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
         data-ad-client="ca-pub-1739197497968733"
         data-ad-slot="6382729267"
         data-ad-format="auto"
         data-full-width-responsive="true"
-      />
+      /> */}
     </>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const allPosts = await getAllPosts()
-  const paths = allPosts.map(post => `/post/${post.slug}`)
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  const paths = res.posts.length > 0 ? res.posts.map(post => `/post/${post.slug}`) : []
 
   return {
     paths,
@@ -73,12 +85,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {slug} = params
 
-  const data = await getAllPosts()
-  const posts = data.map(post => adapter(post)) 
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  if (!res || res.posts.length == 0) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
+  const posts = filteredPosts.map(content => adapter(content as PostModel))
   const post = posts.filter(post => post.slug == slug)[0]
-  
+
   return {
     props: { posts, post },
-    revalidate: 60 * 60 * 12
+    revalidate: 60 * 60 * 24
   }
 }

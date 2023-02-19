@@ -1,18 +1,20 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useContext, useState } from 'react';
-import StoreContext from '../../../context/store';
-
-import useDeviceDetect from '../../../hooks/useDevice';
-import { ActiveLink } from '../ActiveLink';
+import { AuthContext } from 'context/auth/store';
+import StoreContext from 'context/search/store';
+import useDeviceDetect from 'hooks/useDevice';
 
 import styles from './styles.module.scss';
 
 export function Header() {
 
+  const ctx = useContext(AuthContext)
+  const { state, setState } = useContext(StoreContext)
+
   const router = useRouter()
   const {isMobile} = useDeviceDetect()
   const [checked, setChecked] = useState(false);
-  const { state, setState } = useContext(StoreContext)
 
   function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
     setState({ ...state, search: e.target.value })
@@ -34,10 +36,10 @@ export function Header() {
         {
           isMobile && (
             <div className={styles.menuIcon}>
-              <input 
-                type="checkbox" 
-                id="icon_menu" 
-                className={styles.icon_menu} 
+              <input
+                type="checkbox"
+                id="icon_menu"
+                className={styles.icon_menu}
                 checked={checked}
                 onChange={handleCheckbox}
               />
@@ -46,16 +48,16 @@ export function Header() {
                 <div></div>
                 <div></div>
               </label>
-            </div> 
+            </div>
           )
         }
 
         {
-          router.asPath.includes('posts') && 
-          <input 
-            className={styles.input} 
-            type="text" 
-            placeholder="Pesquisar pelo post" 
+          router.asPath.includes('posts') &&
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Pesquisar pelo post"
             onChange={handleKeyPress}
             value={state.search}
           />
@@ -64,19 +66,34 @@ export function Header() {
         {
           (!isMobile || checked) && (
             <nav className={isMobile ? styles.navbar : null}>
-              <ActiveLink href="/" activeClassName={styles.active} onClick={handleCheckbox}>
+              {/* <Link href="/" className={styles.active} onClick={handleCheckbox}>
                 Inicio
-              </ActiveLink>
+              </Link> */}
 
-              <ActiveLink href="/posts" activeClassName={styles.active} onClick={handleCheckbox}>
+              <Link href="/posts" className={styles.active} onClick={handleCheckbox}>
                 Posts
-              </ActiveLink>
+              </Link>
 
-              <ActiveLink href="/autor" activeClassName={styles.active} onClick={handleCheckbox}>
+              <Link href="/autor" className={styles.active} onClick={handleCheckbox}>
                 Sobre o autor
-              </ActiveLink>
-              
-              <a href="https://jhonatan-dev-rios.herokuapp.com/projetos" target="_blank" rel="noopener noreferrer"> Portfólio </a>
+              </Link>
+
+              <Link
+                href={ctx.isAuthenticated ? '/perfil/': '/login/'}
+                className={styles.active}
+                onClick={handleCheckbox}
+              >
+                { ctx.isAuthenticated ? 'Perfil' : 'Login' }
+              </Link>
+
+              {
+                (ctx.isAuthenticated && ctx.user.role === 'admin') &&
+                <Link href="/admin/" className={styles.active} onClick={handleCheckbox}>
+                  <div className={styles.create}>
+                    Painel Admin
+                  </div>
+                </Link>
+              }
             </nav>
           )
         }
@@ -84,5 +101,3 @@ export function Header() {
     </header>
   )
 }
-
-/* TO DO */

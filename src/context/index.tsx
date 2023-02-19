@@ -1,7 +1,14 @@
 import React from 'react'
 
-import { StoreContextProvider } from './store'
+import { StoreContextProvider } from './search/store'
+import { AuthContextProvider } from './auth/store'
 
 export const GlobalContext = ({ children }) => {
-  return <StoreContextProvider> {children} </StoreContextProvider>
+  return (
+    <AuthContextProvider>
+      <StoreContextProvider> 
+        {children} 
+      </StoreContextProvider>
+    </AuthContextProvider>
+  )
 }

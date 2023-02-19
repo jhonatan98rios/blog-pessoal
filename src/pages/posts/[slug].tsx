@@ -2,19 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 
-import SEO from "../../components/Shared/SEO";
-import { Masonry } from "../../components/Posts/Masonry";
-import { Categories } from "../../components/Posts/Categories";
+import useDeviceDetect from "hooks/useDevice";
+import StoreContext from "context/search/store";
 
-import useDeviceDetect from "../../hooks/useDevice";
-import { postsFilter } from "../../services/utils";
-import StoreContext from "../../context/store";
+import { SEO, NavigationControl } from "components/Shared";
+import { Masonry } from "components/Posts/Masonry";
+import { Categories } from "components/Posts/Categories";
 
-import { IPostsProps, IPost } from '../../types'
+import { adapter } from "services/adapter";
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
+import { PostModel } from "models/Post";
 
+import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
-import { getAllCategories, getAllPosts } from "../../services/client";
-import { adapter } from "../../services/adapter";
+import { AxiosHttpClient } from "infra/http/AxiosHttpClient";
+import Notification from "infra/errors/Notification";
+import { GetPostService } from "services/http/Admin/Posts/GetPostService";
 
 export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
@@ -29,7 +32,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(state.search, posts)
+      postsFilterBySearch(posts, state.search)
     )
 
   }, [state.search, router.asPath])
@@ -42,23 +45,26 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
         keywords={`${router.asPath.split('/')[2]}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
         hasADS={true}
       />
-      
+
       <main>
 
-        { isMobile && 
-          <Categories categories={categories} /> 
+        { isMobile &&
+          <Categories categories={categories} />
         }
+
+        <NavigationControl previousPath="/posts/" />
+
         <section className={styles.container}>
           <h2 className="no-display"> Posts </h2>
 
           { !isMobile &&
-           <Categories categories={categories} /> 
+           <Categories categories={categories} />
           }
 
           <Masonry posts={filteredPosts} />
 
-          { !isMobile && 
-            <ins 
+          {/* { !isMobile &&
+            <ins
               className={"adsbygoogle " + styles.fake_col}
               style={{ display: 'block' }}
               data-ad-client="ca-pub-1739197497968733"
@@ -66,7 +72,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
-          }
+          } */}
         </section>
       </main>
     </>
@@ -75,8 +81,12 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const allPosts = await getAllPosts()
-  const paths = allPosts.map(
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  const paths = res.posts.map(
     (post) => post.categories.map(
       (cat) => `/posts/${cat.path}`
     )
@@ -90,24 +100,37 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const data = await getAllPosts()
-  const categories = await getAllCategories()
-  const posts = data
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
 
-  .map(content => adapter(content))
-  .filter(post => {
-    let contains = false
-    post.categories.forEach(cat => {
-      if (cat.path == params.slug) {
-        contains = true
+  if (!res) {
+    return {
+      props: {
+        posts: [],
+        categories: []
       }
+    }
+  }
+
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
+  const categories = getDeduplicatedCategories(filteredPosts)
+  const posts = (filteredPosts.length > 0 ? filteredPosts : [])
+    .map(content => adapter(content as PostModel))
+    .filter(post => {
+      let contains = false
+      post.categories.forEach(cat => {
+        if (cat.path == params.slug) {
+          contains = true
+        }
+      })
+      return contains
     })
-    return contains
-  })
 
   return {
     props: { posts, categories },
-    revalidate: 60 * 60 * 120
+    revalidate: 60 * 60 * 24
   }
 }
 

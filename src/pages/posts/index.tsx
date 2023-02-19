@@ -1,32 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GetStaticProps } from "next";
 
-import SEO from "../../components/Shared/SEO";
-import { Categories } from "../../components/Posts/Categories";
-import { Masonry } from  '../../components/Posts/Masonry'
+import { SEO } from "components/Shared";
+import { Categories } from "components/Posts/Categories";
+import { Masonry } from  'components/Posts/Masonry'
+import { adapter } from 'services/adapter'
 
-import { adapter } from '../../services/adapter'
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
+import useDeviceDetect from "hooks/useDevice";
+import StoreContext from 'context/search/store'
 
-import { getAllCategories, getAllPosts } from '../../services/client'
-import { postsFilter } from "../../services/utils";
-import useDeviceDetect from "../../hooks/useDevice";
-import StoreContext from '../../context/store'
+import { PostModel } from 'models/Post';
 
-import { IPostsProps, IPost } from '../../types'
-
+import { IPostsProps, IPost } from 'types'
 import styles from './styles.module.scss'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
+import Notification from 'infra/errors/Notification';
+import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 
   const { isMobile } = useDeviceDetect()
   const { state } = useContext(StoreContext)
   const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
-  
+
   useEffect(() => {
     setFilteredPosts(
-      postsFilter(state.search, posts)
+      postsFilterBySearch(posts, state.search)
     )
-
   }, [state.search])
 
   return (
@@ -37,23 +38,23 @@ export default function Posts({ posts, categories }: IPostsProps) {
         keywords={`${state.search}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
         hasADS={true}
       />
-      
-      <main>
 
-      { isMobile && 
-        <Categories categories={categories} /> 
-      }
+      <main>
+        { isMobile &&
+          <Categories categories={categories} />
+        }
+
         <section className={styles.container}>
           <h2 className="no-display"> Posts </h2>
 
           { !isMobile &&
-           <Categories categories={categories} /> 
+           <Categories categories={categories} />
           }
-          
+
           <Masonry posts={filteredPosts} />
 
-          { !isMobile && 
-            <ins 
+          {/* { !isMobile &&
+            <ins
               className={"adsbygoogle " + styles.fake_col}
               style={{ display: 'block' }}
               data-ad-client="ca-pub-1739197497968733"
@@ -61,25 +62,38 @@ export default function Posts({ posts, categories }: IPostsProps) {
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
-          }
+          } */}
         </section>
       </main>
     </>
   );
 }
 
-
 export const getStaticProps: GetStaticProps = async () => {
 
-  const data = await getAllPosts()
-  const categories = await getAllCategories()
-  const posts = data.map(content => adapter(content))
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  if (!res || res.posts.length == 0) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
+  const categories = getDeduplicatedCategories(filteredPosts)
+  const posts = filteredPosts.map(content => adapter(content as PostModel))
 
   return {
     props: {
       posts,
       categories
     },
-    revalidate: 60 * 60 * 120
+    revalidate: 60 * 60 * 24
   }
 }

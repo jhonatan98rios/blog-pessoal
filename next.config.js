@@ -6,4 +6,7 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  env: {
+    API_URL: process.env.API_URL
+  }
 }

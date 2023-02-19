@@ -1,0 +1,55 @@
+.user {
+  width: 80%;
+  display: flex;
+  margin: 16px auto;
+  max-width: 1212px;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    width: 20%;
+    max-width: 100px;
+    border-radius: 8px;
+  }
+
+  .title {
+    width: 75%;
+    display: flex;
+    margin: 0px 16px;
+    max-width: 500px;
+    justify-content: space-around;
+
+    @media(max-width: 540px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .controls {
+    width: 100px;
+    display: flex;
+    max-width: 25%;
+    flex-direction: column;
+
+    .editButton,
+    .deleteButton {
+      max-width: 100%;
+      width: 100px;
+      padding: 4px;
+      border: none;
+      color: #fff;
+      display: flex;
+      margin: 4px 0px;
+      border-radius: 8px;
+      justify-content: center;
+    }
+
+    .editButton {
+      background-color: #38f;
+    }
+
+    .deleteButton {
+      background-color: #f33;
+    }
+  }
+}

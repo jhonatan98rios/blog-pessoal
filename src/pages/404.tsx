@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export default function NotFound() {
   return (
     <main style={main}>
@@ -8,16 +10,16 @@ export default function NotFound() {
 }
 
 const main = {
-  'height': 'calc(100vh - 160px)',
-  'width': '100vw',
-  'display': 'flex',
-  'justify-content': 'center',
-  'align-items': 'center',
-  'flex-direction': 'column',
-  'padding-top': '32px',
-}
+  height: 'calc(100vh - 160px)',
+  width: '100vw',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  paddingTop: '32px',
+} as CSSProperties
 
 const image = {
-  'margin-bottom': '32px',
-  'height': '320px'
-}
+  marginBottom: '32px',
+  height: '320px'
+} as CSSProperties

@@ -1,10 +1,10 @@
 import Head from 'next/head';
 
-import { jsonLdGenerator } from '../../../services/json-ld'
+import { jsonLdGenerator } from 'services/json-ld'
 
-import { SEOProps } from '../../../types'
+import { SEOProps } from 'types'
 
-export default function SEO({
+export function SEO({
   title,
   description,
   slug = '',
@@ -14,7 +14,7 @@ export default function SEO({
   indexPage = true,
   hasADS=false
 }: SEOProps) {
-  
+
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
   const default_keywords = 'Como ser um desenvolvedor?, blog de tecnologia, blog de programação, blog de design, blog de tecnologia, linguagens de programação, programação web, desenvolvimento de aplicativos,'
   const pageKeywords = default_keywords + keywords
@@ -60,11 +60,11 @@ export default function SEO({
       <meta name="twitter:image:alt" content="Thumbnail" />
       <meta property="twitter:image:type" content="image/png" />
       <meta name="twitter:image:width" content="800" />
-      <meta name="twitter:image:height" content="360" />      
+      <meta name="twitter:image:height" content="360" />
 
       {/* TO DO */}
 
-      <script 
+      <script
         type="application/ld+json"
         key="jsonld"
         dangerouslySetInnerHTML={
@@ -77,14 +77,14 @@ export default function SEO({
       />
 
       {/* ADSENSE */}
-      <script
+      {/* <script
         id="Adsense-id"
         async={true}
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
         crossOrigin="anonymous"
-      />
-      {
-        hasADS && 
+      /> */}
+      {/* {
+        hasADS &&
         <>
           <script
             dangerouslySetInnerHTML={{
@@ -92,8 +92,8 @@ export default function SEO({
             }}
           />
         </>
-      }
-      
+      } */}
+
     </Head>
   );
 }

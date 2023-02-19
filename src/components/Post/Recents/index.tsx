@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { ExpandedPost } from '../../../types';
+import { ExpandedPost } from 'types';
 
 import styles from './styles.module.scss';
 
@@ -17,19 +17,19 @@ export function Recents({ posts }: RecentsProps) {
       </h3>
       <nav >
         <ul className={styles.recents}>
-          { posts.slice(0, 3).map((post, index) => 
-            <li className={styles.post} key={index}> 
+          { posts.slice(0, 3).map((post, index) =>
+            <li className={styles.post} key={index}>
               <Link href={post.slug}>
                 <h6 className={styles.title}>{ post.title }</h6>
                 <time>{ post.updatedAt }</time>
-                <p 
-                  className={styles.excerpt} 
+                <p
+                  className={styles.excerpt}
                   dangerouslySetInnerHTML={{
                     __html: post.excerpt
-                  }} 
+                  }}
                 />
               </Link>
-            </li> 
+            </li>
           )}
         </ul>
       </nav>
