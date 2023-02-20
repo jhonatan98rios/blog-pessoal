@@ -18,12 +18,9 @@ export async function createPost<T>(body: any) {
 
   return client.api.post('/post', body)
     .then(function (response) {
-      console.log(response);
       return response
     })
     .catch(function (error) {
-      console.log(error);
-
       console.log('issues');
       console.log(error.response.data[0].errors.issues);
       return error
@@ -39,8 +36,6 @@ export async function updatePost<T>(slug: string, body: any) {
       console.log(response);
     })
     .catch(function (error) {
-      console.log(error);
-
       console.log('issues');
       console.log(error.response.data[0].errors.issues);
     });

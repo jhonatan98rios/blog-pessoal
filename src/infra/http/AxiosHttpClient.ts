@@ -8,9 +8,6 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
   public static instance: AxiosHttpClient;
 
   constructor(ctx?: any) {
-
-    console.log(process.env.API_URL)
-
     this.api = axios.create({
       baseURL: process.env.API_URL
     })

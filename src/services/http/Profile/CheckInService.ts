@@ -16,12 +16,6 @@ export class CheckInService {
 
     .then(res => res.data)
     .catch(err => {
-      /* if (err.response?.data?.message) {
-        this.notification.addError({
-          message: err.response.data.message,
-          statusCode: err.response.status
-        })
-      } */
       const { data, status } = err.response
       const errors = parseError(data)
 

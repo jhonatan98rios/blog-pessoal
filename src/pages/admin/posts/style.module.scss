@@ -3,7 +3,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 5rem);
+  min-height: calc(100vh - 220px);
+
+  @media (max-width: 1024px) {
+    min-height: calc(100vh - 285px);
+  }
+
+  @media(max-width: 768px) {
+    min-height: calc(100vh - 310px);
+  }
 
   .header {
     width: 90%;
