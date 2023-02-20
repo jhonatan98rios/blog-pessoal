@@ -14,16 +14,18 @@ export class GetPostService {
     .then(res => res.data)
     .catch(err => {
 
-      const { data, status } = err.response
-      const errors = parseError(data)
+      if (err?.response) {
+        const { data, status } = err.response
+        const errors = parseError(data)
 
-      errors.forEach(error => {
-        this.notification.addError({
-          message: error,
-          statusCode: status,
-          type: 'danger'
+        errors.forEach(error => {
+          this.notification.addError({
+            message: error,
+            statusCode: status,
+            type: 'danger'
+          })
         })
-      })
+      }
 
     })
     .finally(() => {

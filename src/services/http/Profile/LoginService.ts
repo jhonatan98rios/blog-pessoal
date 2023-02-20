@@ -26,7 +26,6 @@ export class LoginService {
     }
 
     if (this.notification.hasErrors) {
-      console.log(this.notification.hasErrors)
       this.notification.throwMessages()
       return
     }

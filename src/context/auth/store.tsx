@@ -44,7 +44,7 @@ export function AuthContextProvider({ children }) {
   }, [])
 
 
-  async function checkin(token) {
+  async function checkin(token: string) {
     /*
     It's called when the page loads.
     Should use the token stored on cookies to authenticate the user
@@ -55,12 +55,14 @@ export function AuthContextProvider({ children }) {
     const checkinService = new CheckInService(httpClient, notification)
     const res = await checkinService.execute(token)
 
-    if (res) {
+    if (res?.user) {
       console.log('checkIn on user: ', res.user)
       httpClient.setAuthorizationHeader(res.token)
+      setUser({ username: res.user, role: res.role })
+      return
     }
 
-    setUser({ username: res.user, role: res.role })
+    logout()
   }
 
   async function login({ username, password }: SignInData) {

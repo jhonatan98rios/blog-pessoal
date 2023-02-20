@@ -60,7 +60,6 @@ export function Quilljs({ setContent, initialContent }: IQuilljs) {
     if (!quill) return
     quill.on('text-change', () => {
       const base64 = Buffer.from(quill.root.innerHTML).toString('base64')
-      console.log(base64)
       setContent(base64)
     })
   }, [quill]);

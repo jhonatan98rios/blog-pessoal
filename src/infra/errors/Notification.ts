@@ -25,7 +25,6 @@ export default class Notification implements AbstractNotification {
   }
 
   addError({ message, statusCode, type }: IAppError): void {
-    console.log('type: ', type)
     let error = new AppError({ message, statusCode, type })
     this.errors.push(error)
   }
@@ -40,10 +39,6 @@ export default class Notification implements AbstractNotification {
       Store.removeAllNotifications()
 
       this.errors.forEach(err => {
-
-        console.log('throwMessages')
-        console.log(this.errors)
-
         const title = err.type == 'success' ? 'Sucesso' : 'Erro'
 
         Store.addNotification({

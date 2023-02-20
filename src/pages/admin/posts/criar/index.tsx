@@ -45,9 +45,7 @@ export default function Create() {
     const notification = new Notification()
     const createPostService = new CreatePostService(httpService, notification)
 
-    console.log('content: ', content)
-
-    /* const res = await createPostService.execute({
+    const res = await createPostService.execute({
       title, subtitle, banner, content, language,
       seo_title, seo_description, seo_keywords,
       categories: categs,
@@ -55,7 +53,7 @@ export default function Create() {
 
     if (res) {
       router.push('/admin/posts')
-    } */
+    }
   }
 
   return (

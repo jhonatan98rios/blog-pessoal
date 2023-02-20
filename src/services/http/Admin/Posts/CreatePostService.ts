@@ -90,7 +90,6 @@ export class CreatePostService {
     }
 
     if (this.notification.hasErrors) {
-      console.log(this.notification.hasErrors)
       this.notification.throwMessages()
       return
     }
@@ -112,17 +111,18 @@ export class CreatePostService {
     })
     .catch(err => {
 
-      const { data, status } = err.response
-      const errors = parseError(data)
+      if (err?.response) {
+        const { data, status } = err.response
+        const errors = parseError(data)
 
-      errors.forEach(error => {
-        this.notification.addError({
-          message: error,
-          statusCode: status,
-          type: 'danger'
+        errors.forEach(error => {
+          this.notification.addError({
+            message: error,
+            statusCode: status,
+            type: 'danger'
+          })
         })
-      })
-
+      }
     })
     .finally(() => {
       this.notification.throwMessages()

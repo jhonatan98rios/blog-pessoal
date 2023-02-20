@@ -31,7 +31,6 @@ export async function updateUserRole(username: string, role: string) {
     role
   })
     .then(res => {
-      console.log(res.data)
       return res.data
     })
     .catch(err => {
