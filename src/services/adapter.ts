@@ -6,7 +6,7 @@ import { PostModel } from "models/Post";
 
 export function adapter(post: PostModel): Partial<ExpandedPost> {
 
-  const decoded = new Buffer(post.content, 'base64').toString()
+  const decoded = new Buffer(post.content, 'base64').toString().replace(/&nbsp;/g, ' ')
 
   return {
     seo_title: post.seo_title,

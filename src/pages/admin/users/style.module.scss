@@ -3,10 +3,14 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    height: calc(100vh - 5rem);
+    min-height: calc(100vh - 220px);
+
+    @media (max-width: 1024px) {
+      min-height: calc(100vh - 285px);
+    }
 
     @media(max-width: 768px) {
-      height: calc(80vh - 8rem);
+      min-height: calc(100vh - 310px);
     }
 
     .section {
