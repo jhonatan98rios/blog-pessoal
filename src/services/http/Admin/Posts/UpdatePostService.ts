@@ -8,6 +8,7 @@ interface IUpdatePostService {
   banner: any
   content: string
   language: string
+  status: string,
   categories: { label: string, path: string }[]
   seo_title: string
   seo_description: string
@@ -22,7 +23,7 @@ export class UpdatePostService {
   ) {}
 
   execute(slug, {
-    title, subtitle, banner, content, language, categories,
+    title, subtitle, banner, content, language, categories, status,
     seo_title, seo_description, seo_keywords,
   }: IUpdatePostService) {
 
@@ -95,7 +96,7 @@ export class UpdatePostService {
     }
 
     return this.httpClient.api.put(`/post/${slug}`, {
-      title, subtitle, banner, content, categories, language,
+      title, subtitle, banner, content, categories, language, status,
       seo_title, seo_description, seo_keywords,
     })
 

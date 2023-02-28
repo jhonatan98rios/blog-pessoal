@@ -17,7 +17,7 @@ export function Quilljs({ setContent, initialContent }: IQuilljs) {
   const insertToEditor = (url: any) => {
     const range = quill.getSelection()
     if (!range) return
-    quill.insertEmbed(range.index, 'image', url)
+    quill.insertEmbed(range.index, 'image', url, 'alt_test')
   }
 
   // Upload Image to Image Server such as AWS S3, Cloudinary, Cloud Storage, etc..

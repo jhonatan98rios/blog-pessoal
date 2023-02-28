@@ -1,15 +1,37 @@
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import useDidMountEffect from "hooks/useDidMountEffect ";
+import CookieConsent from "react-cookie-consent";
 
 export function ConsentBanner() {
+
+  useDidMountEffect(() => {
+    acceptHandler()
+  }, [])
+
+  function acceptHandler() {
+    if (typeof window !== 'undefined') {
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+      })
+    }
+  }
+
   return (
     <CookieConsent
-      buttonText="Concordo"
-      cookieName="nextauth.consent"
+      expires={180}
+      cookieName="analytics.consent"
+
+      buttonText="Aceitar"
+      declineButtonText="Recusar"
+
       style={{ background: "var(--primary)" }}
       buttonStyle={{ background: "#fff", color: "var(--gray700)" }}
-      expires={150}
+      declineButtonStyle={{ background: "transparent", color: "#fff", border: 'none' }}
+
+      enableDeclineButton={true}
+      onAccept={acceptHandler}
     >
-      Esse site utiliza cookies para melhorar sua experiência.
+      Esse site utiliza cookies para melhorar sua experiência de navegação.
     </CookieConsent>
   );
 }

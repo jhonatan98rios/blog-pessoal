@@ -49,9 +49,9 @@ export default function Post({ post }: PostProps) {
 
     const httpService = AxiosHttpClient.getInstance()
     const notification = new Notification()
-    const createPostService = new UpdatePostService(httpService, notification)
-    const res = await createPostService.execute(post.slug, {
-      title, subtitle, banner, content, language,
+    const updatePostService = new UpdatePostService(httpService, notification)
+    const res = await updatePostService.execute(post.slug, {
+      title, subtitle, banner, content, language, status,
       seo_title, seo_description, seo_keywords,
       categories: categs,
     })

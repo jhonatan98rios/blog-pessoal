@@ -9,7 +9,7 @@ import { ConsentBanner } from 'components/Shared/ConsentBanner';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <GlobalContext>
+    <GlobalContext>,
       <ReactNotifications />
       <Header />
       <Component {...pageProps} />

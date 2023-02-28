@@ -25,6 +25,7 @@
     "@testing-library/dom": "*",
     "@testing-library/jest-dom": "*",
     "@testing-library/react": "*",
+    "@types/gtag.js": "^0.0.12",
     "@types/node": "*",
     "@types/prismic-dom": "*",
     "@types/react": "*",
