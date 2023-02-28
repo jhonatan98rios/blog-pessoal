@@ -14,7 +14,15 @@ export class CheckInService {
       token
     })
 
-    .then(res => res.data)
+    .then(res => {
+      this.notification.addError({
+        message: 'Check in realizado com sucesso!',
+        statusCode: 200,
+        type: 'success'
+      })
+
+      return res.data
+    })
     .catch(err => {
       const { data, status } = err.response
       const errors = parseError(data)

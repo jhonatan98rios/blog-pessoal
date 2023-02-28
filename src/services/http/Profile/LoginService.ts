@@ -34,7 +34,15 @@ export class LoginService {
       user, password
     })
 
-    .then(res => res.data)
+    .then(res => {
+      this.notification.addError({
+        message: 'Login realizado com sucesso!',
+        statusCode: 200,
+        type: 'success'
+      })
+
+      return res.data
+    })
     .catch(err => {
       /* if (err.response?.data?.message) {
         this.notification.addError({

@@ -32,21 +32,23 @@ export class RegisterService {
       })
     }
 
-    if (!consent) {
-      this.notification.addError({
-        message: 'Para criar uma conta é necessário concordar com o recebímento de e-mails ativando a opção ao final do formulário',
-        statusCode: 422
-      })
-    }
-
     if (this.notification.hasErrors) {
       this.notification.throwMessages()
       return
     }
 
-    return this.httpClient.api.post('/user/', { user, mail, password })
+    return this.httpClient.api.post('/user/', { user, mail, password, consent })
 
-    .then(res => res.data)
+    .then(res => {
+
+      this.notification.addError({
+        message: 'Usuário criado com sucesso!',
+        statusCode: 200,
+        type: 'success'
+      })
+
+      return res.data
+    })
     .catch(err => {
 
       const { data, status } = err.response
