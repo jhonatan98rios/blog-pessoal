@@ -18,9 +18,7 @@ export function SEO({
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
   const default_keywords = 'Como ser um desenvolvedor?, blog de tecnologia, blog de programação, blog de design, blog de tecnologia, linguagens de programação, programação web, desenvolvimento de aplicativos,'
   const pageKeywords = default_keywords + keywords
-  const pageImage = image ? image : 'https://jhonatan-teixeira-rios-blog.herokuapp.com/logo.png'
-
-  /* TO DO */
+  const pageImage = image ? image : 'https://www.jhonatan-dev-rios-blog.com.br/logo.png'
 
   return (
     <Head>
@@ -62,14 +60,12 @@ export function SEO({
       <meta name="twitter:image:width" content="800" />
       <meta name="twitter:image:height" content="360" />
 
-      {/* TO DO */}
-
       <script
         type="application/ld+json"
         key="jsonld"
         dangerouslySetInnerHTML={
           jsonLdGenerator({
-            url:  `https://jhonatan-teixeira-rios-blog.herokuapp.com/post/${slug}`,
+            url:  `https://www.jhonatan-dev-rios-blog.com.br/posts/${slug}`,
             title: title,
             src: pageImage
           })
@@ -83,7 +79,7 @@ export function SEO({
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
         crossOrigin="anonymous"
       />
-      {
+      {/* {
         hasADS &&
         <>
           <script
@@ -92,7 +88,7 @@ export function SEO({
             }}
           />
         </>
-      }
+      } */}
 
     </Head>
   );

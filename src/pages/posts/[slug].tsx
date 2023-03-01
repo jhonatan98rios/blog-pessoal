@@ -63,7 +63,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
 
           <Masonry posts={filteredPosts} />
 
-          { !isMobile &&
+          {/* { !isMobile &&
             <ins
               className={"adsbygoogle " + styles.fake_col}
               style={{ display: 'block' }}
@@ -72,7 +72,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
-          }
+          } */}
         </section>
       </main>
     </>

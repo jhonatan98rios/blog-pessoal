@@ -18,7 +18,7 @@ export default function Autor() {
       <SEO
         title="Como ser um desenvolvedor?"
         description="Conteúdos sobre programação, design e muito mais!"
-        image="https://jhonatan-teixeira-rios-blog.herokuapp.com/autor/avatar.png"
+        image="https://www.jhonatan-dev-rios-blog.com.br/autor/avatar.png"
         excludeTitleSuffix
       />
 

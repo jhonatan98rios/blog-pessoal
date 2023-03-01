@@ -40,7 +40,7 @@ export default function Home() {
       <SEO
         title="Como ser um desenvolvedor?"
         description="Conteúdos sobre programação, design e muito mais!"
-        image="https://jhonatan-teixeira-rios-blog.herokuapp.com/logo.png"
+        image="https://www.jhonatan-dev-rios-blog.com.br/logo.png"
         excludeTitleSuffix
       />
 

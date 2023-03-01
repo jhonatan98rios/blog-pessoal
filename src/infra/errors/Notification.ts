@@ -34,7 +34,7 @@ export default class Notification implements AbstractNotification {
   }
 
   throwMessages() {
-    if (this.hasErrors) {
+    if (this.hasErrors && Store) {
 
       Store.removeAllNotifications()
 
