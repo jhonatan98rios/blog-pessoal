@@ -77,13 +77,13 @@ export function SEO({
       />
 
       {/* ADSENSE */}
-      {/* <script
+      <script
         id="Adsense-id"
         async={true}
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
         crossOrigin="anonymous"
-      /> */}
-      {/* {
+      />
+      {
         hasADS &&
         <>
           <script
@@ -92,7 +92,7 @@ export function SEO({
             }}
           />
         </>
-      } */}
+      }
 
     </Head>
   );

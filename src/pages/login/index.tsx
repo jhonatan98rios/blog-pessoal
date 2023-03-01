@@ -46,7 +46,7 @@ export default function Login({ }) {
               onChange={(e) => setUser(e.target.value)}
               type="text"
               name='user'
-              placeholder='Insira seu e-mail aqui'
+              placeholder='Insira seu usuário aqui'
             />
             <input
               className={styles.input}

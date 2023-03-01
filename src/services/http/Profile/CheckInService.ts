@@ -15,12 +15,6 @@ export class CheckInService {
     })
 
     .then(res => {
-      this.notification.addError({
-        message: 'Check in realizado com sucesso!',
-        statusCode: 200,
-        type: 'success'
-      })
-
       return res.data
     })
     .catch(err => {
