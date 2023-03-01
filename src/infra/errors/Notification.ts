@@ -34,7 +34,7 @@ export default class Notification implements AbstractNotification {
   }
 
   throwMessages() {
-    if (this.hasErrors && Store) {
+    if (this.hasErrors && Store?.removeAllNotifications) {
 
       Store.removeAllNotifications()
 
@@ -48,8 +48,8 @@ export default class Notification implements AbstractNotification {
           type: err.type ? err.type as NOTIFICATION_TYPE : notificationConfig.type
         })
       })
-
-      this.errors = []
     }
+
+    this.errors = []
   }
 }
