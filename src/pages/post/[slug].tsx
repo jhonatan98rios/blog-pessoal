@@ -73,8 +73,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const notification = new Notification()
   const getPostService = new GetPostService(httpService, notification)
   const res = await getPostService.execute()
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
 
-  const paths = res.posts.length > 0 ? res.posts.map(post => `/post/${post.slug}`) : []
+  const paths = filteredPosts.length > 0 ? filteredPosts.map(post => `/post/${post.slug}`) : []
 
   return {
     paths,

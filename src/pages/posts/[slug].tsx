@@ -85,8 +85,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const notification = new Notification()
   const getPostService = new GetPostService(httpService, notification)
   const res = await getPostService.execute()
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
 
-  const paths = res.posts.map(
+  const paths = filteredPosts.map(
     (post) => post.categories.map(
       (cat) => `/posts/${cat.path}`
     )
