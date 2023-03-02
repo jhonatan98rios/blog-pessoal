@@ -33,6 +33,10 @@ export default class Notification implements AbstractNotification {
     return this.errors
   }
 
+  clearErrors() {
+    this.errors = []
+  }
+
   throwMessages() {
     if (this.hasErrors && Store?.removeAllNotifications) {
 
@@ -50,6 +54,6 @@ export default class Notification implements AbstractNotification {
       })
     }
 
-    this.errors = []
+    this.clearErrors()
   }
 }

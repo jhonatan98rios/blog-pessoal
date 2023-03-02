@@ -9,6 +9,10 @@
     overflow-x: hidden;
   }
 
+  @media(max-width: 768px) {
+    padding: 0 1rem;
+  }
+
   .post {
     max-width: 900px;
     margin-top: 7rem;
@@ -73,6 +77,10 @@
 
         p, ul {
           margin: 1.5rem 0;
+
+          @media(max-width: 768px) {
+            margin: 1rem 0;
+          }
         }
 
         ul {
@@ -100,8 +108,11 @@
           object-fit: cover;
           max-height: 360px;
           border-radius: 8px;
-
           margin: 2rem 0;
+
+          @media(max-width: 768px) {
+            margin: .5rem 0;
+          }
         }
       }
     }

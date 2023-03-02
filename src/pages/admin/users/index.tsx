@@ -22,14 +22,10 @@ export default function AdminsUsers({ users }) {
   const ctx = useContext(AuthContext)
   const router = useRouter()
 
-  function logout() {
-    ctx.logout()
-    router.push('/login')
-  }
-
   useDidMountEffect(() => {
     if (!ctx.isAuthenticated) {
-      logout()
+      ctx.logout()
+      router.push('/login')
     }
   }, [ctx])
 

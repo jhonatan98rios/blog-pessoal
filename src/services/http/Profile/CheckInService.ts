@@ -20,18 +20,7 @@ export class CheckInService {
     .catch(err => {
       const { data, status } = err.response
       const errors = parseError(data)
-
-      errors.forEach(error => {
-        this.notification.addError({
-          message: error,
-          statusCode: status,
-          type: 'danger'
-        })
-      })
-
-    })
-    .finally(() => {
-      this.notification.throwMessages()
+      console.log(errors)
     })
   }
 }

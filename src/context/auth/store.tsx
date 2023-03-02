@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
-import { useRouter } from 'next/router'
 
 import { LoginService } from "services/http/Profile/LoginService";
 import Notification from "infra/errors/Notification";
@@ -28,7 +27,6 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState<User | null>(null)
-  const router = useRouter()
 
   const isAuthenticated = !!user;
 
@@ -94,11 +92,6 @@ export function AuthContextProvider({ children }) {
   }
 
   function logout() {
-    /*
-    Should remove the cookies, store data
-    and delete the token on database
-    */
-
     console.log('LOGOUT')
     const httpClient = AxiosHttpClient.getInstance()
 
@@ -107,9 +100,12 @@ export function AuthContextProvider({ children }) {
     }
 
     httpClient.deleteAuthorizationHeader()
-    destroyCookie(undefined, 'nextauth.token')
+    try {
+      destroyCookie(undefined, 'nextauth.token')
+    } catch(err) {
+      console.log(err)
+    }
     setUser(null)
-    router.push('/login')
   }
 
   return (

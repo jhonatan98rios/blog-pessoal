@@ -12,7 +12,7 @@ import { UpdatePasswordService } from 'services/http/Profile/UpdatePasswordServi
 
 export default function AdminUsersEdit() {
 
-  const { user, logout } = useContext(AuthContext)
+  const ctx = useContext(AuthContext)
 
   const [ currentPassword, setOldPassword ] = useState<string>('')
   const [ password, setPassword ] = useState<string>('')
@@ -24,14 +24,14 @@ export default function AdminUsersEdit() {
     const httpService = AxiosHttpClient.getInstance()
     const notification = new Notification()
     const updatePasswordService = new UpdatePasswordService(httpService, notification)
-    const res = await updatePasswordService.execute(user.username, currentPassword, password, passwordConfirmation)
+    const res = await updatePasswordService.execute(ctx.user.username, currentPassword, password, passwordConfirmation)
 
     if (res) {
-      logout()
+      ctx.logout()
     }
   }
 
-  return user?.username ? (
+  return ctx.user?.username ? (
     <>
       <SEO
         title="Perfil | Editar a senha"
@@ -45,7 +45,7 @@ export default function AdminUsersEdit() {
         <section className={styles.main}>
           <h1 className={styles.title}>
             Editar senha do usuário:
-            <span> {user.username} </span>
+            <span> {ctx.user.username} </span>
           </h1>
 
           <form className={styles.form}>
