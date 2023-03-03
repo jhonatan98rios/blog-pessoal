@@ -36,6 +36,7 @@ export function SEO({
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="google" content="notranslate" />
       <meta name="keywords" content={pageKeywords} />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
 
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />

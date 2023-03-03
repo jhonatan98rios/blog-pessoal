@@ -26,6 +26,8 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
   const { state, setState } = useContext(StoreContext)
   const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
 
+  const categorie = router.asPath.split('/')[2]
+
   useEffect(() => {
     setState({ ...state, search: '' })
   }, [])
@@ -40,9 +42,9 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
   return (
     <>
       <SEO
-        title={`Posts | ${router.asPath.split('/')[2]}`}
+        title={`Posts | ${categorie}`}
         description="Quer saber como ser um programador? Confira nossos posts e seja bem vindo ao mundo da programação!"
-        keywords={`${router.asPath.split('/')[2]}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
+        keywords={`${categorie}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
         hasADS={true}
       />
 
@@ -55,7 +57,7 @@ export default function FilteredPosts({ posts, categories }: IPostsProps) {
         <NavigationControl previousPath="/posts/" />
 
         <section className={styles.container}>
-          <h2 className="no-display"> Posts </h2>
+          <h1 className="no-display"> Todos os posts sobre {categorie} </h1>
 
           { !isMobile &&
            <Categories categories={categories} />

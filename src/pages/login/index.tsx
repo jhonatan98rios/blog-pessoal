@@ -27,8 +27,8 @@ export default function Login({ }) {
   return (
     <>
       <SEO
-        title="Login"
-        description="Acesse sua conta"
+        title="Entrar com uma conta existente | Como ser um desenvolvedor?"
+        description="Tela de login | Entrar com uma conta existente | Acesse sua conta pessoal"
         keywords="login, acesse sua conta"
         hasADS={false}
       />
@@ -38,6 +38,8 @@ export default function Login({ }) {
 
         <section className={styles.main}>
           <h1 className={styles.title}> Login </h1>
+
+          <h2 className='no-display'> Entrar com uma conta existente </h2>
 
           <form className={styles.form}>
             <input

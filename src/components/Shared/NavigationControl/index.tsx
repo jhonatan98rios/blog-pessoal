@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import styles from './styles.module.scss';
@@ -9,8 +8,6 @@ interface IPrev {
 }
 
 export function NavigationControl({ previousPath }: IPrev) {
-
-  const router = useRouter()
 
   return (
     <section className={styles.container}>
@@ -22,7 +19,7 @@ export function NavigationControl({ previousPath }: IPrev) {
             <img
               className={styles.arrow}
               src="/arrow.png"
-              alt=""
+              alt="voltar"
             />
             Voltar
           </Link>

@@ -32,8 +32,8 @@ export default function Register({ }) {
   return (
     <>
       <SEO
-        title="Registrar"
-        description="Crie sua conta"
+        title="Registrar uma nova conta | Como ser um desenvolvedor?"
+        description="Tela de criação de conta | Registrar uma nova conta | Crie sua conta pessoal"
         keywords="registrar, criar sua conta"
         hasADS={false}
       />
@@ -43,6 +43,8 @@ export default function Register({ }) {
 
         <section className={styles.main}>
           <h1 className={styles.title}> Registrar </h1>
+
+          <h2 className='no-display'> Criar nova conta </h2>
 
           <form className={styles.form}>
             <input

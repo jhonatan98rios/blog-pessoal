@@ -38,7 +38,7 @@ export default function Post({ post, posts }: PostProps) {
       <main className={styles.container}>
 
         <article className={styles.post}>
-          <img className={styles.image} src={post.banner.src} />
+          <img className={styles.image} src={post.banner.src} alt={`Banner ${post.title}`} loading="lazy" />
 
           <div className={styles.text}>
             <div className={styles.header}>

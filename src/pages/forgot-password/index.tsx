@@ -31,8 +31,8 @@ export default function Login({ }) {
   return (
     <>
       <SEO
-        title="Login"
-        description="Acesse sua conta"
+        title="Recuperação de senha | Como ser um desenvolvedor?"
+        description="Tela de recuperação de senha | Esqueceu sua senha? Recupere sua senha por email"
         keywords="login, acesse sua conta"
         hasADS={false}
       />
@@ -44,6 +44,7 @@ export default function Login({ }) {
           !sent ?
           <section className={styles.main}>
             <h1 className={styles.title}> Recuperação de senha </h1>
+            <h2 className='no-display'> Solicitar recuperação de senha por email </h2>
 
             <form className={styles.form}>
               <input

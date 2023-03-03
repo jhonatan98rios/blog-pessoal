@@ -13,10 +13,10 @@
   margin-bottom: 16px;
   cursor: pointer;
   position: relative;
+  transition: all .1s;
 
   &:hover {
-    transform: scale(1.005);
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
+    transform: scale(1.01);
   }
 
   @media(min-width: 1025px) {
