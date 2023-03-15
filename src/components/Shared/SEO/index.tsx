@@ -60,6 +60,8 @@ export function SEO({
       <meta name="twitter:image:width" content="800" />
       <meta name="twitter:image:height" content="360" />
 
+      <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
       <script
         type="application/ld+json"
         key="jsonld"
