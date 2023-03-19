@@ -82,7 +82,7 @@ export function AuthContextProvider({ children }) {
 
     destroyCookie(undefined, 'nextauth.token')
     setCookie(undefined, 'nextauth.token', res.token, {
-      maxAge: 60 * 60 * 24, // 1 day
+      maxAge: 60 * 60 * 24 * 3, // 3 days
     })
 
     httpClient.setAuthorizationHeader(res.token)
