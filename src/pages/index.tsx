@@ -1,90 +1,99 @@
-import { GetServerSideProps } from 'next';
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
+import React, { useContext, useEffect, useState } from 'react';
+import { GetStaticProps } from "next";
 
+import { SEO } from "components/Shared";
+import { Categories } from "components/Posts/Categories";
+import { Masonry } from  'components/Posts/Masonry'
+import { adapter } from 'services/adapter'
+
+import { getDeduplicatedCategories, postsFilterBySearch, postsFilterByStatus } from "services/utils";
+import useDeviceDetect from "hooks/useDevice";
 import StoreContext from 'context/search/store'
 
-import { SEO } from 'components/Shared';
-import PresentationImage from 'components/Home/PresentationImage';
-import styles from './home.module.scss';
+import { PostModel } from 'models/Post';
 
-export default function Home() {
+import { IPostsProps, IPost } from 'types'
+import styles from './posts/styles.module.scss'
+import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
+import Notification from 'infra/errors/Notification';
+import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
 
-  const { state, setState } = useContext(StoreContext)
-  const [error, setError] = useState(false)
-  const router = useRouter()
+export default function Posts({ posts, categories }: IPostsProps) {
 
-  function handleKeyPress(e: ChangeEvent<HTMLInputElement>) {
-    setState({ ...state, search: e.target.value })
-  }
-
-  function handleClick() {
-    if (state.search.length > 3) {
-      router.push('/posts')
-    } else {
-      setError(true)
-    }
-  }
+  const { isMobile } = useDeviceDetect()
+  const { state } = useContext(StoreContext)
+  const [ filteredPosts, setFilteredPosts ] = useState<IPost[]>([])
 
   useEffect(() => {
-    setTimeout(() => {
-      setError(false)
-    }, 500)
-
-  }, [error])
-
-  /* TO DO */
+    setFilteredPosts(
+      postsFilterBySearch(posts, state.search)
+    )
+  }, [state.search])
 
   return (
     <>
       <SEO
-        title="Como ser um desenvolvedor?"
-        description="Conteúdos sobre programação, design e muito mais!"
-        image="https://www.jhonatan-dev-rios-blog.com.br/logo.png"
-        excludeTitleSuffix
+        title={`Posts`}
+        description="Quer saber como ser um programador? Confira nossos posts e seja bem vindo ao mundo da programação!"
+        keywords={`${state.search}, programação, estudos, tecnologia, computação, games, web, aplicativos, carreira em ti, desenvolvimento profissional, mercado de ti`}
+        hasADS={true}
       />
 
-      <main className={styles.main}>
-        <section className={styles.section}>
+      <main>
+        { isMobile &&
+          <Categories categories={categories} />
+        }
 
-          <div className={styles.content}>
-            <h1>
-              Como ser um <br />
-              <span> Desenvolvedor? </span> <br />
-            </h1>
-            <p>
-              Conteúdos sobre programação,  <br />
-              design e muito mais!
-            </p>
+        <section className={styles.container}>
+          <h1 className="no-display"> Todos os posts </h1>
 
-            <input
-              className={`${styles.input} ${error ? styles.warning : ''}`}
-              placeholder='Pesquise por titulo ou categoria'
-              type="text"
-              onChange={handleKeyPress}
+          { !isMobile &&
+           <Categories categories={categories} />
+          }
+
+          <Masonry posts={filteredPosts} />
+
+          {/* { !isMobile &&
+            <ins
+              className={"adsbygoogle " + styles.fake_col}
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-1739197497968733"
+              data-ad-slot="7846772608"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
             />
-
-            <button
-              className={styles.button}
-              onClick={handleClick}
-            >
-              Buscar
-            </button>
-          </div>
-
-          <PresentationImage />
+          } */}
         </section>
       </main>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
+
+  const httpService = AxiosHttpClient.getInstance()
+  const notification = new Notification()
+  const getPostService = new GetPostService(httpService, notification)
+  const res = await getPostService.execute()
+
+  if (!res || res.posts.length == 0) {
+    return {
+      props: {
+        posts: [],
+        categories: []
+      }
+    }
+  }
+
+  const filteredPosts = postsFilterByStatus(res.posts, 'prod')
+  const categories = getDeduplicatedCategories(filteredPosts)
+  const posts = filteredPosts.map(content => adapter(content as PostModel))
 
   return {
-    redirect: {
-      destination: '/posts',
-      permanent: false,
-    }
+    props: {
+      posts,
+      categories
+    },
+    revalidate: 60 * 60 * 24
   }
 }

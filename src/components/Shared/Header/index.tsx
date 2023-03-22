@@ -70,7 +70,7 @@ export function Header() {
                 Inicio
               </Link> */}
 
-              <Link href="/posts" className={styles.active} onClick={handleCheckbox}>
+              <Link href="/" className={styles.active} onClick={handleCheckbox}>
                 Posts
               </Link>
 
