@@ -1,3 +1,4 @@
+import { AdBanner } from 'components/Shared/AdBanner';
 import Link from 'next/link';
 import React from 'react';
 import { ExpandedPost } from 'types';
@@ -33,6 +34,8 @@ export function Recents({ posts }: RecentsProps) {
           )}
         </ul>
       </nav>
+
+      <AdBanner id='A81212712O' />
     </aside>
   );
 }

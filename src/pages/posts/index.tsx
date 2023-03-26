@@ -17,6 +17,7 @@ import styles from './styles.module.scss'
 import { AxiosHttpClient } from 'infra/http/AxiosHttpClient';
 import Notification from 'infra/errors/Notification';
 import { GetPostService } from 'services/http/Admin/Posts/GetPostService';
+import { AdBanner } from 'components/Shared/AdBanner';
 
 export default function Posts({ posts, categories }: IPostsProps) {
 
@@ -53,16 +54,6 @@ export default function Posts({ posts, categories }: IPostsProps) {
 
           <Masonry posts={filteredPosts} />
 
-          {/* { !isMobile &&
-            <ins
-              className={"adsbygoogle " + styles.fake_col}
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-1739197497968733"
-              data-ad-slot="7846772608"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          } */}
         </section>
       </main>
     </>

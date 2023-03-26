@@ -21,7 +21,7 @@ export default function Login({ }) {
     e.preventDefault()
 
     await ctx.login({ username, password })
-    router.push('/perfil')
+    router.push('/')
   }
 
   return (
