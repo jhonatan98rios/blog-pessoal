@@ -1,4 +1,7 @@
-import { useEffect, useRef } from 'react';
+import useWindowDimensions from 'hooks/useWindowDimensions';
+import { Html } from 'next/document';
+import { useEffect, useRef, useState } from 'react';
+import { AdType, advertisements } from './advertisements'
 import styles from './styles.module.scss'
 
 interface IAdBanner {
@@ -7,16 +10,18 @@ interface IAdBanner {
 
 export function AdBanner({ id }: IAdBanner) {
 
-  const banner = useRef<HTMLAnchorElement>(null)
+  const { width } = useWindowDimensions();
+  const banner = useRef(null)
+  const advertisement: AdType = advertisements[id]
+  const [isVisible, setVisible] = useState(true)
 
   function handleScroll() {
-
-    if (this.scrollY > 750) {
-      banner.current.style.position = 'fixed'
-      banner.current.style.top = '100px'
-    } else {
-      banner.current.style.position = 'relative'
-      banner.current.style.top = '0px'
+    if (banner.current) {
+      if (this.scrollY > 750) {
+        banner.current.classList.add('fixedBanner')
+      } else {
+        banner.current.classList.remove('fixedBanner')
+      }
     }
   }
 
@@ -27,19 +32,27 @@ export function AdBanner({ id }: IAdBanner) {
     }
   }, [])
 
-  const content = {
-    'A81212712O': { src: '/adbanners/A81212712O.png', link: 'https://go.hotmart.com/A81212712O?dp=1' },
-  }[id]
-
-  return (
-    <a
-      target="_blank"
-      ref={banner}
-      className={styles.banner}
-      href={content.link}
-      style={{
-        backgroundImage: `url(${content.src})`
-      }}
-    />
+  return isVisible && (
+    <div ref={banner} className={styles.banner}>
+      <span
+        onClick={() => setVisible(false)}
+        className={styles.close}
+      >
+        ✕
+      </span>
+      <a
+        className={styles.anchor}
+        style={{
+          backgroundImage: `url(${advertisement.src[
+            width < 1024 ? 'touch' : 'desktop'
+          ]})`
+        }}
+        target="_blank"
+        href={advertisement.link}
+      >
+        <h4> {advertisement.title} </h4>
+        <p dangerouslySetInnerHTML={{__html: advertisement.description}} />
+      </a>
+    </div>
   );
 }
