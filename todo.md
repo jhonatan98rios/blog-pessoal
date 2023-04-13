@@ -19,3 +19,8 @@
     - [ ] Implementar um formulário de edição de senha nessa página
     - [ ] Enviar o token como um link para o email do usuário
 
+
+# Monetização
+- [] Adicionar o link https://go.hotmart.com/V81207915T?dp=1 no banner sobre criação de aplicativos online
+
+- https://go.hotmart.com/A81212712O?dp=1
