@@ -78,13 +78,13 @@ export function Header() {
                 Sobre o autor
               </Link>
 
-              <Link
+              {/* <Link
                 href={ctx.isAuthenticated ? '/perfil/': '/login/'}
                 className={styles.active}
                 onClick={handleCheckbox}
               >
                 { ctx.isAuthenticated ? 'Perfil' : 'Login' }
-              </Link>
+              </Link> */}
 
               {
                 (ctx.isAuthenticated && ctx.user.role === 'admin') &&
