@@ -10,7 +10,7 @@ export class GetPostService {
   ) {}
 
   execute() {
-    return this.httpClient.api.get(`/post`)
+    return this.httpClient.api.get(`/posts`)
     .then(res => res.data)
     .catch(err => {
 
