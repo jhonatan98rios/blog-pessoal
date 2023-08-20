@@ -75,7 +75,7 @@ export function Header() {
               </Link>
 
               <Link href="/autor" className={styles.active} onClick={handleCheckbox}>
-                Sobre o autor
+                Sobre o autor!
               </Link>
 
               {/* <Link
