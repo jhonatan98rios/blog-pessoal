@@ -11,7 +11,7 @@ export class GetPostService {
   ) {}
 
   execute() {
-    return this.httpClient.api.get(`${API_URL}/post`)
+    return this.httpClient.api.get(`${API_URL}/posts`)
     .then(res => res.data)
     .catch(err => {
 
