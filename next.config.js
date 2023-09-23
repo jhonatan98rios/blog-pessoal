@@ -7,6 +7,7 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   env: {
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    LAMBDA_URL: process.env.LAMBDA_URL
   }
 }

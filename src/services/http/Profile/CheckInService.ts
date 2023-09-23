@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL, LAMBDA_URL } from "services/constants";
 
 export class CheckInService {
 
@@ -10,7 +11,7 @@ export class CheckInService {
   ) {}
 
   execute(token: string) {
-    return this.httpClient.api.post('/user/check-in', {
+    return this.httpClient.api.post(`${LAMBDA_URL}/user/check-in`, {
       token
     })
 

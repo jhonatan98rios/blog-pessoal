@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (!data || !data.user) {
 
-    console.log('Erro no getAllUsers')
+    console.log('Erro no getOneUser')
 
     return {
       props: {

@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL, LAMBDA_URL } from "services/constants";
 
 export class UpdatePasswordService {
 
@@ -49,7 +50,7 @@ export class UpdatePasswordService {
       return
     }
 
-    return this.httpClient.api.put(`/user/${username}`, {
+    return this.httpClient.api.put(`${LAMBDA_URL}/user/${username}`, {
       currentPassword, password, passwordConfirmation
     })
 

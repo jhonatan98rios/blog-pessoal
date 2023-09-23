@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL, LAMBDA_URL } from "services/constants";
 
 export class ResetPasswordService {
 
@@ -42,7 +43,7 @@ export class ResetPasswordService {
       return
     }
 
-    return this.httpClient.api.post('/user/reset-password', {
+    return this.httpClient.api.post(`${LAMBDA_URL}/user/reset-password`, {
       mail, token, password, passwordConfirmation
     })
 
