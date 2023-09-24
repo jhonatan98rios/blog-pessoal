@@ -28,9 +28,6 @@ type UpdateUserRoleReturn = {
 export async function updateUserRole(username: string, role: string): Promise<UpdateUserRoleReturn | void> {
   const client = AxiosHttpClient.getInstance()
   const url = `${LAMBDA_URL}/user/role/${username}`
-  console.log('URL >: ', url)
-
-  console.log('authorization >: ', client.authorization)
 
   return client.api.put<UpdateUserRoleReturn>(url, {
     role
