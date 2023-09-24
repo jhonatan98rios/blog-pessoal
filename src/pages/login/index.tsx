@@ -56,6 +56,7 @@ export default function Login({ }) {
               type="password"
               name='password'
               placeholder='Insira sua senha aqui'
+              autoComplete="on"
             />
             <Link className={styles.forgotPasswordLink} href='/forgot-password'>
               <span> Esqueceu sua senha? </span>

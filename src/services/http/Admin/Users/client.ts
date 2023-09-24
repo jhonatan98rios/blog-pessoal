@@ -9,8 +9,6 @@ type GetAllUsersReturn = {
 export async function getAllUsers(ctx): Promise<GetAllUsersReturn> {
   const client = AxiosHttpClient.getInstance(ctx)
   const users = client.getAsyncData<GetAllUsersReturn>(`${LAMBDA_URL}/user/`)
-  console.log('users: ')
-  console.log(users)
   return users
 }
 
@@ -29,14 +27,21 @@ type UpdateUserRoleReturn = {
 }
 export async function updateUserRole(username: string, role: string): Promise<UpdateUserRoleReturn | void> {
   const client = AxiosHttpClient.getInstance()
+  const url = `${LAMBDA_URL}/user/role/${username}`
+  console.log('URL >: ', url)
 
-  return client.api.put<UpdateUserRoleReturn>(`${LAMBDA_URL}/user/role/${username}`, {
+  console.log('authorization >: ', client.authorization)
+
+  return client.api.put<UpdateUserRoleReturn>(url, {
     role
   })
     .then(res => {
       return res.data
     })
     .catch(err => {
-      console.log(err.response.data.message)
+      console.log(err.response.data.Message)
     })
 }
+
+
+///user/role/{user}

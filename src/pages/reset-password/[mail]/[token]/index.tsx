@@ -66,6 +66,7 @@ export default function Login({ mail, token }) {
               type="password"
               name='password'
               placeholder='Insira sua senha aqui'
+              autoComplete="on"
             />
             <input
               className={styles.input}

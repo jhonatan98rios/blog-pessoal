@@ -19,6 +19,9 @@ export default function Login({ user }: ILogin) {
 
   async function formHandle(e: any) {
     e.preventDefault()
+
+    console.log('formHandle')
+
     const res = await updateUserRole(user.user, role)
 
     if(res) {

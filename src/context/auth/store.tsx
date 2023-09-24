@@ -54,7 +54,6 @@ export function AuthContextProvider({ children }) {
     const res = await checkinService.execute(token)
 
     if (res?.user) {
-      console.log('checkIn on user: ', res.user)
       httpClient.setAuthorizationHeader(res.token)
       setUser({ username: res.user, role: res.role })
       return
@@ -87,8 +86,6 @@ export function AuthContextProvider({ children }) {
 
     httpClient.setAuthorizationHeader(res.token)
     setUser({ username: res.user, role: res.role })
-
-    console.log('login on user: ', res.user)
   }
 
   function logout() {

@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 import React from 'react';
 
 class MyDocument extends Document {
@@ -19,7 +20,7 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
 
         </Head>
-        <script
+        <Script
           id="gtag"
           dangerouslySetInnerHTML={{
             __html: `
