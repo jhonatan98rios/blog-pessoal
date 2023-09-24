@@ -50,7 +50,7 @@ export class UpdatePasswordService {
       return
     }
 
-    return this.httpClient.api.put(`${LAMBDA_URL}/user/${username}`, {
+    return this.httpClient.api.put(`${LAMBDA_URL}/user/update-user/${username}`, {
       currentPassword, password, passwordConfirmation
     })
 
@@ -64,6 +64,8 @@ export class UpdatePasswordService {
       return res.data
     })
     .catch(err => {
+
+      console.log(err)
 
       const { data, status } = err.response
       const errors = parseError(data)
