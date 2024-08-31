@@ -52,6 +52,15 @@ export class RegisterService {
     })
     .catch(err => {
 
+      if (!err.response) {
+        this.notification.addError({
+          message: err,
+          statusCode: 500,
+          type: 'danger'
+        })
+        return JSON.stringify(err)
+      }
+
       const { data, status } = err.response
       const errors = parseError(data)
 
