@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL, LAMBDA_URL } from "services/constants";
 
 export class UpdatePasswordService {
 
@@ -49,7 +50,7 @@ export class UpdatePasswordService {
       return
     }
 
-    return this.httpClient.api.put(`/user/${username}`, {
+    return this.httpClient.api.put(`${LAMBDA_URL}/user/update-user/${username}`, {
       currentPassword, password, passwordConfirmation
     })
 
@@ -63,6 +64,15 @@ export class UpdatePasswordService {
       return res.data
     })
     .catch(err => {
+
+      if (!err.response) {
+        this.notification.addError({
+          message: err,
+          statusCode: 500,
+          type: 'danger'
+        })
+        return JSON.stringify(err)
+      }
 
       const { data, status } = err.response
       const errors = parseError(data)

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 
 import { jsonLdGenerator } from 'services/json-ld'
 
@@ -60,7 +61,7 @@ export function SEO({
       <meta name="twitter:image:width" content="800" />
       <meta name="twitter:image:height" content="360" />
 
-      <script
+      <Script
         type="application/ld+json"
         key="jsonld"
         dangerouslySetInnerHTML={
@@ -73,7 +74,7 @@ export function SEO({
       />
 
       {/* ADSENSE */}
-      <script
+      <Script
         id="Adsense-id"
         async={true}
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1739197497968733"
@@ -82,7 +83,7 @@ export function SEO({
       {/* {
         hasADS &&
         <>
-          <script
+          <Script
             dangerouslySetInnerHTML={{
               __html: `(adsbygoogle = window.adsbygoogle || []).push({});`
             }}

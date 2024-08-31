@@ -1,16 +1,16 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import axios, { AxiosInstance } from "axios";
 import { parseCookies } from "nookies";
+import { LAMBDA_URL } from "services/constants";
 
 export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
   public api: AxiosInstance
+
   public static instance: AxiosHttpClient;
 
   constructor(ctx?: any) {
-    this.api = axios.create({
-      baseURL: process.env.API_URL
-    })
+    this.api = axios.create()
 
     this.api.interceptors.request.use(config => {
       return config;
@@ -37,7 +37,17 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
   public async getAsyncData<T>(url: string): Promise<T> {
     try {
-      const result = await this.api.get(url)
+      console.log("URL:", url)
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Origin': 'https://jhonatan-dev-rios-blog.vercel.app',
+          'Access-Control-Allow-Credentials': true,
+        }
+      }
+
+      const result = await this.api.get(url, config)
       const data = result.data;
       return data
 
@@ -56,7 +66,7 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
   public async deleteUserToken(user: string) {
     try {
-      await this.api.delete(`/user/logout/${user}`)
+      await this.api.delete(`${LAMBDA_URL}/user/logout/${user}`)
     } catch (error) {
       console.log(error);
     }
