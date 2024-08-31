@@ -20,8 +20,10 @@ export default function Login({ }) {
   async function formHandle(e: any) {
     e.preventDefault()
 
-    await ctx.login({ username, password })
-    router.push('/')
+    const isLogged = await ctx.login({ username, password })
+    if (isLogged) {
+      router.push('/')
+    }
   }
 
   return (

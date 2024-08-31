@@ -19,6 +19,12 @@ export class CheckInService {
       return res.data
     })
     .catch(err => {
+
+      if (!err.response) {
+        console.log(err)
+        return JSON.stringify(err)
+      }
+
       const { data, status } = err.response
       const errors = parseError(data)
       console.log(errors)
