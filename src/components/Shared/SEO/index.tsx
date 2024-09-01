@@ -13,7 +13,7 @@ export function SEO({
   excludeTitleSuffix = false,
   indexPage = true,
   hasADS=false
-}: SEOProps) {
+}: Readonly<SEOProps>) {
 
   const pageTitle = `${title} ${!excludeTitleSuffix ? '| Como ser um desenvolvedor?' : ''}`;
   const default_keywords = 'Como ser um desenvolvedor?, blog de tecnologia, blog de programação, blog de design, blog de tecnologia, linguagens de programação, programação web, desenvolvimento de aplicativos,'
