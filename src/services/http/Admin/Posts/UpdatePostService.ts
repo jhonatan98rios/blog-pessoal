@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL } from "services/constants";
 
 interface IUpdatePostService {
   title: string
@@ -95,7 +96,7 @@ export class UpdatePostService {
       return
     }
 
-    return this.httpClient.api.put(`/post/${slug}`, {
+    return this.httpClient.api.put(`${API_URL}/post/${slug}`, {
       title, subtitle, banner, content, categories, language, status,
       seo_title, seo_description, seo_keywords,
     })

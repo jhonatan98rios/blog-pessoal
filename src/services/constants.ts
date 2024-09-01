@@ -21,3 +21,6 @@ export const sizes = {
     'height': 16 * 30 - 20
   }
 }
+
+export const API_URL=process.env.API_URL
+export const LAMBDA_URL=process.env.LAMBDA_URL

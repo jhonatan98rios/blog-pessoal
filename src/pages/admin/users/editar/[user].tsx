@@ -19,6 +19,9 @@ export default function Login({ user }: ILogin) {
 
   async function formHandle(e: any) {
     e.preventDefault()
+
+    console.log('formHandle')
+
     const res = await updateUserRole(user.user, role)
 
     if(res) {
@@ -82,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (!data || !data.user) {
 
-    console.log('Erro no getAllUsers')
+    console.log('Erro no getOneUser')
 
     return {
       props: {

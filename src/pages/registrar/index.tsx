@@ -69,6 +69,7 @@ export default function Register({ }) {
               value={password}
               className={styles.input}
               placeholder='Insira sua senha aqui'
+              autoComplete="on"
               onChange={(e) => setPassword(e.target.value)}
             />
 

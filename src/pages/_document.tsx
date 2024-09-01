@@ -17,8 +17,21 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-
         </Head>
+
+        <body>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-NF5HTW8"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+          <Main />
+          <NextScript />
+        </body>
+
         <script
           id="gtag"
           dangerouslySetInnerHTML={{
@@ -39,19 +52,6 @@ class MyDocument extends Document {
             `,
           }}
         />
-
-        <body>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NF5HTW8"
-            height="0"
-            width="0"
-            style={{display: 'none', visibility: 'hidden'}}
-          />
-          </noscript>
-          <Main />
-          <NextScript />
-        </body>
       </Html>
     );
   }

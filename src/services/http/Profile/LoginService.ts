@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL, LAMBDA_URL } from "services/constants";
 
 export class LoginService {
 
@@ -30,20 +31,42 @@ export class LoginService {
       return
     }
 
-    return this.httpClient.api.post('/user/login', {
+    return this.httpClient.api.post(`${LAMBDA_URL}/user/login`, {
       user, password
     })
 
     .then(res => {
-      this.notification.addError({
-        message: 'Login realizado com sucesso!',
-        statusCode: 200,
-        type: 'success'
-      })
 
-      return res.data
+      if (res.data.user) {
+        this.notification.addError({
+          message: 'Login realizado com sucesso!',
+          statusCode: 200,
+          type: 'success'
+        })
+        return res.data
+
+      } else {
+
+        const { message, status } = res.data
+
+        this.notification.addError({
+          message: message,
+          statusCode: status,
+          type: 'danger'
+        })
+      }
+
     })
     .catch(err => {
+
+      if (!err.response) {
+        this.notification.addError({
+          message: err,
+          statusCode: 500,
+          type: 'danger'
+        })
+        return JSON.stringify(err)
+      }
 
       const { data, status } = err.response
       const errors = parseError(data)

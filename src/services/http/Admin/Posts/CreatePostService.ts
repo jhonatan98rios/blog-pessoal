@@ -1,6 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
+import { API_URL } from "services/constants";
 
 interface ICreatePostService {
   title: string
@@ -94,7 +95,7 @@ export class CreatePostService {
       return
     }
 
-    return this.httpClient.api.post('/post', {
+    return this.httpClient.api.post(`${API_URL}/post`, {
       title, subtitle, banner, content, categories, language,
       seo_title, seo_description, seo_keywords,
     })

@@ -8,7 +8,7 @@ export function ConsentBanner() {
   }, [])
 
   function acceptHandler() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('consent', 'update', {
         ad_storage: 'granted',
         analytics_storage: 'granted',

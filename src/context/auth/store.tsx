@@ -19,7 +19,7 @@ type SignInData = {
 type AuthContextType = {
   isAuthenticated: boolean;
   user: User;
-  login: (data: SignInData) => Promise<void>
+  login: (data: SignInData) => Promise<boolean>
   logout: () => void
 }
 
@@ -54,7 +54,6 @@ export function AuthContextProvider({ children }) {
     const res = await checkinService.execute(token)
 
     if (res?.user) {
-      console.log('checkIn on user: ', res.user)
       httpClient.setAuthorizationHeader(res.token)
       setUser({ username: res.user, role: res.role })
       return
@@ -78,7 +77,7 @@ export function AuthContextProvider({ children }) {
       password,
     })
 
-    if (!res?.token) return
+    if (!res?.token) return false
 
     destroyCookie(undefined, 'nextauth.token')
     setCookie(undefined, 'nextauth.token', res.token, {
@@ -87,8 +86,7 @@ export function AuthContextProvider({ children }) {
 
     httpClient.setAuthorizationHeader(res.token)
     setUser({ username: res.user, role: res.role })
-
-    console.log('login on user: ', res.user)
+    return true
   }
 
   function logout() {
