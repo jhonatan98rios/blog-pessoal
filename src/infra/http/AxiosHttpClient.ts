@@ -42,8 +42,7 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'Origin': 'https://jhonatan-dev-rios-blog.com.br/',
-          'Access-Control-Allow-Credentials': true,
+          'Origin': 'https://jhonatan-dev-rios-blog.com.br',
         }
       }
 
