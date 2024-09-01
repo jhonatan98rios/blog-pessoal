@@ -1,7 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
-import { API_URL, LAMBDA_URL } from "services/constants";
+import { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_LAMBDA_URL } from "services/constants";
 
 export class LoginService {
 
@@ -31,7 +31,7 @@ export class LoginService {
       return
     }
 
-    return this.httpClient.api.post(`${LAMBDA_URL}/user/login`, {
+    return this.httpClient.api.post(`${NEXT_PUBLIC_LAMBDA_URL}/user/login`, {
       user, password
     })
 

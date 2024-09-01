@@ -22,5 +22,5 @@ export const sizes = {
   }
 }
 
-export const API_URL=process.env.API_URL
-export const LAMBDA_URL=process.env.LAMBDA_URL
+export const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL
+export const NEXT_PUBLIC_LAMBDA_URL=process.env.NEXT_PUBLIC_LAMBDA_URL

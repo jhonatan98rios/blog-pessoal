@@ -1,7 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import axios, { AxiosInstance } from "axios";
 import { parseCookies } from "nookies";
-import { LAMBDA_URL } from "services/constants";
+import { NEXT_PUBLIC_LAMBDA_URL } from "services/constants";
 
 export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
@@ -66,7 +66,7 @@ export class AxiosHttpClient implements AbstractHttpClient<AxiosInstance> {
 
   public async deleteUserToken(user: string) {
     try {
-      await this.api.delete(`${LAMBDA_URL}/user/logout/${user}`)
+      await this.api.delete(`${NEXT_PUBLIC_LAMBDA_URL}/user/logout/${user}`)
     } catch (error) {
       console.log(error);
     }

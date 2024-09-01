@@ -1,6 +1,6 @@
 import { AxiosHttpClient } from "infra/http/AxiosHttpClient";
 import { UserModel } from 'models/User'
-import { API_URL, LAMBDA_URL } from "services/constants";
+import { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_LAMBDA_URL } from "services/constants";
 
 
 type GetAllUsersReturn = {
@@ -8,7 +8,7 @@ type GetAllUsersReturn = {
 }
 export async function getAllUsers(ctx): Promise<GetAllUsersReturn> {
   const client = AxiosHttpClient.getInstance(ctx)
-  const users = client.getAsyncData<GetAllUsersReturn>(`${LAMBDA_URL}/user/`)
+  const users = client.getAsyncData<GetAllUsersReturn>(`${NEXT_PUBLIC_LAMBDA_URL}/user/`)
   return users
 }
 
@@ -18,7 +18,7 @@ type GetOneUserReturn = {
 }
 export async function getOneUser(user: string): Promise<GetOneUserReturn> {
   const client = AxiosHttpClient.getInstance()
-  return client.getAsyncData<GetOneUserReturn>(`${LAMBDA_URL}/user/${user}`)
+  return client.getAsyncData<GetOneUserReturn>(`${NEXT_PUBLIC_LAMBDA_URL}/user/${user}`)
 }
 
 
@@ -27,7 +27,7 @@ type UpdateUserRoleReturn = {
 }
 export async function updateUserRole(username: string, role: string): Promise<UpdateUserRoleReturn | void> {
   const client = AxiosHttpClient.getInstance()
-  const url = `${LAMBDA_URL}/user/role/${username}`
+  const url = `${NEXT_PUBLIC_LAMBDA_URL}/user/role/${username}`
 
   return client.api.put<UpdateUserRoleReturn>(url, {
     role

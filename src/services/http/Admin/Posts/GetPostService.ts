@@ -1,7 +1,7 @@
 import { AbstractHttpClient } from "adapters/AbstractHttpClient";
 import { AbstractNotification } from "adapters/AbstractNotification";
 import { parseError } from "infra/errors/parseError";
-import { API_URL } from "services/constants";
+import { NEXT_PUBLIC_API_URL } from "services/constants";
 
 export class GetPostService {
 
@@ -11,7 +11,7 @@ export class GetPostService {
   ) {}
 
   execute() {
-    return this.httpClient.api.get(`${API_URL}/posts`)
+    return this.httpClient.api.get(`${NEXT_PUBLIC_API_URL}/posts`)
     .then(res => res.data)
     .catch(err => {
 
