@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+/**
+ * @type {import('next').NextConfig}
+ */
 module.exports = {
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -9,5 +12,8 @@ module.exports = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_LAMBDA_URL: process.env.NEXT_PUBLIC_LAMBDA_URL
-  }
+  },
+  experimental: {
+    largePageDataBytes: 128 * 10000,
+  },
 }
